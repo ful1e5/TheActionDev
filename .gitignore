@@ -1,0 +1,6 @@
+node_modules/
+__tests__/runner/*
+
+package-lock.json
+lib/
+*.log
