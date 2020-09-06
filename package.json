@@ -1,0 +1,10 @@
+{
+  "name": "TheActionDev",
+  "version": "1.0.0",
+  "description": "dev.to Posts with GitHub Action 🧑‍💻",
+  "main": "lib/main.js",
+  "repository": "git@github.com:ful1e5/TheActionDev.git",
+  "author": "Kaiz Khatri",
+  "license": "MIT",
+  "private": true
+}
