@@ -11,8 +11,8 @@
 ### Checkin
 
 - Do checkin source (src)
-- **Do not** checkin build output (lib) to **master** branch, we'll build it before release
-- **Do** checkin build output (lib) to **release** branches
+- **Do not** checkin build output (dist) to **master** branch, we'll build it before release
+- **Do** checkin build output (dist) to **release** branches
 - **Do not** checkin package-lock.json to **master** branch, we'll generate it before release
 - **Do not** checkin node_modules to **master** branch
 - **Do** checkin runtime node_modules to **release** branches
@@ -25,7 +25,7 @@ This step ensures that formatting and checkin rules are followed and that devDep
 
 ```
 npm install                                 # installs all devDependencies including Husky
-git add abc.ext                             # Add the files you've changed. This should include files in src, lib, and node_modules (see above)
+git add abc.ext                             # Add the files you've changed. This should include files in src, dist, and node_modules (see above)
 git commit -m "Informative commit message"  # Commit. This will run Husky
 ```
 

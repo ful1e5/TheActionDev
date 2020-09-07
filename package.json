@@ -2,7 +2,7 @@
   "name": "the-action-dev",
   "version": "1.0.0-dev",
   "description": "dev.to Posts with GitHub Actions 🧑‍💻",
-  "main": "lib/main.js",
+  "main": "dist/main.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com:ful1e5/TheActionDev.git"
