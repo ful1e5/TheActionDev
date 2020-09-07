@@ -3,10 +3,9 @@ description: "dev.to Posts with GitHub Action 🧑‍💻"
 author: "Kaiz Khatri"
 
 inputs:
-  milliseconds:
+  token:
     required: true
-    description: "Waiting.."
-    default: 3000
+    description: "Token from dev.to"
 
 runs:
   using: "node12"
