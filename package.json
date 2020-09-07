@@ -2,22 +2,13 @@
   "name": "the-action-dev",
   "version": "0.0.0",
   "description": "dev.to Posts with GitHub Actions 🧑‍💻",
+  "author": "Kaiz Khatri",
   "main": "dist/main.js",
+  "license": "MIT",
+  "private": true,
   "repository": {
     "type": "git",
     "url": "git+https://github.com:ful1e5/TheActionDev.git"
-  },
-  "scripts": {
-    "build": "tsc",
-    "format": "prettier --write **/*.ts",
-    "format-check": "prettier --check **/*.ts",
-    "lint": "eslint src/**/*.ts",
-    "package": "ncc build --source-map --license licenses.txt",
-    "test": "jest",
-    "run:action": "npm run build && npm run format && npm run lint && npm run package && npm test",
-    "clean": "rm -rf dist package-lock.json",
-    "npm-lock": "synp -f -s yarn.lock",
-    "release": "yarn clean && yarn && yarn rebuild && yarn npm-lock && mv -f package-lock.json npm.lock && rm -rf node_modules && yarn --prod && mv npm.lock package-lock.json"
   },
   "keywords": [
     "dev.to",
@@ -26,9 +17,19 @@
     "actions",
     "node"
   ],
-  "author": "Kaiz Khatri",
-  "license": "MIT",
-  "private": true,
+  "scripts": {
+    "build": "tsc",
+    "format": "prettier --write **/*.ts",
+    "format-check": "prettier --check **/*.ts",
+    "lint": "eslint src/**/*.ts",
+    "package": "ncc build --source-map --license licenses.txt",
+    "test": "jest",
+    "action": "npm run build && npm run format && npm run lint && npm run package && npm test",
+    "npm-lock": "synp -f -s yarn.lock && mv -f package-lock.json npm.lock"
+  },
+  "dependencies": {
+    "@actions/core": "^1.2.5"
+  },
   "devDependencies": {
     "@types/jest": "^26.0.13",
     "@types/node": "^14.6.4",
@@ -44,8 +45,5 @@
     "synp": "^1.8.2",
     "ts-jest": "^26.3.0",
     "typescript": "^4.0.2"
-  },
-  "dependencies": {
-    "@actions/core": "^1.2.5"
   }
 }
