@@ -1,0 +1,11 @@
+name: "TheActionDev"
+description: "dev.to Posts with GitHub Action 🧑‍💻"
+author: "Kaiz Khatri"
+inputs:
+  milliseconds:
+    required: true
+    description: "Waiting.."
+    default: 3000
+runs:
+  using: "node12"
+  main: "dist/index.js"
