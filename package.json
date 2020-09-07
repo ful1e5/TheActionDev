@@ -9,12 +9,15 @@
   },
   "scripts": {
     "build": "tsc",
+    "format": "prettier --write **/*.ts",
+    "format-check": "prettier --check **/*.ts",
+    "lint": "eslint src/**/*.ts",
+    "package": "ncc build --source-map --license licenses.txt",
     "test": "jest",
+    "run:action": "npm run build && npm run format && npm run lint && npm run package && npm test",
     "clean": "rm -rf dist package-lock.json",
-    "rebuild": "yarn clean && yarn build",
-    "release": "yarn clean && yarn && yarn rebuild && yarn npm-lock && mv -f package-lock.json npm.lock && rm -rf node_modules && yarn --prod && mv npm.lock package-lock.json",
-    "dev": "yarn clean && yarn",
-    "npm-lock": "synp -f -s yarn.lock"
+    "npm-lock": "synp -f -s yarn.lock",
+    "release": "yarn clean && yarn && yarn rebuild && yarn npm-lock && mv -f package-lock.json npm.lock && rm -rf node_modules && yarn --prod && mv npm.lock package-lock.json"
   },
   "keywords": [
     "dev.to",
