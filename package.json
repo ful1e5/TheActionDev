@@ -1,6 +1,6 @@
 {
   "name": "the-action-dev",
-  "version": "1.0.0-dev",
+  "version": "0.0.0",
   "description": "dev.to Posts with GitHub Actions 🧑‍💻",
   "main": "dist/main.js",
   "repository": {
