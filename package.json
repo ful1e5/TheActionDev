@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "description": "dev.to Posts with GitHub Actions 🧑‍💻",
   "author": "Kaiz Khatri",
-  "main": "dist/main.js",
+  "main": "lib/main.js",
   "license": "MIT",
   "private": true,
   "repository": {
@@ -24,8 +24,9 @@
     "lint": "eslint src/**/*.ts",
     "package": "ncc build --source-map --license licenses.txt",
     "test": "jest",
-    "action": "npm run build && npm run format && npm run lint && npm run package && npm test",
-    "npm-lock": "synp -f -s yarn.lock && mv -f package-lock.json npm.lock"
+    "action:yarn": "yarn build && yarn format && yarn lint && yarn package && yarn test",
+    "npm-lock": "synp -f -s yarn.lock",
+    "action": "npm run build && npm run format && npm run lint && npm run package && npm test"
   },
   "dependencies": {
     "@actions/core": "^1.2.5"
