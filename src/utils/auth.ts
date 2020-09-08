@@ -1,13 +1,18 @@
-import { debug } from "@actions/core";
+import * as core from "@actions/core";
 
 const isAuth = false;
 
-export async function authenticate(token: string): Promise<boolean> {
+/**
+ *
+ * @param token dev.to api token
+ *
+ */
+export const authenticate = async (token: string): Promise<boolean> => {
   return new Promise((resolve, reject) => {
-    debug(token);
+    core.info(token);
     resolve(isAuth);
     if (token === "") {
       reject(new Error("Token not be empty"));
     }
   });
-}
+};
