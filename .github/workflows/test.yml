@@ -9,7 +9,7 @@ on: # rebuild any PRs and main branch changes
       - "releases/*"
 
 jobs:
-  build/ci:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
