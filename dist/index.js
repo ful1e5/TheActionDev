@@ -74,16 +74,11 @@ const core_1 = __webpack_require__(186);
 const isAuth = false;
 function authenticate(token) {
     return __awaiter(this, void 0, void 0, function* () {
-        return new Promise(resolve => {
-            try {
-                core_1.debug(token);
-                resolve(isAuth);
-                if (token === "") {
-                    throw new Error("Invalid Token");
-                }
-            }
-            catch (error) {
-                console.error(error);
+        return new Promise((resolve, reject) => {
+            core_1.debug(token);
+            resolve(isAuth);
+            if (token === "") {
+                reject(new Error("Token not be empty"));
             }
         });
     });
