@@ -24,8 +24,10 @@
     "lint": "eslint src/**/*.ts",
     "package": "ncc build --source-map --license licenses.txt",
     "test": "jest",
-    "action:yarn": "yarn build && yarn format && yarn lint && yarn package && yarn test",
     "npm-lock": "synp -f -s yarn.lock",
+    "pack:dev": "rm -rf lib dist && yarn build && yarn package",
+    "run:dev": "act -s DEV_TO_TOKEN=S3cret1T0k3n -j test",
+    "action:yarn": "yarn build && yarn format && yarn lint && yarn package && yarn test",
     "action": "npm run build && npm run format && npm run lint && npm run package && npm test"
   },
   "dependencies": {
