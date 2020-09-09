@@ -108,6 +108,33 @@ exports.DevAPI = DevAPI;
 
 /***/ }),
 
+/***/ 3560:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.RepoArticlesProvider = void 0;
+const fs_1 = __importDefault(__webpack_require__(5747));
+class RepoArticlesProvider {
+    constructor(_path) {
+        this._path = _path;
+    }
+    _list() {
+        return fs_1.default.readdirSync(this._path);
+    }
+    syncArticles() {
+        console.log("snying..");
+    }
+}
+exports.RepoArticlesProvider = RepoArticlesProvider;
+
+
+/***/ }),
+
 /***/ 3109:
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
@@ -145,10 +172,14 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.run = void 0;
 const core = __importStar(__webpack_require__(2186));
 const DevApi_1 = __webpack_require__(3429);
+const RepoArticlesProvider_1 = __webpack_require__(3560);
 exports.run = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const token = core.getInput("token", { required: true });
-        const api = new DevApi_1.DevAPI(token);
+        const apiKey = core.getInput("apiKey", { required: true });
+        const articlesDir = core.getInput("articles-directory");
+        const api = new DevApi_1.DevAPI(apiKey);
+        const repo = new RepoArticlesProvider_1.RepoArticlesProvider(articlesDir);
+        repo.syncArticles();
         const lists = yield api.list();
         console.log(lists);
     }
