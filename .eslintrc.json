@@ -10,6 +10,7 @@
   "rules": {
     "eslint-comments/no-use": "off",
     "camelcase": "off",
+    "no-useless-escape": "off",
     "import/no-namespace": "off",
     "no-unused-vars": "off",
     "@typescript-eslint/no-unused-vars": "error",
