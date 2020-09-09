@@ -6,6 +6,9 @@ inputs:
   apiKey:
     description: "Api Key from dev.to"
     required: true
+  articelsPath:
+    description: "Airticels will sync with dev.to"
+    default: "."
 
 runs:
   using: "node12"
