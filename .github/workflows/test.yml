@@ -23,4 +23,4 @@ jobs:
       - uses: actions/checkout@v2
       - uses: ./
         with:
-          token: ${{ secrets.DEV_TO_TOKEN }}
+          apiKey: ${{ secrets.DEV_TO_TOKEN }}

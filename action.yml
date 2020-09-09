@@ -3,9 +3,9 @@ description: "dev.to Posts with GitHub Action 🧑‍💻"
 author: "Kaiz Khatri"
 
 inputs:
-  token:
+  apiKey:
+    description: "Api Key from dev.to"
     required: true
-    description: "Token from dev.to"
 
 runs:
   using: "node12"

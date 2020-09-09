@@ -3,9 +3,9 @@ import { DevAPI } from "./api/DevApi";
 
 export const run = async (): Promise<void> => {
   try {
-    const token: string = core.getInput("token", { required: true });
+    const apiKey: string = core.getInput("apiKey", { required: true });
 
-    const api = new DevAPI(token);
+    const api = new DevAPI(apiKey);
     const lists = await api.list();
     console.log(lists);
   } catch (error) {
