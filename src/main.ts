@@ -5,9 +5,10 @@ import { RepoArticlesProvider } from "./content/RepoArticlesProvider";
 export const run = async (): Promise<void> => {
   try {
     const apiKey: string = core.getInput("apiKey", { required: true });
+    const articelsPath: string = core.getInput("articelsPath");
 
     const api = new DevAPI(apiKey);
-    const repo = new RepoArticlesProvider();
+    const repo = new RepoArticlesProvider(articelsPath);
 
     repo.sync();
     const lists = await api.list();
