@@ -26,7 +26,7 @@
     "test": "jest",
     "npm-lock": "synp -f -s yarn.lock",
     "pack:dev": "rm -rf lib dist && yarn build && yarn package",
-    "run:dev": "act -s DEV_TO_TOKEN=S3cret1T0k3n -j test",
+    "run:dev": "act -s DEV_TO_TOKEN=S3cret1T0k3n -j test-run",
     "action:yarn": "yarn build && yarn format && yarn lint && yarn package && yarn test",
     "action": "npm run build && npm run format && npm run lint && npm run package && npm test"
   },
