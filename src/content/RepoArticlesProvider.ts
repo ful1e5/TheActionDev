@@ -1,13 +1,14 @@
-import fs from "fs";
-
+import * as glob from "@actions/glob";
 export class RepoArticlesProvider {
-  constructor(private _path: string) {}
-
-  private _list() {
-    return fs.readdirSync(this._path);
+  private async files() {
+    const patterns = ["**/dev.md"];
+    const globber = await glob.create(patterns.join("\n"));
+    return await globber.glob();
   }
 
-  syncArticles() {
+  async sync() {
+    // TODO
+    console.log(await this.files());
     console.log("snying..");
   }
 }
