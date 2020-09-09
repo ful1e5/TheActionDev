@@ -6,6 +6,9 @@ inputs:
   apiKey:
     description: "Api Key from dev.to"
     required: true
+  articles-directory:
+    description: "dev.to articles directory"
+    default: "."
 
 runs:
   using: "node12"
