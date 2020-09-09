@@ -2,10 +2,18 @@
 # yarn lockfile v1
 
 
-"@actions/core@^1.2.5":
+"@actions/core@^1.2.0", "@actions/core@^1.2.5":
   version "1.2.5"
   resolved "https://registry.yarnpkg.com/@actions/core/-/core-1.2.5.tgz#fa57bf8c07a38191e243beb9ea9d8368c1cb02c8"
   integrity sha512-mwpoNjHSWWh0IiALdDEQi3tru124JKn0yVNziIBzTME8QRv7thwoghVuT1jBRjFvdtoHsqD58IRHy1nf86paRg==
+
+"@actions/glob@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@actions/glob/-/glob-0.1.0.tgz#969ceda7e089c39343bca3306329f41799732e40"
+  integrity sha512-lx8SzyQ2FE9+UUvjqY1f28QbTJv+w8qP7kHHbfQRhphrlcx0Mdmm1tZdGJzfxv1jxREa/sLW4Oy8CbGQKCJySA==
+  dependencies:
+    "@actions/core" "^1.2.0"
+    minimatch "^3.0.4"
 
 "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.10.4":
   version "7.10.4"
