@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
-/* eslint-disable camelcase */
 import rq from "request-promise";
 
 export interface Article {
