@@ -5,12 +5,11 @@ import { RepoArticlesProvider } from "./content/RepoArticlesProvider";
 export const run = async (): Promise<void> => {
   try {
     const apiKey: string = core.getInput("apiKey", { required: true });
-    const articlesDir: string = core.getInput("articles-directory");
 
     const api = new DevAPI(apiKey);
-    const repo = new RepoArticlesProvider(articlesDir);
+    const repo = new RepoArticlesProvider();
 
-    repo.syncArticles();
+    repo.sync();
     const lists = await api.list();
     console.log(lists);
   } catch (error) {
