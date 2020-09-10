@@ -60,6 +60,13 @@ class DevAPI {
     get hasApiKey() {
         return !!this._apiKey;
     }
+    user() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const options = this._buildRequestOptions("/users/me", "GET");
+            const response = yield request_promise_1.default(options);
+            return response;
+        });
+    }
     updateApiKey(apiKey) {
         this._apiKey = apiKey;
     }
@@ -290,13 +297,13 @@ class RepoArticlesProvider {
         return __awaiter(this, void 0, void 0, function* () {
             core.startGroup(`Syncing ${this._repoName} articles with dev.to`);
             const data = [];
-            core.info(` ⚡ ${articles.length} articels fetched from your dev.to profile`);
+            core.info(`⚡ ${articles.length} articels fetched from your dev.to profile`);
             for (const file of yield this.files()) {
                 data.push(new MetaParser_1.MetaParser(file));
             }
             for (const article of data) {
-                const isDraft = article.publishStateParser() ? "" : "draft";
-                core.info(`⬆️ Uploading ${article.titleParser()} as ${isDraft}...`);
+                const isDraft = article.publishStateParser() ? "" : "as draft";
+                core.info(`⬆️ Uploading ${article.titleParser()} ${isDraft}...`);
             }
             core.endGroup();
         });
