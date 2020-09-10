@@ -76,6 +76,14 @@ export class MetaParser {
   }
 
   bodyParser() {
-    // TODO:
+    if (!this._yaml) {
+      return null;
+    }
+    const body = this._markdown.replace(this._yaml[1], "");
+    if (!body) {
+      return null;
+    }
+
+    return decodeURIComponent(body);
   }
 }
