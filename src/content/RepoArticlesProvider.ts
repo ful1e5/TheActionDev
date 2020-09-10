@@ -1,13 +1,8 @@
 import * as glob from "@actions/glob";
 import * as core from "@actions/core";
 import * as github from "@actions/github";
-import { DevAPI } from "../api/DevApi";
 import { MetaParser } from "./MetaParser";
-
-interface RepoArticlesProviderOptions {
-  path?: string;
-  api: DevAPI;
-}
+import { Article } from "../api/DevApi";
 
 export class RepoArticlesProvider {
   private _repoName: string;
@@ -18,7 +13,7 @@ export class RepoArticlesProvider {
     "!**/CHANGELOGS.md"
   ];
 
-  constructor(private options: RepoArticlesProviderOptions) {
+  constructor(private _path?: string) {
     // Set Repo Name
     this._repoName = github.context.repo.repo;
 
@@ -26,7 +21,7 @@ export class RepoArticlesProvider {
     const userIgnore = core.getInput("ignoreFiles");
 
     if (userIgnore !== "") {
-      core.debug(`Ignoring ${userIgnore} to Sync`);
+      core.info(`Ignoring ${userIgnore} to Sync`);
 
       const userIgnoreFiles = userIgnore
         .split(",")
@@ -40,10 +35,9 @@ export class RepoArticlesProvider {
     }
   }
 
-  private async files() {
-    const pattern = [`${this.options.path}/*.md`, ...this._excludePattern];
+  private async files(): Promise<string[]> {
+    const pattern = [`${this._path}/*.md`, ...this._excludePattern];
 
-    core.info(`Syncing ${this._repoName} GitHub Repo articles with dev.to`);
     const globber = await glob.create(pattern.join("\n"), {
       followSymbolicLinks: false
     });
@@ -51,15 +45,23 @@ export class RepoArticlesProvider {
     return await globber.glob();
   }
 
-  async sync() {
+  async sync(articles: Article[]): Promise<void> {
+    core.startGroup(`Syncing ${this._repoName} articles with dev.to`);
     const data: MetaParser[] = [];
-    // TODO: Sync with Cron job
+
+    core.info(
+      ` ⚡ ${articles.length} articels fetched from your dev.to profile`
+    );
+
     for (const file of await this.files()) {
       data.push(new MetaParser(file));
     }
 
     for (const article of data) {
-      core.info(`Syncing ${article.titleParser()} ...`);
+      const isDraft = article.publishStateParser() ? "" : "draft";
+      core.info(`⬆️ Uploading ${article.titleParser()} as ${isDraft}...`);
     }
+
+    core.endGroup();
   }
 }
