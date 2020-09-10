@@ -1,7 +1,7 @@
 ---
 title: Hello World 👋🏻
 published: false
-description: "Post From TheActionDev"
+description: First Post From TheActionDev
 tags: blogging, hello-world
 ---
 
