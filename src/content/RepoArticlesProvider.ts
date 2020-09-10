@@ -50,7 +50,7 @@ export class RepoArticlesProvider {
     const data: MetaParser[] = [];
 
     core.info(
-      ` ⚡ ${articles.length} articels fetched from your dev.to profile`
+      `⚡ ${articles.length} articels fetched from your dev.to profile`
     );
 
     for (const file of await this.files()) {
@@ -58,8 +58,8 @@ export class RepoArticlesProvider {
     }
 
     for (const article of data) {
-      const isDraft = article.publishStateParser() ? "" : "draft";
-      core.info(`⬆️ Uploading ${article.titleParser()} as ${isDraft}...`);
+      const isDraft = article.publishStateParser() ? "" : "as draft";
+      core.info(`⬆️ Uploading ${article.titleParser()} ${isDraft}...`);
     }
 
     core.endGroup();
