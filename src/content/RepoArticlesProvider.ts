@@ -9,26 +9,36 @@ export class RepoArticlesProvider {
     "!**/CHANGELOGS.md"
   ];
 
+  /**
+   *
+   * @param _path Path to local "dev.to" articels
+   */
   constructor(private _path?: string) {
-    this._excludePattern.push(
-      ...core
-        .getInput("ignoreFiles")
-        .split(",")
-        .map(f => `!${this._path}/${f}`)
-    );
+    const userIgnore = core.getInput("ignoreFiles");
+
+    if (userIgnore !== "") {
+      core.debug(`Ignoring ${userIgnore} to Sync`);
+
+      const userIgnoreFiles = userIgnore.split(",").map(f => `!**/${f.trim()}`);
+      core.debug(`User Ignore Files: ${userIgnoreFiles}`);
+
+      this._excludePattern.push(...userIgnoreFiles);
+    }
   }
 
   private async files() {
-    const pattern = [`${this._path}/*.md`, this._excludePattern];
+    const pattern = [`${this._path}/*.md`, ...this._excludePattern];
+
+    core.info(`Looking articles inside ${this._path}`);
     const globber = await glob.create(pattern.join("\n"), {
       followSymbolicLinks: false
     });
+
     return await globber.glob();
   }
 
   async sync() {
     // TODO: Sync with Cron job
-    console.log(await this.files());
-    console.log("snycing..");
+    console.log("Local Files", await this.files());
   }
 }
