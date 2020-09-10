@@ -8,9 +8,10 @@ export const run = async (): Promise<void> => {
     const articelsPath: string = core.getInput("articelsPath");
 
     const api = new DevAPI(apiKey);
-    const repo = new RepoArticlesProvider({ path: articelsPath, api });
+    const devToArticles = await api.list();
 
-    repo.sync();
+    const repo = new RepoArticlesProvider(articelsPath);
+    repo.sync(devToArticles);
   } catch (error) {
     core.setFailed(error.message);
   }
