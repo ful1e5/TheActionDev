@@ -61,7 +61,7 @@ export class MetaParser {
       .filter(t => t !== "");
   }
 
-  publishStateParser() {
+  publishStateParser(): boolean | null {
     if (!this._yaml) {
       return false;
     }
@@ -75,7 +75,7 @@ export class MetaParser {
     return published[1] === "true";
   }
 
-  bodyParser() {
+  bodyParser(): string | null {
     if (!this._yaml) {
       return null;
     }
