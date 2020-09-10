@@ -143,39 +143,41 @@ class MetaParser {
     constructor(_fileURI) {
         this._fileURI = _fileURI;
         this._markdown = fs_1.default.readFileSync(this._fileURI).toString();
+        this._yaml = this._markdown.match(/^\s*\-{3}\n([\s\S]*?)\n\-{3}/);
         if (this._markdown === "") {
             core.warning(`${this._fileURI} is Empty`);
             return;
         }
+        if (this._yaml === null) {
+            core.warning(`yaml meta-data not found in ${this._fileURI}`);
+            return;
+        }
     }
     titleParser() {
-        const yaml = this._markdown.match(/^\s*\-{3}\n([\s\S]*?)\n\-{3}/);
-        if (!yaml) {
+        if (!this._yaml) {
             return null;
         }
-        const title = yaml[1].match(/^[ \t]*title:[ \t]*(.*?)[ \t]*$/m);
+        const title = this._yaml[1].match(/^[ \t]*title:[ \t]*(.*?)[ \t]*$/m);
         if (!title) {
             return null;
         }
         return decodeURIComponent(title[1]);
     }
     descriptionParser() {
-        const yaml = this._markdown.match(/^\s*\-{3}\n([\s\S]*?)\n\-{3}/);
-        if (!yaml) {
+        if (!this._yaml) {
             return null;
         }
-        const description = yaml[1].match(/^[ \t]*description:[ \t]*(.*?)[ \t]*$/m);
+        const description = this._yaml[1].match(/^[ \t]*description:[ \t]*(.*?)[ \t]*$/m);
         if (!description) {
             return null;
         }
         return decodeURIComponent(description[1]);
     }
     tagsParser() {
-        const yaml = this._markdown.match(/^\s*\-{3}\n([\s\S]*?)\n\-{3}/);
-        if (!yaml) {
+        if (!this._yaml) {
             return null;
         }
-        const tags = yaml[1].match(/^[ \t]*tags:[ \t]*(.*?)[ \t]*$/m);
+        const tags = this._yaml[1].match(/^[ \t]*tags:[ \t]*(.*?)[ \t]*$/m);
         if (!tags) {
             return null;
         }
@@ -185,18 +187,24 @@ class MetaParser {
             .filter(t => t !== "");
     }
     publishStateParser() {
-        const yaml = this._markdown.match(/^\s*\-{3}\n([\s\S]*?)\n\-{3}/);
-        if (!yaml) {
+        if (!this._yaml) {
             return false;
         }
-        const published = yaml[1].match(/^[ \t]*published:[ \t]*(.*?)[ \t]*$/m);
+        const published = this._yaml[1].match(/^[ \t]*published:[ \t]*(.*?)[ \t]*$/m);
         if (!published) {
             return false;
         }
         return published[1] === "true";
     }
     bodyParser() {
-        // TODO:
+        if (!this._yaml) {
+            return null;
+        }
+        const body = this._markdown.replace(this._yaml[1], "");
+        if (!body) {
+            return null;
+        }
+        return decodeURIComponent(body);
     }
 }
 exports.MetaParser = MetaParser;
@@ -244,8 +252,8 @@ const core = __importStar(__webpack_require__(2186));
 const github = __importStar(__webpack_require__(5438));
 const MetaParser_1 = __webpack_require__(624);
 class RepoArticlesProvider {
-    constructor(options) {
-        this.options = options;
+    constructor(_path) {
+        this._path = _path;
         this._excludePattern = [
             "!**/README.md",
             "!**/CONTRIBUTING.md",
@@ -257,7 +265,7 @@ class RepoArticlesProvider {
         // Ignoring user files
         const userIgnore = core.getInput("ignoreFiles");
         if (userIgnore !== "") {
-            core.debug(`Ignoring ${userIgnore} to Sync`);
+            core.info(`Ignoring ${userIgnore} to Sync`);
             const userIgnoreFiles = userIgnore
                 .split(",")
                 .map(f => `!**/${f.trim()}`)
@@ -271,24 +279,26 @@ class RepoArticlesProvider {
     }
     files() {
         return __awaiter(this, void 0, void 0, function* () {
-            const pattern = [`${this.options.path}/*.md`, ...this._excludePattern];
-            core.info(`Syncing ${this._repoName} GitHub Repo articles with dev.to`);
+            const pattern = [`${this._path}/*.md`, ...this._excludePattern];
             const globber = yield glob.create(pattern.join("\n"), {
                 followSymbolicLinks: false
             });
             return yield globber.glob();
         });
     }
-    sync() {
+    sync(articles) {
         return __awaiter(this, void 0, void 0, function* () {
+            core.startGroup(`Syncing ${this._repoName} articles with dev.to`);
             const data = [];
-            // TODO: Sync with Cron job
+            core.info(` ⚡ ${articles.length} articels fetched from your dev.to profile`);
             for (const file of yield this.files()) {
                 data.push(new MetaParser_1.MetaParser(file));
             }
             for (const article of data) {
-                core.info(`Syncing ${article.titleParser()}`);
+                const isDraft = article.publishStateParser() ? "" : "draft";
+                core.info(`⬆️ Uploading ${article.titleParser()} as ${isDraft}...`);
             }
+            core.endGroup();
         });
     }
 }
@@ -340,8 +350,9 @@ exports.run = () => __awaiter(void 0, void 0, void 0, function* () {
         const apiKey = core.getInput("apiKey", { required: true });
         const articelsPath = core.getInput("articelsPath");
         const api = new DevApi_1.DevAPI(apiKey);
-        const repo = new RepoArticlesProvider_1.RepoArticlesProvider({ path: articelsPath, api });
-        repo.sync();
+        const devToArticles = yield api.list();
+        const repo = new RepoArticlesProvider_1.RepoArticlesProvider(articelsPath);
+        repo.sync(devToArticles);
     }
     catch (error) {
         core.setFailed(error.message);
