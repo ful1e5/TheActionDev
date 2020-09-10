@@ -19,7 +19,10 @@ export class RepoArticlesProvider {
     if (userIgnore !== "") {
       core.debug(`Ignoring ${userIgnore} to Sync`);
 
-      const userIgnoreFiles = userIgnore.split(",").map(f => `!**/${f.trim()}`);
+      const userIgnoreFiles = userIgnore
+        .split(",")
+        .map(f => `!**/${f.trim()}`)
+        .filter(f => f !== "");
       core.debug(`User Ignore Files: ${userIgnoreFiles}`);
 
       this._excludePattern.push(...userIgnoreFiles);
