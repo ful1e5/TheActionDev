@@ -25,3 +25,4 @@ jobs:
         with:
           apiKey: ${{ secrets.DEV_TO_TOKEN }}
           articelsPath: ./docs
+          ignoreFiles: contributors.md
