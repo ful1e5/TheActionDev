@@ -6,9 +6,16 @@ export interface Article {
   body_markdown?: string;
   published?: boolean;
   url?: string;
+  published_at?: string;
   comments_count?: number;
   positive_reactions_count?: number;
   reserveTitle?: string;
+}
+
+export interface User {
+  id: number;
+  username: string;
+  name: string;
 }
 
 export class DevAPI {
@@ -54,6 +61,12 @@ export class DevAPI {
 
   get hasApiKey(): boolean {
     return !!this._apiKey;
+  }
+
+  async user(): Promise<User> {
+    const options = this._buildRequestOptions("/users/me", "GET");
+    const response: User = await rq(options);
+    return response;
   }
 
   updateApiKey(apiKey: string) {
