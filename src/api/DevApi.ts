@@ -19,7 +19,7 @@ export class DevAPI {
     method: string,
     parameters?: { [key: string]: string | number },
     artical?: Article
-  ) {
+  ): rq.OptionsWithUri {
     let uri = `https://dev.to/api${path}`;
     if (parameters) {
       const query: string[] = [];
@@ -44,7 +44,7 @@ export class DevAPI {
     return options;
   }
 
-  private async _list(page: number) {
+  private async _list(page: number): Promise<Article[]> {
     const options = this._buildRequestOptions("/articles/me/all", "GET", {
       page
     });
@@ -52,7 +52,7 @@ export class DevAPI {
     return response;
   }
 
-  get hasApiKey() {
+  get hasApiKey(): boolean {
     return !!this._apiKey;
   }
 
@@ -60,7 +60,7 @@ export class DevAPI {
     this._apiKey = apiKey;
   }
 
-  async list() {
+  async list(): Promise<Article[]> {
     const articleList: Article[] = [];
     let page = 1;
     let responseList: Article[];
@@ -75,13 +75,17 @@ export class DevAPI {
     return articleList;
   }
 
-  async get(id: number) {
+  async get(id: number): Promise<Article> {
     const options = this._buildRequestOptions(`/articles/${id}`, "GET");
     const response: Article = await rq(options);
     return response;
   }
 
-  async update(id: number, title: string, bodyMarkdown: string) {
+  async update(
+    id: number,
+    title: string,
+    bodyMarkdown: string
+  ): Promise<Article> {
     const options = this._buildRequestOptions(
       `/articles/${id}`,
       "PUT",
@@ -92,7 +96,7 @@ export class DevAPI {
     return response;
   }
 
-  async create(title: string, bodyMarkdown: string) {
+  async create(title: string, bodyMarkdown: string): Promise<Article> {
     const options = this._buildRequestOptions("/articles", "POST", undefined, {
       title,
       body_markdown: bodyMarkdown
