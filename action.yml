@@ -7,7 +7,7 @@ inputs:
     description: "Api Key from dev.to"
     required: true
   articelsPath:
-    description: "Directory is going to sync with dev.to"
+    description: "Path to 'dev.to' articels"
     default: "."
   ignoreFiles:
     description: "Files are ignored by action. Multiple files are separated by ','(Comma)."

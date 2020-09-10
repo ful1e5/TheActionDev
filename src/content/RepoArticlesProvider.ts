@@ -40,7 +40,7 @@ export class RepoArticlesProvider {
   private async files() {
     const pattern = [`${this._path}/*.md`, ...this._excludePattern];
 
-    core.info(`Syncing ${this._repoName} articles with dev.to`);
+    core.info(`Syncing ${this._repoName} GitHub Repo articles with dev.to`);
     const globber = await glob.create(pattern.join("\n"), {
       followSymbolicLinks: false
     });
