@@ -59,7 +59,7 @@ export class RepoArticlesProvider {
     }
 
     for (const article of data) {
-      core.info(`Syncing ${article.titleParser()}`);
+      core.info(`Syncing ${article.titleParser()} ...`);
     }
   }
 }
