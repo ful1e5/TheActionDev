@@ -2,6 +2,7 @@ import * as glob from "@actions/glob";
 import * as core from "@actions/core";
 import * as github from "@actions/github";
 import { DevAPI } from "../api/DevApi";
+import { MetaParser } from "./MetaParser";
 
 interface RepoArticlesProviderOptions {
   path?: string;
@@ -51,8 +52,14 @@ export class RepoArticlesProvider {
   }
 
   async sync() {
+    const data: MetaParser[] = [];
     // TODO: Sync with Cron job
-    const lists = await this.options.api.list();
-    console.log("dev.to articles list", lists);
+    for (const file of await this.files()) {
+      data.push(new MetaParser(file));
+    }
+
+    for (const article of data) {
+      core.info(`Syncing ${article.titleParser()}`);
+    }
   }
 }
