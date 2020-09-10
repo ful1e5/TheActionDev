@@ -9,6 +9,8 @@ inputs:
   articelsPath:
     description: "Airticels will sync with dev.to"
     default: "."
+  ignoreFiles:
+    description: "Files are ignored in dev.to Sync. Multiple files are separated by ','(Comma)."
 
 runs:
   using: "node12"
