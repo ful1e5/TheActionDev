@@ -3,22 +3,27 @@ import fs from "fs";
 
 export class MetaParser {
   private _markdown: string;
+  private _yaml: RegExpMatchArray | null;
 
   constructor(private _fileURI: string) {
     this._markdown = fs.readFileSync(this._fileURI).toString();
+    this._yaml = this._markdown.match(/^\s*\-{3}\n([\s\S]*?)\n\-{3}/);
 
     if (this._markdown === "") {
       core.warning(`${this._fileURI} is Empty`);
       return;
     }
+    if (this._yaml === null) {
+      core.warning(`yaml meta-data not found in ${this._fileURI}`);
+      return;
+    }
   }
 
   titleParser(): string | null {
-    const yaml = this._markdown.match(/^\s*\-{3}\n([\s\S]*?)\n\-{3}/);
-    if (!yaml) {
+    if (!this._yaml) {
       return null;
     }
-    const title = yaml[1].match(/^[ \t]*title:[ \t]*(.*?)[ \t]*$/m);
+    const title = this._yaml[1].match(/^[ \t]*title:[ \t]*(.*?)[ \t]*$/m);
     if (!title) {
       return null;
     }
@@ -27,11 +32,12 @@ export class MetaParser {
   }
 
   descriptionParser(): string | null {
-    const yaml = this._markdown.match(/^\s*\-{3}\n([\s\S]*?)\n\-{3}/);
-    if (!yaml) {
+    if (!this._yaml) {
       return null;
     }
-    const description = yaml[1].match(/^[ \t]*description:[ \t]*(.*?)[ \t]*$/m);
+    const description = this._yaml[1].match(
+      /^[ \t]*description:[ \t]*(.*?)[ \t]*$/m
+    );
     if (!description) {
       return null;
     }
@@ -40,12 +46,11 @@ export class MetaParser {
   }
 
   tagsParser(): string[] | null {
-    const yaml = this._markdown.match(/^\s*\-{3}\n([\s\S]*?)\n\-{3}/);
-    if (!yaml) {
+    if (!this._yaml) {
       return null;
     }
 
-    const tags = yaml[1].match(/^[ \t]*tags:[ \t]*(.*?)[ \t]*$/m);
+    const tags = this._yaml[1].match(/^[ \t]*tags:[ \t]*(.*?)[ \t]*$/m);
     if (!tags) {
       return null;
     }
@@ -57,11 +62,12 @@ export class MetaParser {
   }
 
   publishStateParser() {
-    const yaml = this._markdown.match(/^\s*\-{3}\n([\s\S]*?)\n\-{3}/);
-    if (!yaml) {
+    if (!this._yaml) {
       return false;
     }
-    const published = yaml[1].match(/^[ \t]*published:[ \t]*(.*?)[ \t]*$/m);
+    const published = this._yaml[1].match(
+      /^[ \t]*published:[ \t]*(.*?)[ \t]*$/m
+    );
     if (!published) {
       return false;
     }
