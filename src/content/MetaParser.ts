@@ -9,6 +9,7 @@ export class MetaParser {
 
     if (this._markdown === "") {
       core.warning(`${this._fileURI} is Empty`);
+      return;
     }
   }
 
@@ -25,8 +26,8 @@ export class MetaParser {
     return decodeURIComponent(title[1]);
   }
 
-  descriptionparser(): string | null {
-    const yaml = this._markdown.match(/^\s*\-{3}\n([\s\s]*?)\n\-{3}/);
+  descriptionParser(): string | null {
+    const yaml = this._markdown.match(/^\s*\-{3}\n([\s\S]*?)\n\-{3}/);
     if (!yaml) {
       return null;
     }
@@ -39,10 +40,11 @@ export class MetaParser {
   }
 
   tagsParser(): string[] | null {
-    const yaml = this._markdown.match(/^\s*\-{3}\n([\s\s]*?)\n\-{3}/);
+    const yaml = this._markdown.match(/^\s*\-{3}\n([\s\S]*?)\n\-{3}/);
     if (!yaml) {
       return null;
     }
+
     const tags = yaml[1].match(/^[ \t]*tags:[ \t]*(.*?)[ \t]*$/m);
     if (!tags) {
       return null;
