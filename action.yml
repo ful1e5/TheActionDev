@@ -7,10 +7,10 @@ inputs:
     description: "Api Key from dev.to"
     required: true
   articelsPath:
-    description: "Airticels will sync with dev.to"
+    description: "Directory is going to sync with dev.to"
     default: "."
   ignoreFiles:
-    description: "Files are ignored in dev.to Sync. Multiple files are separated by ','(Comma)."
+    description: "Files are ignored by action. Multiple files are separated by ','(Comma)."
 
 runs:
   using: "node12"
