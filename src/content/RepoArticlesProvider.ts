@@ -13,6 +13,10 @@ export class RepoArticlesProvider {
     "!**/CHANGELOGS.md"
   ];
 
+  /**
+   *
+   * @param _path Path to local Articles
+   */
   constructor(private _path?: string) {
     // Set Repo Name
     this._repoName = github.context.repo.repo;
@@ -35,6 +39,9 @@ export class RepoArticlesProvider {
     }
   }
 
+  /**
+   * Get all local dev.to articles absolute paths
+   */
   private async files(): Promise<string[]> {
     const pattern = [`${this._path}/*.md`, ...this._excludePattern];
 
@@ -45,12 +52,20 @@ export class RepoArticlesProvider {
     return await globber.glob();
   }
 
-  async sync(articles: Article[]): Promise<void> {
+  /**
+   *
+   * @param articles Live Articles from dev.to
+   * @param authorLink dev.to/<username>
+   */
+  async sync(
+    articles: Article[],
+    authorProfileLink: string | null
+  ): Promise<void> {
     core.startGroup(`Syncing ${this._repoName} articles with dev.to`);
     const data: MetaParser[] = [];
 
     core.info(
-      `⚡ ${articles.length} articels fetched from your dev.to profile`
+      `⚡ ${articles.length} articels fetched from ${authorProfileLink}`
     );
 
     for (const file of await this.files()) {
