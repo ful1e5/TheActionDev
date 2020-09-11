@@ -73,7 +73,9 @@ export class RepoArticlesProvider {
     }
 
     for (const article of data) {
-      const isDraft = article.publishStateParser() ? "" : "as draft";
+      const isDraft = article.publishStateParser()
+        ? "as published"
+        : "as draft";
       core.info(`⬆️ Uploading ${article.titleParser()} ${isDraft}...`);
     }
 
