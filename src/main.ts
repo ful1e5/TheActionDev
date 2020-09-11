@@ -5,13 +5,14 @@ import { RepoArticlesProvider } from "./content/RepoArticlesProvider";
 export const run = async (): Promise<void> => {
   try {
     const apiKey: string = core.getInput("apiKey", { required: true });
-    const articelsPath: string = core.getInput("articelsPath");
+    const articlesPath: string = core.getInput("articlesPath");
 
     const api = new DevAPI(apiKey);
-    const devToArticles = await api.list();
+    const articles = await api.list();
+    const authorProfileLink = await api.profileLink();
 
-    const repo = new RepoArticlesProvider(articelsPath);
-    repo.sync(devToArticles);
+    const repo = new RepoArticlesProvider(articlesPath);
+    repo.sync(articles, authorProfileLink);
   } catch (error) {
     core.setFailed(error.message);
   }
