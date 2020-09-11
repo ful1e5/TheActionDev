@@ -1,12 +1,14 @@
 import * as glob from "@actions/glob";
 import * as core from "@actions/core";
 import * as github from "@actions/github";
+
 import { MetaParser } from "./MetaParser";
 import { Article } from "../api/DevApi";
 import { LowDBApi } from "../api/LowDBApi";
 
 export class RepoArticlesProvider {
   private _repoName: string;
+  httpsLink: string;
   private _excludePattern: string[] = [
     "!**/README.md",
     "!**/CONTRIBUTING.md",
@@ -21,6 +23,7 @@ export class RepoArticlesProvider {
   constructor(private _path?: string) {
     // Set Repo Name
     this._repoName = github.context.repo.repo;
+    this.httpsLink = `https://www.github.com/${github.context.repo.owner}/${this._repoName}`;
 
     // Ignoring user files
     const userIgnore = core.getInput("ignore");
@@ -67,7 +70,7 @@ export class RepoArticlesProvider {
     const data: MetaParser[] = [];
 
     core.info(
-      `⚡ ${resource.articles.length} articels fetched from ${resource.authorProfileLink}`
+      `⚡ ${resource.articles.length} articles fetched from ${resource.authorProfileLink}`
     );
 
     for (const file of await this.files()) {
