@@ -4,6 +4,9 @@ import { LowDBApi } from "./api/LowDBApi";
 import { DevAPI } from "./api/DevApi";
 import { RepoArticlesProvider } from "./content/RepoArticlesProvider";
 
+/**
+ * Run TheActionDev
+ */
 export const run = async (): Promise<void> => {
   try {
     const apiKey: string = core.getInput("api-key", { required: true });
