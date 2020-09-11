@@ -149,7 +149,7 @@ export class DevAPI {
   /**
    * Fetch all Webhooks
    */
-  async webhooks() {
+  async webhooks(): Promise<WebHook[]> {
     const options = this._buildRequestOptions("/webhooks", "GET");
 
     core.debug("DevApi: Listing dev.to Webhooks");
@@ -169,7 +169,7 @@ export class DevAPI {
    * @param target_url Where dev send event
    * Create new Webhook
    */
-  async createWebhook(target_url: string) {
+  async createWebhook(target_url: string): Promise<WebHook> {
     const options = this._buildRequestOptions("/webhooks", "POST", undefined, {
       webhook_endpoint: {
         target_url,
@@ -180,7 +180,7 @@ export class DevAPI {
 
     core.debug("DevApi: Creating TheActionDev Webhooks");
     const response: WebHook = await rq(options);
-    core.debug(`DevApi: Response: ${response}`);
+    return response;
   }
 
   /**
@@ -195,8 +195,7 @@ export class DevAPI {
     );
 
     core.debug("DevApi: Deleting 'TheActionDev' Webhook");
-    const response = await rq(options);
-    core.debug(`DevApi: Response: ${response}`);
+    await rq(options);
   }
 
   /**
