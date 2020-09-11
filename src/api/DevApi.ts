@@ -8,6 +8,7 @@ export interface Article {
   url?: string;
   published_at?: string;
   comments_count?: number;
+  description?: string;
   positive_reactions_count?: number;
   reserveTitle?: string;
 }
