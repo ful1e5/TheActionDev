@@ -3,6 +3,7 @@ import * as core from "@actions/core";
 import * as github from "@actions/github";
 import { MetaParser } from "./MetaParser";
 import { Article } from "../api/DevApi";
+import { LowDBApi } from "../api/LowDBApi";
 
 export class RepoArticlesProvider {
   private _repoName: string;
@@ -53,19 +54,20 @@ export class RepoArticlesProvider {
   }
 
   /**
-   *
    * @param articles Live Articles from dev.to
-   * @param authorLink dev.to/<username>
+   * @param authorLink dev.to/user_name
+   * @param db LowDBApi instance
    */
-  async sync(
-    articles: Article[],
-    authorProfileLink: string | null
-  ): Promise<void> {
+  async sync(resource: {
+    articles: Article[];
+    authorProfileLink: string | null;
+    db: LowDBApi;
+  }): Promise<void> {
     core.startGroup(`Syncing ${this._repoName} articles with dev.to`);
     const data: MetaParser[] = [];
 
     core.info(
-      `⚡ ${articles.length} articels fetched from ${authorProfileLink}`
+      `⚡ ${resource.articles.length} articels fetched from ${resource.authorProfileLink}`
     );
 
     for (const file of await this.files()) {
