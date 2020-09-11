@@ -7,7 +7,7 @@ inputs:
     description: "Api Key from dev.to"
     required: true
   directory:
-    description: "Path to 'dev.to' articels"
+    description: "Path to 'dev.to' articles"
     default: "."
   ignore:
     description: "Files are ignored by action. Multiple files are separated by ','(Comma)."
