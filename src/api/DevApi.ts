@@ -27,6 +27,16 @@ export interface User {
   name: string;
 }
 
+export interface WebHook {
+  type_of: "webhook_endpoint";
+  id: number;
+  source: string;
+  target_url: string;
+  events: string[];
+  created_at: string;
+  user?: User;
+}
+
 export class DevAPI {
   constructor(private _apiKey?: string) {}
 
@@ -143,8 +153,8 @@ export class DevAPI {
     const options = this._buildRequestOptions("/webhooks", "GET");
 
     core.debug("DevApi: Listing dev.to Webhooks");
-    const response = await rq(options);
-    console.log(response);
+    const response: WebHook[] = await rq(options);
+    return response;
   }
 
   /**
@@ -162,8 +172,8 @@ export class DevAPI {
     });
 
     core.debug("DevApi: Creating TheActionDev Webhooks");
-    const response = await rq(options);
-    console.log(response);
+    const response: WebHook = await rq(options);
+    core.debug(`DevApi: Response: ${response}`);
   }
 
   /**
@@ -179,8 +189,7 @@ export class DevAPI {
 
     core.debug("DevApi: Deleting 'TheActionDev' Webhook");
     const response = await rq(options);
-    console.log(response);
-    return response;
+    core.debug(`DevApi: Response: ${response}`);
   }
 
   /**
