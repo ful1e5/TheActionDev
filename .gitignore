@@ -1,3 +1,7 @@
+# Custom
+.db
+*.db
+
 # Dependency directory
 node_modules
 
