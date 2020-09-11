@@ -1,6 +1,7 @@
 import path from "path";
 import * as core from "@actions/core";
 import fs from "fs";
+import { Article } from "../api/DevApi";
 
 export class MetaParser {
   private _markdown: string;
@@ -106,5 +107,23 @@ export class MetaParser {
     }
 
     return decodeURIComponent(body);
+  }
+
+  article(): Article {
+    const title = this.titleParser();
+    const description = this.descriptionParser();
+    const published = this.publishStateParser();
+    const body_markdown = this.bodyParser();
+
+    if (title && published && body_markdown && description) {
+      return {
+        title,
+        published,
+        description,
+        body_markdown
+      };
+    }
+
+    throw new Error(`Can't Parse ${this._maskedURI}`);
   }
 }
