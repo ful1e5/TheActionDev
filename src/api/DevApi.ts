@@ -21,6 +21,13 @@ export interface User {
 export class DevAPI {
   constructor(private _apiKey?: string) {}
 
+  /**
+   *
+   * @param path request path
+   * @param method GET | POST
+   * @param parameters Optional parameters to send parameters
+   * @param article Optional parameters based on Article Interface
+   */
   private _buildRequestOptions(
     path: string,
     method: string,
@@ -51,6 +58,10 @@ export class DevAPI {
     return options;
   }
 
+  /**
+   *
+   * @param page `page` request parameter to dev.to
+   */
   private async _list(page: number): Promise<Article[]> {
     const options = this._buildRequestOptions("/articles/me/all", "GET", {
       page
@@ -63,12 +74,18 @@ export class DevAPI {
     return !!this._apiKey;
   }
 
+  /**
+   * Fetch authenticated User
+   */
   private async _me(): Promise<User> {
     const options = this._buildRequestOptions("/users/me", "GET");
     const response: User = await rq(options);
     return response;
   }
 
+  /**
+   * Author profile url
+   */
   async profileLink(): Promise<string | null> {
     const user = await this._me();
     if (user?.username) return null;
@@ -80,6 +97,9 @@ export class DevAPI {
     this._apiKey = apiKey;
   }
 
+  /**
+   * Get all Articles from authenticated user
+   */
   async list(): Promise<Article[]> {
     const articleList: Article[] = [];
     let page = 1;
@@ -101,6 +121,13 @@ export class DevAPI {
     return response;
   }
 
+  /**
+   *
+   * @param id unique identifier of dev.to post
+   * @param title Updated title
+   * @param bodyMarkdown Post body(markdown)
+   * Upadte Post on dev.to by `id`
+   */
   async update(
     id: number,
     title: string,
@@ -116,6 +143,12 @@ export class DevAPI {
     return response;
   }
 
+  /**
+   *
+   * @param title New Post title
+   * @param bodyMarkdown body of post(markdown)
+   * Create new post on your dev.to profile
+   */
   async create(title: string, bodyMarkdown: string): Promise<Article> {
     const options = this._buildRequestOptions("/articles", "POST", undefined, {
       title,
