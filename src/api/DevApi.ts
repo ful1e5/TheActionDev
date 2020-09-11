@@ -25,7 +25,7 @@ export class DevAPI {
     path: string,
     method: string,
     parameters?: { [key: string]: string | number },
-    artical?: Article
+    article?: Article
   ): rq.OptionsWithUri {
     let uri = `https://dev.to/api${path}`;
     if (parameters) {
@@ -44,8 +44,8 @@ export class DevAPI {
       json: true
     };
 
-    if (artical) {
-      options.body = artical;
+    if (article) {
+      options.body = article;
     }
 
     return options;
@@ -63,7 +63,7 @@ export class DevAPI {
     return !!this._apiKey;
   }
 
-  async user(): Promise<User> {
+  private async _me(): Promise<User> {
     const options = this._buildRequestOptions("/users/me", "GET");
     const response: User = await rq(options);
     return response;
