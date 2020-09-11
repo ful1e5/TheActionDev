@@ -169,11 +169,11 @@ export class DevAPI {
    * @param target_url Where dev send event
    * Create new Webhook
    */
-  async createWebhook(target_url: string): Promise<WebHook> {
+  async createWebhook(source: string, target_url: string): Promise<WebHook> {
     const options = this._buildRequestOptions("/webhooks", "POST", undefined, {
       webhook_endpoint: {
         target_url,
-        source: "TheActionDev",
+        source,
         events: ["article_created", "article_updated"]
       }
     });
