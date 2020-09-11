@@ -108,7 +108,7 @@ class DevAPI {
     profileLink() {
         return __awaiter(this, void 0, void 0, function* () {
             const user = yield this._me();
-            if (user === null || user === void 0 ? void 0 : user.username)
+            if (!(user === null || user === void 0 ? void 0 : user.username))
                 return null;
             const link = `https://dev.to/${user.username}`;
             core.debug(`DevApI: User Profile link generated ${link}`);
@@ -508,6 +508,7 @@ class RepoArticlesProvider {
         ];
         // Set Repo Name
         this._repoName = github.context.repo.repo;
+        this.httpsLink = `https://www.github.com/${github.context.repo.owner}/${this._repoName}`;
         // Ignoring user files
         const userIgnore = core.getInput("ignore");
         if (userIgnore !== "") {
@@ -544,7 +545,7 @@ class RepoArticlesProvider {
         return __awaiter(this, void 0, void 0, function* () {
             core.startGroup(`Syncing ${this._repoName} articles with dev.to`);
             const data = [];
-            core.info(`⚡ ${resource.articles.length} articels fetched from ${resource.authorProfileLink}`);
+            core.info(`⚡ ${resource.articles.length} articles fetched from ${resource.authorProfileLink}`);
             for (const file of yield this.files()) {
                 data.push(new MetaParser_1.MetaParser(file));
             }
