@@ -22,7 +22,7 @@ export class RepoArticlesProvider {
     this._repoName = github.context.repo.repo;
 
     // Ignoring user files
-    const userIgnore = core.getInput("ignoreFiles");
+    const userIgnore = core.getInput("ignore");
 
     if (userIgnore !== "") {
       core.info(`Ignoring ${userIgnore} to Sync`);
