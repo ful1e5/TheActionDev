@@ -3,13 +3,13 @@ description: "dev.to Posts with GitHub Action 🧑‍💻"
 author: "Kaiz Khatri"
 
 inputs:
-  apiKey:
+  api-key:
     description: "Api Key from dev.to"
     required: true
-  articelsPath:
+  directory:
     description: "Path to 'dev.to' articels"
     default: "."
-  ignoreFiles:
+  ignore:
     description: "Files are ignored by action. Multiple files are separated by ','(Comma)."
 
 runs:

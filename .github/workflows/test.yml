@@ -23,6 +23,6 @@ jobs:
       - uses: actions/checkout@v2
       - uses: ./
         with:
-          apiKey: ${{ secrets.DEV_TO_TOKEN }}
-          articelsPath: ./docs
-          ignoreFiles: contributors.md
+          api-key: ${{ secrets.DEV_TO_TOKEN }}
+          directory: ./docs
+          ignore: contributors.md
