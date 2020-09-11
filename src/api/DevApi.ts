@@ -157,6 +157,13 @@ export class DevAPI {
     return response;
   }
 
+  async getWebhookID(source: string): Promise<number | undefined> {
+    const hooks = await this.webhooks();
+    const hook = hooks.find(value => value.source === source);
+
+    return hook?.id;
+  }
+
   /**
    *
    * @param target_url Where dev send event
