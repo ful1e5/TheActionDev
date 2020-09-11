@@ -109,7 +109,7 @@ export class DevAPI {
    */
   async profileLink(): Promise<string | null> {
     const user = await this._me();
-    if (user?.username) return null;
+    if (!user?.username) return null;
 
     const link = `https://dev.to/${user.username}`;
     core.debug(`DevApI: User Profile link generated ${link}`);
