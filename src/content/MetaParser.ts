@@ -1,6 +1,7 @@
+import fs from "fs";
 import path from "path";
 import * as core from "@actions/core";
-import fs from "fs";
+
 import { Article } from "../api/DevApi";
 
 export class MetaParser {
@@ -26,6 +27,9 @@ export class MetaParser {
     }
   }
 
+  /**
+   * Get "title" meta-data from markdown file
+   */
   titleParser(): string | null {
     const msg = `Can't Parse "title" in ${this._maskedURI}`;
     if (!this._yaml) {
@@ -41,6 +45,9 @@ export class MetaParser {
     return decodeURIComponent(title[1]);
   }
 
+  /**
+   * Get "description" meta-data from markdown file
+   */
   descriptionParser(): string | null {
     const msg = `Can't Parse "description" in ${this._maskedURI}`;
     if (!this._yaml) {
@@ -58,6 +65,9 @@ export class MetaParser {
     return decodeURIComponent(description[1]);
   }
 
+  /**
+   * Get "tags" meta-data from markdown file
+   */
   tagsParser(): string[] | null {
     const msg = `Can't Parse "tags" in ${this._maskedURI}`;
     if (!this._yaml) {
@@ -77,6 +87,9 @@ export class MetaParser {
       .filter(t => t !== "");
   }
 
+  /**
+   * Get "published" meta-data from markdown file
+   */
   publishStateParser(): boolean | null {
     const msg = `Can't Parse "published" in ${this._maskedURI}`;
     if (!this._yaml) {
@@ -94,6 +107,9 @@ export class MetaParser {
     return published[1] === "true";
   }
 
+  /**
+   * Get article "body" from markdown file
+   */
   bodyParser(): string | null {
     const msg = `Can't Parse "Markdown Body" in ${this._maskedURI}`;
     if (!this._yaml) {
@@ -109,6 +125,9 @@ export class MetaParser {
     return decodeURIComponent(body);
   }
 
+  /**
+   * Get Article
+   */
   article(): Article {
     const title = this.titleParser();
     const description = this.descriptionParser();
