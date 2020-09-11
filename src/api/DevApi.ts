@@ -1,4 +1,5 @@
 import rq from "request-promise";
+import * as core from "@actions/core";
 
 export interface Article {
   id?: number;
@@ -11,6 +12,13 @@ export interface Article {
   description?: string;
   positive_reactions_count?: number;
   reserveTitle?: string;
+}
+export interface WebhookInput {
+  webhook_endpoint: {
+    target_url: string;
+    source: string;
+    events: string[];
+  };
 }
 
 export interface User {
@@ -33,7 +41,7 @@ export class DevAPI {
     path: string,
     method: string,
     parameters?: { [key: string]: string | number },
-    article?: Article
+    body?: Article | WebhookInput
   ): rq.OptionsWithUri {
     let uri = `https://dev.to/api${path}`;
     if (parameters) {
@@ -52,8 +60,8 @@ export class DevAPI {
       json: true
     };
 
-    if (article) {
-      options.body = article;
+    if (body) {
+      options.body = body;
     }
 
     return options;
@@ -67,6 +75,8 @@ export class DevAPI {
     const options = this._buildRequestOptions("/articles/me/all", "GET", {
       page
     });
+
+    core.debug("DevApi: Listing all Articles");
     const response: Article[] = await rq(options);
     return response;
   }
@@ -91,7 +101,9 @@ export class DevAPI {
     const user = await this._me();
     if (user?.username) return null;
 
-    return `https://dev.to/${user.username}`;
+    const link = `https://dev.to/${user.username}`;
+    core.debug(`DevApI: User Profile link generated ${link}`);
+    return link;
   }
 
   updateApiKey(apiKey: string) {
@@ -118,7 +130,56 @@ export class DevAPI {
 
   async get(id: number): Promise<Article> {
     const options = this._buildRequestOptions(`/articles/${id}`, "GET");
+
+    core.debug(`DevApi: Fetching Article by ${id} ID`);
     const response: Article = await rq(options);
+    return response;
+  }
+
+  /**
+   * Fetch all Webhooks
+   */
+  async webhooks() {
+    const options = this._buildRequestOptions("/webhooks", "GET");
+
+    core.debug("DevApi: Listing dev.to Webhooks");
+    const response = await rq(options);
+    console.log(response);
+  }
+
+  /**
+   *
+   * @param target_url Where dev send event
+   * Create new Webhook
+   */
+  async createWebhook(target_url: string) {
+    const options = this._buildRequestOptions("/webhooks", "POST", undefined, {
+      webhook_endpoint: {
+        target_url,
+        source: "TheActionDev",
+        events: ["article_created", "article_updated"]
+      }
+    });
+
+    core.debug("DevApi: Creating TheActionDev Webhooks");
+    const response = await rq(options);
+    console.log(response);
+  }
+
+  /**
+   *
+   * @param webHookID id of dev.to webhook
+   * Delete Webhook
+   */
+  async deleteWebhook(webHookID: number) {
+    const options = this._buildRequestOptions(
+      `/webhooks/${webHookID}`,
+      "DELETE"
+    );
+
+    core.debug("DevApi: Deleting 'TheActionDev' Webhook");
+    const response = await rq(options);
+    console.log(response);
     return response;
   }
 
@@ -140,6 +201,8 @@ export class DevAPI {
       undefined,
       { title, body_markdown: bodyMarkdown }
     );
+
+    core.debug(`DevApi: Updating ${title}`);
     const response: Article = await rq(options);
     return response;
   }
@@ -155,6 +218,7 @@ export class DevAPI {
       title,
       body_markdown: bodyMarkdown
     });
+    core.debug("DevApi: Creating Article");
     const response: Article = await rq(options);
     return response;
   }
