@@ -69,6 +69,13 @@ export class DevAPI {
     return response;
   }
 
+  async profileLink(): Promise<string | null> {
+    const user = await this._me();
+    if (user?.username) return null;
+
+    return `https://dev.to/${user.username}`;
+  }
+
   updateApiKey(apiKey: string) {
     this._apiKey = apiKey;
   }
