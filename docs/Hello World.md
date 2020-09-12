@@ -1,10 +1,10 @@
 ---
-title: Hello World 👋🏻
+title: Hello From TheActionDev 👋
 published: false
-description: First Post From TheActionDev
-tags: blogging, hello-world
+tags: typescript, javascript
+series: TheActionDev
 ---
 
-Hello World 👋🏻
+First Post with TheActionDev 🤩
 
-Check out [TheActionDev](https://github.com/ful1e5/TheActionDev)
+{% github ful1e5/TheActionDev %}
