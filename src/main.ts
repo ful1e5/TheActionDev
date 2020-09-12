@@ -17,7 +17,7 @@ export const run = async (): Promise<void> => {
     const repo = new RepoArticlesProvider(articlesPath);
 
     // await api.createWebhook(repo.name, repo.dispatchLink);
-    await api.webhooks();
+    // await api.webhooks();
 
     const articles = await api.list();
     const authorProfileLink = await api.profileLink();
