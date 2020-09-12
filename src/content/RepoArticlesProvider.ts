@@ -3,7 +3,7 @@ import * as core from "@actions/core";
 import * as github from "@actions/github";
 
 import { MetaParser } from "./MetaParser";
-import { Article } from "../api/DevApi";
+import { DevAPI } from "../api/DevApi";
 
 export class RepoArticlesProvider {
   name: string;
@@ -59,30 +59,39 @@ export class RepoArticlesProvider {
   }
 
   /**
-   * @param articles Live Articles from dev.to
-   * @param authorLink dev.to/user_name
-   * @param db LowDBApi instance
+   * @param api dev.to api instance
    */
-  async upload(resource: {
-    articles: Article[];
-    authorProfileLink: string | null;
-  }): Promise<void> {
+  async sync(api: DevAPI): Promise<void> {
     core.startGroup(`Syncing ${this.name} articles with dev.to`);
     const data: MetaParser[] = [];
 
+    const articles = await api.list();
+    const authorProfileLink = await api.profileLink();
+
     core.info(
-      `⚡ ${resource.articles.length} articles fetched from ${resource.authorProfileLink}`
+      `⚡ ${articles.length} articles fetched from ${authorProfileLink}`
     );
 
     for (const file of await this.files()) {
       data.push(new MetaParser(file));
     }
 
-    for (const article of data) {
-      const isDraft = article.publishStateParser()
+    for (const repoArticle of data) {
+      const isDraft = repoArticle.publishStateParser()
         ? "as published"
         : "as draft";
-      core.info(`⬆️ Uploading ${article.titleParser()} ${isDraft}...`);
+
+      const presentOnDev = articles.filter(
+        a => a.title === repoArticle.titleParser()
+      );
+
+      console.log(presentOnDev);
+
+      if (presentOnDev) {
+        core.info(`📝 Updating "${repoArticle.titleParser()}" ${isDraft}...`);
+      } else {
+        core.info(`⬆️ Uploading "${repoArticle.titleParser()}" ${isDraft}...`);
+      }
     }
 
     core.endGroup();
