@@ -13,7 +13,6 @@ export interface Article {
   tags?: string[];
   canonical_url?: string;
   positive_reactions_count?: number;
-  reserveTitle?: string;
 }
 
 export interface WebhookInput {
