@@ -10,6 +10,7 @@ export interface Article {
   published_at?: string;
   comments_count?: number;
   series?: string;
+  tags?: string[];
   canonical_url?: string;
   positive_reactions_count?: number;
   reserveTitle?: string;
