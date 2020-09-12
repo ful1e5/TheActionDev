@@ -7,8 +7,9 @@ import { Article } from "../api/DevApi";
 import { LowDBApi } from "../api/LowDBApi";
 
 export class RepoArticlesProvider {
-  private _repoName: string;
+  name: string;
   httpsLink: string;
+  dispatchLink: string;
   private _excludePattern: string[] = [
     "!**/README.md",
     "!**/CONTRIBUTING.md",
@@ -22,8 +23,9 @@ export class RepoArticlesProvider {
    */
   constructor(private _path?: string) {
     // Set Repo Name
-    this._repoName = github.context.repo.repo;
-    this.httpsLink = `https://www.github.com/${github.context.repo.owner}/${this._repoName}`;
+    this.name = github.context.repo.repo;
+    this.httpsLink = `https://www.github.com/${github.context.repo.owner}/${this.name}`;
+    this.dispatchLink = `${this.httpsLink}/dispatches`;
 
     // Ignoring user files
     const userIgnore = core.getInput("ignore");
@@ -66,7 +68,7 @@ export class RepoArticlesProvider {
     authorProfileLink: string | null;
     db: LowDBApi;
   }): Promise<void> {
-    core.startGroup(`Syncing ${this._repoName} articles with dev.to`);
+    core.startGroup(`Syncing ${this.name} articles with dev.to`);
     const data: MetaParser[] = [];
 
     core.info(
