@@ -46,23 +46,23 @@ export class MetaParser {
   }
 
   /**
-   * Get "description" meta-data from markdown file
+   * Get "canonical_url" meta-data from markdown file
    */
-  descriptionParser(): string | null {
+  canonicalUrlParser(): string | null {
     const msg = `Can't Parse "description" in ${this._maskedURI}`;
     if (!this._yaml) {
       core.warning(msg);
       return null;
     }
-    const description = this._yaml[1].match(
-      /^[ \t]*description:[ \t]*(.*?)[ \t]*$/m
+    const canonicalUrl = this._yaml[1].match(
+      /^[ \t]*canonical_url:[ \t]*(.*?)[ \t]*$/m
     );
-    if (!description) {
+    if (!canonicalUrl) {
       core.warning(msg);
       return null;
     }
 
-    return decodeURIComponent(description[1]);
+    return decodeURIComponent(canonicalUrl[1]);
   }
 
   /**
@@ -130,15 +130,15 @@ export class MetaParser {
    */
   article(): Article {
     const title = this.titleParser();
-    const description = this.descriptionParser();
+    const canonicalUrl = this.canonicalUrlParser();
     const published = this.publishStateParser();
     const body_markdown = this.bodyParser();
 
-    if (title && published && body_markdown && description) {
+    if (title && published && body_markdown && canonicalUrl) {
       return {
         title,
         published,
-        description,
+        canonical_url: canonicalUrl,
         body_markdown
       };
     }
