@@ -13,6 +13,7 @@ export interface Article {
   positive_reactions_count?: number;
   reserveTitle?: string;
 }
+
 export interface WebhookInput {
   webhook_endpoint: {
     target_url: string;
