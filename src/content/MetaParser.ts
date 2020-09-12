@@ -30,36 +30,53 @@ export class MetaParser {
   /**
    * Get "title" meta-data from markdown file
    */
-  titleParser(): string | null {
+  titleParser(): string | undefined {
     const msg = `Can't Parse "title" in ${this._maskedURI}`;
     if (!this._yaml) {
       core.warning(msg);
-      return null;
+      return undefined;
     }
     const title = this._yaml[1].match(/^[ \t]*title:[ \t]*(.*?)[ \t]*$/m);
     if (!title) {
       core.warning(msg);
-      return null;
+      return undefined;
     }
 
     return decodeURIComponent(title[1]);
   }
 
   /**
-   * Get "canonical_url" meta-data from markdown file
+   * Get "series" meta-data from markdown file
    */
-  canonicalUrlParser(): string | null {
+  seriesParser(): string | undefined {
     const msg = `Can't Parse "description" in ${this._maskedURI}`;
     if (!this._yaml) {
       core.warning(msg);
-      return null;
+      return undefined;
+    }
+    const series = this._yaml[1].match(/^[ \t]*series:[ \t]*(.*?)[ \t]*$/m);
+    if (!series) {
+      core.warning(msg);
+      return undefined;
+    }
+
+    return decodeURIComponent(series[1]);
+  }
+  /**
+   * Get "canonical_url" meta-data from markdown file
+   */
+  canonicalUrlParser(): string | undefined {
+    const msg = `Can't Parse "description" in ${this._maskedURI}`;
+    if (!this._yaml) {
+      core.warning(msg);
+      return undefined;
     }
     const canonicalUrl = this._yaml[1].match(
       /^[ \t]*canonical_url:[ \t]*(.*?)[ \t]*$/m
     );
     if (!canonicalUrl) {
       core.warning(msg);
-      return null;
+      return undefined;
     }
 
     return decodeURIComponent(canonicalUrl[1]);
@@ -68,17 +85,17 @@ export class MetaParser {
   /**
    * Get "tags" meta-data from markdown file
    */
-  tagsParser(): string[] | null {
+  tagsParser(): string[] | undefined {
     const msg = `Can't Parse "tags" in ${this._maskedURI}`;
     if (!this._yaml) {
       core.warning(msg);
-      return null;
+      return undefined;
     }
 
     const tags = this._yaml[1].match(/^[ \t]*tags:[ \t]*(.*?)[ \t]*$/m);
     if (!tags) {
       core.warning(msg);
-      return null;
+      return undefined;
     }
 
     return tags[1]
@@ -90,7 +107,7 @@ export class MetaParser {
   /**
    * Get "published" meta-data from markdown file
    */
-  publishStateParser(): boolean | null {
+  publishStateParser(): boolean {
     const msg = `Can't Parse "published" in ${this._maskedURI}`;
     if (!this._yaml) {
       core.warning(msg);
@@ -110,16 +127,16 @@ export class MetaParser {
   /**
    * Get article "body" from markdown file
    */
-  bodyParser(): string | null {
+  bodyParser(): string | undefined {
     const msg = `Can't Parse "Markdown Body" in ${this._maskedURI}`;
     if (!this._yaml) {
       core.warning(msg);
-      return null;
+      return undefined;
     }
     const body = this._markdown.replace(this._yaml[1], "");
     if (!body) {
       core.warning(msg);
-      return null;
+      return undefined;
     }
 
     return decodeURIComponent(body);
@@ -131,13 +148,17 @@ export class MetaParser {
   article(): Article {
     const title = this.titleParser();
     const canonicalUrl = this.canonicalUrlParser();
+    const series = this.seriesParser();
+    const tags = this.tagsParser();
     const published = this.publishStateParser();
     const body_markdown = this.bodyParser();
 
-    if (title && published && body_markdown && canonicalUrl) {
+    if (title && published && body_markdown) {
       return {
         title,
         published,
+        series,
+        tags,
         canonical_url: canonicalUrl,
         body_markdown
       };
