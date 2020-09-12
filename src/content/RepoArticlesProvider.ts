@@ -25,7 +25,7 @@ export class RepoArticlesProvider {
     // Set Repo Name
     this.name = github.context.repo.repo;
     this.httpsLink = `https://www.github.com/${github.context.repo.owner}/${this.name}`;
-    this.dispatchLink = `${this.httpsLink}/dispatches`;
+    this.dispatchLink = `${this.httpsLink}/actions/workflows/${github.context.workflow}/dispatches`;
 
     // Ignoring user files
     const userIgnore = core.getInput("ignore");
