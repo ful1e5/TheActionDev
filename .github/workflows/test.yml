@@ -1,5 +1,9 @@
 name: "build-test"
 on: # rebuild any PRs and main branch changes
+  # TODO:Webhooks
+  # repository_dispatch:
+  # types: test-run
+
   pull_request:
   push:
     paths-ignore:

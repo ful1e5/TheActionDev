@@ -12,6 +12,12 @@ inputs:
   ignore:
     description: "Files are ignored by action. Multiple files are separated by ','(Comma)."
 
+
+  # TODO:Webhooks
+  # payload:
+  #   description: "Dev.to Webhooks data (using underhood)"
+  #   default: ${{ github.event.client_payload.example-key }} # Do not Change
+
 runs:
   using: "node12"
   main: "dist/index.js"
