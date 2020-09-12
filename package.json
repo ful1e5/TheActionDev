@@ -29,7 +29,7 @@
     "npm-lock": "synp -f -s yarn.lock",
     "r:npm-lock": "rm -rf package-lock.json",
     "pack:dev": "yarn rebuild && yarn package",
-    "run:dev": "yarn pack:dev && act -s DEV_TO_TOKEN=$TOKEN -j test-run",
+    "dev": "yarn pack:dev && act -s DEV_TO_TOKEN=$TOKEN -j test-run",
     "action:yarn": "yarn build && yarn format && yarn lint && yarn package && yarn test",
     "action": "npm run build && npm run format && npm run lint && npm run package && npm test"
   },
@@ -37,7 +37,6 @@
     "@actions/core": "^1.2.5",
     "@actions/github": "^4.0.0",
     "@actions/glob": "^0.1.0",
-    "@octokit/webhooks": "^7.11.2",
     "lowdb": "^1.0.0",
     "request-promise": "^4.2.6"
   },
