@@ -16,13 +16,7 @@ export const run = async (): Promise<void> => {
     const api = new DevAPI(apiKey);
     const repo = new RepoArticlesProvider(articlesPath);
 
-    // await api.createWebhook(repo.name, repo.dispatchLink);
-    // await api.webhooks();
-
-    const articles = await api.list();
-    const authorProfileLink = await api.profileLink();
-
-    repo.upload({ articles, authorProfileLink });
+    repo.sync(api);
   } catch (error) {
     core.setFailed(error.message);
   }
