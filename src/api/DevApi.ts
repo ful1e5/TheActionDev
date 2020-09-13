@@ -11,6 +11,7 @@ export interface Article {
   comments_count?: number;
   series?: string;
   tags?: string[];
+  cover_image: string | null;
   canonical_url?: string;
   positive_reactions_count?: number;
 }
@@ -18,6 +19,7 @@ export interface Article {
 export interface ArticleData {
   title: string;
   published: boolean;
+  cover_image: string | null;
   body_markdown: string;
   tags: string[];
   canonical_url: string;
@@ -62,7 +64,7 @@ export class DevAPI {
     path: string,
     method: string,
     parameters?: { [key: string]: string | number },
-    body?: Article | WebhookInput | ArticleData
+    body?: WebhookInput | ArticleData
   ): rq.OptionsWithUri {
     let uri = `https://dev.to/api${path}`;
     if (parameters) {
@@ -233,10 +235,9 @@ export class DevAPI {
    * @param bodyMarkdown body of post(markdown)
    * Create new post on your dev.to profile
    */
-  async create(title: string, bodyMarkdown: string): Promise<Article> {
+  async create(articleData: ArticleData): Promise<Article> {
     const options = this._buildRequestOptions("/articles", "POST", undefined, {
-      title,
-      body_markdown: bodyMarkdown
+      ...articleData
     });
     core.debug("DevApi: Creating Article");
     const response: Article = await rq(options);
