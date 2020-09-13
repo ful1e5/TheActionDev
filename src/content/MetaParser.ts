@@ -51,14 +51,14 @@ export class MetaParser {
   description(): string | undefined {
     const msg = `Set 'description:' as {null} default in ${this._maskedURI}`;
     if (!this._yaml) {
-      core.warning(msg);
+      core.info(msg);
       return undefined;
     }
     const description = this._yaml[1].match(
       /^[ \t]*description:[ \t]*(.*?)[ \t]*$/m
     );
     if (!description) {
-      core.warning(msg);
+      core.info(msg);
       return undefined;
     }
 
@@ -71,14 +71,14 @@ export class MetaParser {
   coverImage(): string | null {
     const msg = `Set 'cover_image:' as {null} default in ${this._maskedURI}`;
     if (!this._yaml) {
-      core.warning(msg);
+      core.info(msg);
       return null;
     }
     const coverImage = this._yaml[1].match(
       /^[ \t]*cover_image:[ \t]*(.*?)[ \t]*$/m
     );
     if (!coverImage) {
-      core.warning(msg);
+      core.info(msg);
       return null;
     }
 
@@ -91,12 +91,12 @@ export class MetaParser {
   series(): string {
     const msg = `Set 'series:' as ""(empty) default in ${this._maskedURI}`;
     if (!this._yaml) {
-      core.debug(msg);
+      core.info(msg);
       return "";
     }
     const series = this._yaml[1].match(/^[ \t]*series:[ \t]*(.*?)[ \t]*$/m);
     if (!series) {
-      core.debug(msg);
+      core.info(msg);
       return "";
     }
 
@@ -109,14 +109,14 @@ export class MetaParser {
   canonicalUrl(): string {
     const msg = `Set 'canonical_url:' as ""(empty) default in ${this._maskedURI}`;
     if (!this._yaml) {
-      core.debug(msg);
+      core.info(msg);
       return "";
     }
     const canonicalUrl = this._yaml[1].match(
       /^[ \t]*canonical_url:[ \t]*(.*?)[ \t]*$/m
     );
     if (!canonicalUrl) {
-      core.debug(msg);
+      core.info(msg);
       return "";
     }
 
@@ -129,13 +129,13 @@ export class MetaParser {
   tags(): string[] | [] {
     const msg = `Set 'tags:' as [] Default in ${this._maskedURI}`;
     if (!this._yaml) {
-      core.debug(msg);
+      core.info(msg);
       return [];
     }
 
     const tags = this._yaml[1].match(/^[ \t]*tags:[ \t]*(.*?)[ \t]*$/m);
     if (!tags) {
-      core.debug(msg);
+      core.info(msg);
       return [];
     }
 
