@@ -20,12 +20,12 @@ export interface Article {
 export interface ArticleData {
   title: string;
   published: boolean;
+  description: string;
+  tags: string[];
   cover_image: string | null;
   body_markdown: string;
-  tags: string[];
-  description: string;
-  canonical_url: string;
   series: string;
+  canonical_url: string;
 }
 
 export interface WebhookInput {
