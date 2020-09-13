@@ -106,6 +106,14 @@ export class RepoArticlesProvider {
         }
       } else {
         core.info(`⬆️ Uploading "${repoArticle.title()}" as ${status}...`);
+        try {
+          const response = await api.create(repoArticle.data());
+          core.info(
+            `🔗 "${response.title}" available as "${status}" at ${response.url}`
+          );
+        } catch (error) {
+          core.warning(error);
+        }
       }
     }
 
