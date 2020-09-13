@@ -68,9 +68,13 @@ export class RepoArticlesProvider {
     const articles = await api.list();
     const authorProfileLink = await api.profileLink();
 
-    core.info(
-      `⚡ ${articles.length} articles fetched from ${authorProfileLink}`
-    );
+    if (!articles) {
+      throw new Error("Articles not fetched from dev.to api");
+    } else {
+      core.info(
+        `⚡ ${articles.length} articles fetched from ${authorProfileLink}`
+      );
+    }
 
     for (const file of await this.files()) {
       data.push(new MetaParser(file));
@@ -81,14 +85,21 @@ export class RepoArticlesProvider {
         ? "as published"
         : "as draft";
 
-      const presentOnDev = articles.filter(
+      const [presentOnDev] = articles.filter(
         a => a.title === repoArticle.titleParser()
       );
 
-      console.log(presentOnDev);
-
-      if (presentOnDev) {
+      if (presentOnDev?.id) {
         core.info(`📝 Updating "${repoArticle.titleParser()}" ${isDraft}...`);
+        try {
+          const response = await api.update(
+            presentOnDev.id,
+            repoArticle.articleData()
+          );
+          console.log(response);
+        } catch (error) {
+          core.warning(error);
+        }
       } else {
         core.info(`⬆️ Uploading "${repoArticle.titleParser()}" ${isDraft}...`);
       }
