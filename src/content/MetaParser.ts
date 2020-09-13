@@ -192,6 +192,6 @@ export class MetaParser {
       };
     }
 
-    throw new Error(`Can't Parse ${this._maskedURI}`);
+    throw new Error(`Can't Parse meta-data in ${this._maskedURI}`);
   }
 }
