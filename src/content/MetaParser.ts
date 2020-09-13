@@ -79,7 +79,7 @@ export class MetaParser {
       return "";
     }
 
-    return canonicalUrl[1];
+    return decodeURIComponent(canonicalUrl[1]);
   }
 
   /**
@@ -133,7 +133,9 @@ export class MetaParser {
       core.warning(msg);
       return undefined;
     }
-    const body = this._markdown.replace(this._yaml[1], "");
+    const body = this._markdown
+      .replace(this._yaml[1], "")
+      .replace(/-{3}\n{2}/g, "");
     if (!body) {
       core.warning(msg);
       return undefined;
