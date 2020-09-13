@@ -15,6 +15,15 @@ export interface Article {
   positive_reactions_count?: number;
 }
 
+export interface ArticleData {
+  title: string;
+  published: boolean;
+  body_markdown: string;
+  tags: string[];
+  canonical_url: string;
+  series: string;
+}
+
 export interface WebhookInput {
   webhook_endpoint: {
     target_url: string;
@@ -53,7 +62,7 @@ export class DevAPI {
     path: string,
     method: string,
     parameters?: { [key: string]: string | number },
-    body?: Article | WebhookInput
+    body?: Article | WebhookInput | ArticleData
   ): rq.OptionsWithUri {
     let uri = `https://dev.to/api${path}`;
     if (parameters) {
@@ -203,23 +212,17 @@ export class DevAPI {
   /**
    *
    * @param id unique identifier of dev.to post
-   * @param title Updated title
-   * @param bodyMarkdown Post body(markdown)
+   * @param articleData New Article Data
    * Upadte Post on dev.to by `id`
    */
-  async update(
-    id: number,
-    title: string,
-    bodyMarkdown: string
-  ): Promise<Article> {
+  async update(id: number, articleData: ArticleData): Promise<Article> {
     const options = this._buildRequestOptions(
       `/articles/${id}`,
       "PUT",
       undefined,
-      { title, body_markdown: bodyMarkdown }
+      { ...articleData }
     );
 
-    core.debug(`DevApi: Updating ${title}`);
     const response: Article = await rq(options);
     return response;
   }
