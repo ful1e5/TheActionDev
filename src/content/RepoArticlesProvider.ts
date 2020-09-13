@@ -85,25 +85,27 @@ export class RepoArticlesProvider {
 
     // Loop through all repo articles
     for (const repoArticle of data) {
-      const status = repoArticle.publishState() ? "as published" : "as draft";
+      const status = repoArticle.publishState() ? "published" : "draft";
 
       const [presentOnDev] = articles.filter(
         a => a.title === repoArticle.title()
       );
 
       if (presentOnDev?.id) {
-        core.info(`📝 Updating "${repoArticle.title()}" ${status}...`);
+        core.info(`📝 Updating "${repoArticle.title()}" as ${status}...`);
         try {
           const response = await api.update(
             presentOnDev.id,
             repoArticle.data()
           );
-          console.log(response);
+          core.info(
+            `🔗 "${response.title}" available as "${status}" at ${response.url}`
+          );
         } catch (error) {
           core.warning(error);
         }
       } else {
-        core.info(`⬆️ Uploading "${repoArticle.title()}" ${status}...`);
+        core.info(`⬆️ Uploading "${repoArticle.title()}" as ${status}...`);
       }
     }
 
