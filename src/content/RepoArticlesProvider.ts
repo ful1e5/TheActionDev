@@ -64,17 +64,17 @@ export class RepoArticlesProvider {
    * @param api dev.to api instance
    */
   async sync(api: DevAPI): Promise<void> {
-    core.startGroup(`Syncing ${this.name} articles with dev.to`);
+    const devProfileLink = await api.profileLink();
+    core.startGroup(`Syncing ${this.name} articles with ${devProfileLink}`);
 
     const data: MetaParser[] = [];
     const articles = await api.list();
-    const authorProfileLink = await api.profileLink();
 
     if (!articles) {
       throw new Error("Articles not fetched from dev.to api");
     } else {
       core.info(
-        `⚡ ${articles.length} articles fetched from ${authorProfileLink}`
+        `⚡ ${articles.length} articles fetched from ${devProfileLink}`
       );
     }
 
