@@ -9,6 +9,8 @@ export class RepoArticlesProvider {
   name: string;
   apiLink: string;
   dispatchLink: string;
+
+  // Ignoring GitHub Markdowns
   private _excludePattern: string[] = [
     "!**/README.md",
     "!**/CONTRIBUTING.md",
@@ -63,8 +65,8 @@ export class RepoArticlesProvider {
    */
   async sync(api: DevAPI): Promise<void> {
     core.startGroup(`Syncing ${this.name} articles with dev.to`);
-    const data: MetaParser[] = [];
 
+    const data: MetaParser[] = [];
     const articles = await api.list();
     const authorProfileLink = await api.profileLink();
 
@@ -76,19 +78,21 @@ export class RepoArticlesProvider {
       );
     }
 
+    // Creating MetaParser objects
     for (const file of await this.files()) {
       data.push(new MetaParser(file));
     }
 
+    // Loop through all repo articles
     for (const repoArticle of data) {
-      const isDraft = repoArticle.publishState() ? "as published" : "as draft";
+      const status = repoArticle.publishState() ? "as published" : "as draft";
 
       const [presentOnDev] = articles.filter(
         a => a.title === repoArticle.title()
       );
 
       if (presentOnDev?.id) {
-        core.info(`📝 Updating "${repoArticle.title()}" ${isDraft}...`);
+        core.info(`📝 Updating "${repoArticle.title()}" ${status}...`);
         try {
           const response = await api.update(
             presentOnDev.id,
@@ -99,7 +103,7 @@ export class RepoArticlesProvider {
           core.warning(error);
         }
       } else {
-        core.info(`⬆️ Uploading "${repoArticle.title()}" ${isDraft}...`);
+        core.info(`⬆️ Uploading "${repoArticle.title()}" ${status}...`);
       }
     }
 
