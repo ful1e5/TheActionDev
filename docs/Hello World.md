@@ -1,8 +1,8 @@
 ---
-title: Hello From TheAction 👋
+title: TheActionDev 👋
 description: Hello World
-published: false
-tags: typescript, javascript
+published: true
+tags: typescript, javascript, github
 series: TheActionDev
 ---
 
