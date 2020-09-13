@@ -49,7 +49,7 @@ export class MetaParser {
    * Get "cover_image" meta-data from markdown file
    */
   coverImageParser(): string | null {
-    const msg = `Set 'cover_image:' as ""(empty) default in ${this._maskedURI}`;
+    const msg = `Set 'cover_image:' as {null} default in ${this._maskedURI}`;
     if (!this._yaml) {
       core.warning(msg);
       return null;
@@ -179,8 +179,6 @@ export class MetaParser {
     const series = this.seriesParser();
     const coverImage = this.coverImageParser();
     const canonicalUrl = this.canonicalUrlParser();
-
-    console.log(body_markdown, published, title);
 
     if (title && body_markdown) {
       return {
