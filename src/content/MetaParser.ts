@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 import * as core from "@actions/core";
 
-import { Article } from "../api/DevApi";
+import { ArticleData } from "../api/DevApi";
 
 export class MetaParser {
   private _markdown: string;
@@ -31,7 +31,7 @@ export class MetaParser {
    * Get "title" meta-data from markdown file
    */
   titleParser(): string | undefined {
-    const msg = `Can't Parse "title" in ${this._maskedURI}`;
+    const msg = `'title:' is Required in ${this._maskedURI}`;
     if (!this._yaml) {
       core.warning(msg);
       return undefined;
@@ -48,16 +48,16 @@ export class MetaParser {
   /**
    * Get "series" meta-data from markdown file
    */
-  seriesParser(): string | undefined {
-    const msg = `Can't Parse "description" in ${this._maskedURI}`;
+  seriesParser(): string {
+    const msg = `Set 'series:' as ""(empty) default in ${this._maskedURI}`;
     if (!this._yaml) {
-      core.warning(msg);
-      return undefined;
+      core.debug(msg);
+      return "";
     }
     const series = this._yaml[1].match(/^[ \t]*series:[ \t]*(.*?)[ \t]*$/m);
     if (!series) {
-      core.warning(msg);
-      return undefined;
+      core.debug(msg);
+      return "";
     }
 
     return decodeURIComponent(series[1]);
@@ -65,37 +65,37 @@ export class MetaParser {
   /**
    * Get "canonical_url" meta-data from markdown file
    */
-  canonicalUrlParser(): string | undefined {
-    const msg = `Can't Parse "description" in ${this._maskedURI}`;
+  canonicalUrlParser(): string {
+    const msg = `Set 'canonical_url:' as ""(empty) default in ${this._maskedURI}`;
     if (!this._yaml) {
-      core.warning(msg);
-      return undefined;
+      core.debug(msg);
+      return "";
     }
     const canonicalUrl = this._yaml[1].match(
       /^[ \t]*canonical_url:[ \t]*(.*?)[ \t]*$/m
     );
     if (!canonicalUrl) {
-      core.warning(msg);
-      return undefined;
+      core.debug(msg);
+      return "";
     }
 
-    return decodeURIComponent(canonicalUrl[1]);
+    return canonicalUrl[1];
   }
 
   /**
    * Get "tags" meta-data from markdown file
    */
-  tagsParser(): string[] | undefined {
-    const msg = `Can't Parse "tags" in ${this._maskedURI}`;
+  tagsParser(): string[] | [] {
+    const msg = `Set 'tags:' as [] Default in ${this._maskedURI}`;
     if (!this._yaml) {
-      core.warning(msg);
-      return undefined;
+      core.debug(msg);
+      return [];
     }
 
     const tags = this._yaml[1].match(/^[ \t]*tags:[ \t]*(.*?)[ \t]*$/m);
     if (!tags) {
-      core.warning(msg);
-      return undefined;
+      core.debug(msg);
+      return [];
     }
 
     return tags[1]
@@ -108,16 +108,16 @@ export class MetaParser {
    * Get "published" meta-data from markdown file
    */
   publishStateParser(): boolean {
-    const msg = `Can't Parse "published" in ${this._maskedURI}`;
+    const msg = `Set "published: false" in ${this._maskedURI}`;
     if (!this._yaml) {
-      core.warning(msg);
+      core.info(msg);
       return false;
     }
     const published = this._yaml[1].match(
       /^[ \t]*published:[ \t]*(.*?)[ \t]*$/m
     );
     if (!published) {
-      core.warning(msg);
+      core.info(msg);
       return false;
     }
 
@@ -139,21 +139,26 @@ export class MetaParser {
       return undefined;
     }
 
-    return decodeURIComponent(body);
+    return body;
   }
 
   /**
    * Get Article
    */
-  article(): Article {
+  articleData(): ArticleData {
+    // Must require
     const title = this.titleParser();
-    const canonicalUrl = this.canonicalUrlParser();
-    const series = this.seriesParser();
-    const tags = this.tagsParser();
-    const published = this.publishStateParser();
     const body_markdown = this.bodyParser();
 
-    if (title && published && body_markdown) {
+    // Automatically handle
+    const published = this.publishStateParser();
+    const tags = this.tagsParser();
+    const series = this.seriesParser();
+    const canonicalUrl = this.canonicalUrlParser();
+
+    console.log(body_markdown, published, title);
+
+    if (title && body_markdown) {
       return {
         title,
         published,
