@@ -11,6 +11,7 @@ export interface Article {
   comments_count?: number;
   series?: string;
   tags?: string[];
+  description?: string;
   cover_image: string | null;
   canonical_url?: string;
   positive_reactions_count?: number;
@@ -22,6 +23,7 @@ export interface ArticleData {
   cover_image: string | null;
   body_markdown: string;
   tags: string[];
+  description: string;
   canonical_url: string;
   series: string;
 }
