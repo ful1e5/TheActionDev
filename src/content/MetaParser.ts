@@ -46,6 +46,26 @@ export class MetaParser {
   }
 
   /**
+   * Get "cover_image" meta-data from markdown file
+   */
+  coverImageParser(): string | null {
+    const msg = `Set 'cover_image:' as ""(empty) default in ${this._maskedURI}`;
+    if (!this._yaml) {
+      core.warning(msg);
+      return null;
+    }
+    const coverImage = this._yaml[1].match(
+      /^[ \t]*cover_image:[ \t]*(.*?)[ \t]*$/m
+    );
+    if (!coverImage) {
+      core.warning(msg);
+      return null;
+    }
+
+    return decodeURIComponent(coverImage[1]);
+  }
+
+  /**
    * Get "series" meta-data from markdown file
    */
   seriesParser(): string {
@@ -62,6 +82,7 @@ export class MetaParser {
 
     return decodeURIComponent(series[1]);
   }
+
   /**
    * Get "canonical_url" meta-data from markdown file
    */
@@ -156,6 +177,7 @@ export class MetaParser {
     const published = this.publishStateParser();
     const tags = this.tagsParser();
     const series = this.seriesParser();
+    const coverImage = this.coverImageParser();
     const canonicalUrl = this.canonicalUrlParser();
 
     console.log(body_markdown, published, title);
@@ -167,6 +189,7 @@ export class MetaParser {
         series,
         tags,
         canonical_url: canonicalUrl,
+        cover_image: coverImage,
         body_markdown
       };
     }
