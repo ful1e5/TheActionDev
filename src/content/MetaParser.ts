@@ -30,7 +30,7 @@ export class MetaParser {
   /**
    * Get "title" meta-data from markdown file
    */
-  titleParser(): string | undefined {
+  title(): string | undefined {
     const msg = `'title:' is Required in ${this._maskedURI}`;
     if (!this._yaml) {
       core.warning(msg);
@@ -48,7 +48,7 @@ export class MetaParser {
   /**
    * Get "cover_image" meta-data from markdown file
    */
-  coverImageParser(): string | null {
+  coverImage(): string | null {
     const msg = `Set 'cover_image:' as {null} default in ${this._maskedURI}`;
     if (!this._yaml) {
       core.warning(msg);
@@ -68,7 +68,7 @@ export class MetaParser {
   /**
    * Get "series" meta-data from markdown file
    */
-  seriesParser(): string {
+  series(): string {
     const msg = `Set 'series:' as ""(empty) default in ${this._maskedURI}`;
     if (!this._yaml) {
       core.debug(msg);
@@ -86,7 +86,7 @@ export class MetaParser {
   /**
    * Get "canonical_url" meta-data from markdown file
    */
-  canonicalUrlParser(): string {
+  canonicalUrl(): string {
     const msg = `Set 'canonical_url:' as ""(empty) default in ${this._maskedURI}`;
     if (!this._yaml) {
       core.debug(msg);
@@ -106,7 +106,7 @@ export class MetaParser {
   /**
    * Get "tags" meta-data from markdown file
    */
-  tagsParser(): string[] | [] {
+  tags(): string[] | [] {
     const msg = `Set 'tags:' as [] Default in ${this._maskedURI}`;
     if (!this._yaml) {
       core.debug(msg);
@@ -128,7 +128,7 @@ export class MetaParser {
   /**
    * Get "published" meta-data from markdown file
    */
-  publishStateParser(): boolean {
+  publishState(): boolean {
     const msg = `Set "published: false" in ${this._maskedURI}`;
     if (!this._yaml) {
       core.info(msg);
@@ -148,7 +148,7 @@ export class MetaParser {
   /**
    * Get article "body" from markdown file
    */
-  bodyParser(): string | undefined {
+  body(): string | undefined {
     const msg = `Can't Parse "Markdown Body" in ${this._maskedURI}`;
     if (!this._yaml) {
       core.warning(msg);
@@ -166,19 +166,19 @@ export class MetaParser {
   }
 
   /**
-   * Get Article
+   * Get Repo Article Data
    */
-  articleData(): ArticleData {
+  data(): ArticleData {
     // Must require
-    const title = this.titleParser();
-    const body_markdown = this.bodyParser();
+    const title = this.title();
+    const body_markdown = this.body();
 
     // Automatically handle
-    const published = this.publishStateParser();
-    const tags = this.tagsParser();
-    const series = this.seriesParser();
-    const coverImage = this.coverImageParser();
-    const canonicalUrl = this.canonicalUrlParser();
+    const published = this.publishState();
+    const tags = this.tags();
+    const series = this.series();
+    const coverImage = this.coverImage();
+    const canonicalUrl = this.canonicalUrl();
 
     if (title && body_markdown) {
       return {

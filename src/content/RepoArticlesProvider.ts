@@ -81,27 +81,25 @@ export class RepoArticlesProvider {
     }
 
     for (const repoArticle of data) {
-      const isDraft = repoArticle.publishStateParser()
-        ? "as published"
-        : "as draft";
+      const isDraft = repoArticle.publishState() ? "as published" : "as draft";
 
       const [presentOnDev] = articles.filter(
-        a => a.title === repoArticle.titleParser()
+        a => a.title === repoArticle.title()
       );
 
       if (presentOnDev?.id) {
-        core.info(`📝 Updating "${repoArticle.titleParser()}" ${isDraft}...`);
+        core.info(`📝 Updating "${repoArticle.title()}" ${isDraft}...`);
         try {
           const response = await api.update(
             presentOnDev.id,
-            repoArticle.articleData()
+            repoArticle.data()
           );
           console.log(response);
         } catch (error) {
           core.warning(error);
         }
       } else {
-        core.info(`⬆️ Uploading "${repoArticle.titleParser()}" ${isDraft}...`);
+        core.info(`⬆️ Uploading "${repoArticle.title()}" ${isDraft}...`);
       }
     }
 
