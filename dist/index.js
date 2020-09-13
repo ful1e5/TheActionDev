@@ -196,14 +196,12 @@ class DevAPI {
     /**
      *
      * @param id unique identifier of dev.to post
-     * @param title Updated title
-     * @param bodyMarkdown Post body(markdown)
+     * @param articleData New Article Data
      * Upadte Post on dev.to by `id`
      */
-    update(id, title, bodyMarkdown) {
+    update(id, articleData) {
         return __awaiter(this, void 0, void 0, function* () {
-            const options = this._buildRequestOptions(`/articles/${id}`, "PUT", undefined, { title, body_markdown: bodyMarkdown });
-            core.debug(`DevApi: Updating ${title}`);
+            const options = this._buildRequestOptions(`/articles/${id}`, "PUT", undefined, Object.assign({}, articleData));
             const response = yield request_promise_1.default(options);
             return response;
         });
@@ -214,12 +212,9 @@ class DevAPI {
      * @param bodyMarkdown body of post(markdown)
      * Create new post on your dev.to profile
      */
-    create(title, bodyMarkdown) {
+    create(articleData) {
         return __awaiter(this, void 0, void 0, function* () {
-            const options = this._buildRequestOptions("/articles", "POST", undefined, {
-                title,
-                body_markdown: bodyMarkdown
-            });
+            const options = this._buildRequestOptions("/articles", "POST", undefined, Object.assign({}, articleData));
             core.debug("DevApi: Creating Article");
             const response = yield request_promise_1.default(options);
             return response;
@@ -281,8 +276,8 @@ class MetaParser {
     /**
      * Get "title" meta-data from markdown file
      */
-    titleParser() {
-        const msg = `Can't Parse "title" in ${this._maskedURI}`;
+    title() {
+        const msg = `'title:' is Required in ${this._maskedURI}`;
         if (!this._yaml) {
             core.warning(msg);
             return undefined;
@@ -295,50 +290,82 @@ class MetaParser {
         return decodeURIComponent(title[1]);
     }
     /**
-     * Get "series" meta-data from markdown file
+     * Get "description" meta-data from markdown file
      */
-    seriesParser() {
-        const msg = `Can't Parse "description" in ${this._maskedURI}`;
+    description() {
+        const msg = `Set 'description:' as {null} default in ${this._maskedURI}`;
         if (!this._yaml) {
             core.warning(msg);
             return undefined;
         }
-        const series = this._yaml[1].match(/^[ \t]*series:[ \t]*(.*?)[ \t]*$/m);
-        if (!series) {
+        const description = this._yaml[1].match(/^[ \t]*description:[ \t]*(.*?)[ \t]*$/m);
+        if (!description) {
             core.warning(msg);
             return undefined;
+        }
+        return decodeURIComponent(description[1]);
+    }
+    /**
+     * Get "cover_image" meta-data from markdown file
+     */
+    coverImage() {
+        const msg = `Set 'cover_image:' as {null} default in ${this._maskedURI}`;
+        if (!this._yaml) {
+            core.warning(msg);
+            return null;
+        }
+        const coverImage = this._yaml[1].match(/^[ \t]*cover_image:[ \t]*(.*?)[ \t]*$/m);
+        if (!coverImage) {
+            core.warning(msg);
+            return null;
+        }
+        return decodeURIComponent(coverImage[1]);
+    }
+    /**
+     * Get "series" meta-data from markdown file
+     */
+    series() {
+        const msg = `Set 'series:' as ""(empty) default in ${this._maskedURI}`;
+        if (!this._yaml) {
+            core.debug(msg);
+            return "";
+        }
+        const series = this._yaml[1].match(/^[ \t]*series:[ \t]*(.*?)[ \t]*$/m);
+        if (!series) {
+            core.debug(msg);
+            return "";
         }
         return decodeURIComponent(series[1]);
     }
     /**
      * Get "canonical_url" meta-data from markdown file
      */
-    canonicalUrlParser() {
-        const msg = `Can't Parse "description" in ${this._maskedURI}`;
+    canonicalUrl() {
+        const msg = `Set 'canonical_url:' as ""(empty) default in ${this._maskedURI}`;
         if (!this._yaml) {
-            core.warning(msg);
-            return undefined;
+            core.debug(msg);
+            return "";
         }
         const canonicalUrl = this._yaml[1].match(/^[ \t]*canonical_url:[ \t]*(.*?)[ \t]*$/m);
         if (!canonicalUrl) {
-            core.warning(msg);
-            return undefined;
+            core.debug(msg);
+            return "";
         }
         return decodeURIComponent(canonicalUrl[1]);
     }
     /**
      * Get "tags" meta-data from markdown file
      */
-    tagsParser() {
-        const msg = `Can't Parse "tags" in ${this._maskedURI}`;
+    tags() {
+        const msg = `Set 'tags:' as [] Default in ${this._maskedURI}`;
         if (!this._yaml) {
-            core.warning(msg);
-            return undefined;
+            core.debug(msg);
+            return [];
         }
         const tags = this._yaml[1].match(/^[ \t]*tags:[ \t]*(.*?)[ \t]*$/m);
         if (!tags) {
-            core.warning(msg);
-            return undefined;
+            core.debug(msg);
+            return [];
         }
         return tags[1]
             .split(",")
@@ -348,15 +375,15 @@ class MetaParser {
     /**
      * Get "published" meta-data from markdown file
      */
-    publishStateParser() {
-        const msg = `Can't Parse "published" in ${this._maskedURI}`;
+    publishState() {
+        const msg = `Set "published: false" in ${this._maskedURI}`;
         if (!this._yaml) {
-            core.warning(msg);
+            core.info(msg);
             return false;
         }
         const published = this._yaml[1].match(/^[ \t]*published:[ \t]*(.*?)[ \t]*$/m);
         if (!published) {
-            core.warning(msg);
+            core.info(msg);
             return false;
         }
         return published[1] === "true";
@@ -364,40 +391,42 @@ class MetaParser {
     /**
      * Get article "body" from markdown file
      */
-    bodyParser() {
+    body() {
         const msg = `Can't Parse "Markdown Body" in ${this._maskedURI}`;
         if (!this._yaml) {
             core.warning(msg);
             return undefined;
         }
-        const body = this._markdown.replace(this._yaml[1], "");
+        const body = this._markdown
+            .replace(this._yaml[1], "")
+            .replace(/-{3}\n{2}/g, "");
         if (!body) {
             core.warning(msg);
             return undefined;
         }
-        return decodeURIComponent(body);
+        return body;
     }
     /**
-     * Get Article
+     * Get Repo Article Data
      */
-    article() {
-        const title = this.titleParser();
-        const canonicalUrl = this.canonicalUrlParser();
-        const series = this.seriesParser();
-        const tags = this.tagsParser();
-        const published = this.publishStateParser();
-        const body_markdown = this.bodyParser();
-        if (title && published && body_markdown) {
+    data() {
+        // Must require
+        const title = this.title();
+        const body_markdown = this.body();
+        const description = this.description();
+        if (title && body_markdown && description) {
             return {
                 title,
-                published,
-                series,
-                tags,
-                canonical_url: canonicalUrl,
-                body_markdown
+                description,
+                body_markdown,
+                published: this.publishState(),
+                series: this.series(),
+                tags: this.tags(),
+                canonical_url: this.canonicalUrl(),
+                cover_image: this.coverImage()
             };
         }
-        throw new Error(`Can't Parse ${this._maskedURI}`);
+        throw new Error(`Can't Parse meta-data in ${this._maskedURI}`);
     }
 }
 exports.MetaParser = MetaParser;
@@ -451,6 +480,7 @@ class RepoArticlesProvider {
      */
     constructor(_path) {
         this._path = _path;
+        // Ignoring GitHub Markdowns
         this._excludePattern = [
             "!**/README.md",
             "!**/CONTRIBUTING.md",
@@ -494,25 +524,43 @@ class RepoArticlesProvider {
      */
     sync(api) {
         return __awaiter(this, void 0, void 0, function* () {
-            core.startGroup(`Syncing ${this.name} articles with dev.to`);
+            const devProfileLink = yield api.profileLink();
+            core.startGroup(`Syncing ${this.name} articles with ${devProfileLink}`);
             const data = [];
             const articles = yield api.list();
-            const authorProfileLink = yield api.profileLink();
-            core.info(`⚡ ${articles.length} articles fetched from ${authorProfileLink}`);
+            if (!articles) {
+                throw new Error("Articles not fetched from dev.to api");
+            }
+            else {
+                core.info(`⚡ ${articles.length} articles fetched from ${devProfileLink}`);
+            }
+            // Creating MetaParser objects
             for (const file of yield this.files()) {
                 data.push(new MetaParser_1.MetaParser(file));
             }
+            // Loop through all repo articles
             for (const repoArticle of data) {
-                const isDraft = repoArticle.publishStateParser()
-                    ? "as published"
-                    : "as draft";
-                const presentOnDev = articles.filter(a => a.title === repoArticle.titleParser());
-                console.log(presentOnDev);
-                if (presentOnDev) {
-                    core.info(`📝 Updating "${repoArticle.titleParser()}" ${isDraft}...`);
+                const status = repoArticle.publishState() ? "published" : "draft";
+                const [presentOnDev] = articles.filter(a => a.title === repoArticle.title());
+                if (presentOnDev === null || presentOnDev === void 0 ? void 0 : presentOnDev.id) {
+                    core.info(`📝 Updating "${repoArticle.title()}" as ${status}...`);
+                    try {
+                        const response = yield api.update(presentOnDev.id, repoArticle.data());
+                        core.info(`🔗 "${response.title}" available as "${status}" at ${response.url}`);
+                    }
+                    catch (error) {
+                        core.warning(error);
+                    }
                 }
                 else {
-                    core.info(`⬆️ Uploading "${repoArticle.titleParser()}" ${isDraft}...`);
+                    core.info(`⬆️ Uploading "${repoArticle.title()}" as ${status}...`);
+                    try {
+                        const response = yield api.create(repoArticle.data());
+                        core.info(`🔗 "${response.title}" available as "${status}" at ${response.url}`);
+                    }
+                    catch (error) {
+                        core.warning(error);
+                    }
                 }
             }
             core.endGroup();
