@@ -85,12 +85,12 @@ export class RepoArticlesProvider {
       const obj = new MetaParser(file);
 
       // Printing Repo Article Info
-      core.info(`\n\n ℹ️ ${obj.title()} Repo Article Available`);
-      core.info(`Tags: ${obj.tags().toString()}`);
-      core.info(`Description: ${obj.description()}`);
-      core.info(`Canonical Url: ${obj.canonicalUrl()}`);
-      core.info(`Series: ${obj.series()}`);
-      core.info(`Published: ${obj.publishState()}`);
+      core.info(`\n\n 📝 "${obj.title()}" Article Fetched`);
+      core.info(`  Tags: ${obj.tags().toString()}`);
+      core.info(`  Description: ${obj.description()}`);
+      core.info(`  Canonical Url: ${obj.canonicalUrl()}`);
+      core.info(`  Series: ${obj.series()}`);
+      core.info(`  Published: ${obj.publishState()}`);
       data.push(obj);
     }
 
