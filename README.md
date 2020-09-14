@@ -50,7 +50,7 @@
 ---
 
 <!-- <p align="center">
-    Start using this action by
+    Start using this action with
     <a href="">
       TheActionDev-template
     </a>
@@ -58,19 +58,19 @@
 
 # What is TheActionDev
 
-TheActionDev is Github Action allow you to write & Maintining [dev.to](https://dev.to/) **articles** without touching `dev.to` UI. This entire action developed in **[#ActionsHackathon](https://dev.to/devteam/announcing-the-github-actions-hackathon-on-dev-3ljn)** with **[dev.to OpenApi](https://docs.dev.to/api/)** & **Typescript**. This action is scan your **Github Repository** directories and find articles based on `yaml` **MetaData** inside `.md`(markdown file).
+TheActionDev is Github Action allow you to write & Maintining [dev.to](https://dev.to/) **articles** without touching `dev.to` UI. This entire action developed in **[#ActionsHackathon](https://dev.to/devteam/announcing-the-github-actions-hackathon-on-dev-3ljn)** with **[dev.to OpenApi]** & **Typescript**. This action is scan your **Github Repository** directories and find articles based on `yaml` **MetaData** inside `.md`(markdown file).
 
 <!-- Usage -->
 
-# Basic Usage
+## Basic Usage
 
-1. You'll first need to create a YAML file to describe the workflow in your project (e.g. .github/workflows/TheActionDev.yml).
-2. Generate dev.to `apiKey` by following [this docs](https://docs.dev.to/api/#section/Authentication/api_key)
-3. Add your `apiKey` to **GitHub Secret**
+- You'll first need to create a YAML file to describe the workflow in your project (e.g. .github/workflows/TheActionDev.yml).
+- Generate dev.to `apiKey` by following [this docs](https://docs.dev.to/api/#section/Authentication/api_key)
+- Add your `apiKey` to **GitHub Secret** by follow [Github Docs](https://docs.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets)
 
 <!-- Usage Example -->
 
-## TheActionDev.yaml
+### TheActionDev.yaml
 
 ```yaml
 name: TheActionDev Sync
@@ -96,11 +96,11 @@ jobs:
 
 <!-- Inputs of this Action -->
 
-## Inputs
+### Inputs
 
 #### `api-key`
 
-dev.to OpenApi Key
+[dev.to OpenApi] Key. Set inside **[Github Secret](https://docs.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets)**.
 
 #### `directory`
 
@@ -108,7 +108,30 @@ Relative path to your articles files (\*.md) directory
 
 #### `ignore`
 
-File you wan't to ignore by this action. listed files ignored **globally** by this action.
+The file you want to ignore by this action. This **feature** is implemented by [@actions/glob](https://github.com/actions/toolkit/tree/master/packages/glob),So you also provide **[glob pattern](https://github.com/actions/toolkit/tree/master/packages/glob#patterns)** with it.
+
+<!-- Glob pattern example -->
+
+#### example
+
+for example, we have to ignore all articles inside `foo` sub-directory
+
+```diff
+.....
+
+ - name: Sycing Article to dev.to
+   uses: ful1e5/TheActionDev@v1
+   with:
+     api-key: ${{ secrets.DEVTO_API_KEY }}
+     directory: ./articles
+-     ignore: foo/bar.md, foo/hello.md
++     ignore: foo/**.md
+
+.....
+
+```
+
+Listed files ignored **globally** by **TheActionDev**.
 
 - README.md
 - CONTRIBUTING.md
@@ -116,6 +139,8 @@ File you wan't to ignore by this action. listed files ignored **globally** by th
 - CHANGELOG.md
 - [Pull Request Templates](https://docs.github.com/en/github/building-a-strong-community/about-issue-and-pull-request-templates#pull-request-templates)
 - [Issue Templates](https://docs.github.com/en/github/building-a-strong-community/about-issue-and-pull-request-templates#issue-templates)
+
+## Writing Article with `TheActionDev`
 
 <!-- Article Structure -->
 
@@ -132,13 +157,15 @@ cover_image: string               # `Optional` url to image
 canonical_url: string             # `Optional` url
 ---
 
-# Body goes here...
+# The Markdown Body here
 ```
 
 ### Article Body Basics
 
 - Use [Markdown](https://guides.github.com/features/mastering-markdown/) to write and format posts.
 - You can use [Liquid tags](https://docs.dev.to/frontend/liquid-tags/) to add rich content such as Tweets, YouTube videos, etc.
+
+<!-- Article Example -->
 
 ### Example
 
@@ -155,3 +182,48 @@ First Post with **TheActionDev** 🤩
 
 {% github ful1e5/TheActionDev %}
 ```
+
+## Development
+
+Check [docs/DEVELOPMENT.md](./docs/DEVELOPMENT.md)
+
+<!-- Help -->
+
+# Getting Help
+
+You can create a **issue**, I will help you. 🙂
+
+<!-- Contributions and Suggestion -->
+
+# Contributing
+
+Check [CONTRIBUTING.md](CONTRIBUTING.md), any suggestions for features and contributions to the continuing code masterelopment can be made via the issue tracker or code contributions via a `Fork` & `Pull requests`.
+
+<!-- Support -->
+
+## Support
+
+Give a **★**, So other **DEV** don't miss this.
+
+> For more support
+
+<a href="https://www.buymeacoffee.com/Nt7Wg4V" target="_blank">
+  <img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" >
+</a>
+
+<!-- Ninja  -->
+
+<h1 align="center">
+  ♫♪.ılılıll|̲̅̅●̲̅̅|̲̅̅=̲̅̅|̲̅̅●̲̅̅|llılılı.♫♪
+</h1>
+<p align="center">
+  <sub>Ninja is listing 
+  <a href="">
+    <b>HardStyle</b>
+  </a>
+  </sub>
+</p>
+
+<!-- Reuse Links -->
+
+[dev.to openapi]: https://docs.dev.to/api/
