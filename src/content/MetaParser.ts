@@ -141,7 +141,7 @@ export class MetaParser {
 
     return tags[1]
       .split(",")
-      .map(t => t.trim())
+      .map(t => decodeURIComponent(t.trim()))
       .filter(t => t !== "");
   }
 
