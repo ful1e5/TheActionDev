@@ -19,6 +19,10 @@
     <img src="https://www.codefactor.io/repository/github/ful1e5/theactiondev/badge" alt="CodeFactor" />
   </a>
 
+  <a href="https://github.com/ful1e5/TheActionDev/releases">  
+    <img alt="TheActionDev Releases" src="https://img.shields.io/github/v/release/ful1e5/TheActionDev">
+  </a>
+
   <!-- Second Row -->
   </br >
   <a href="https://www.typescriptlang.org/docs/handbook/typescript-from-scratch.html">
@@ -29,7 +33,12 @@
     <img alt="License" src="https://img.shields.io/github/license/ful1e5/TheActionDev?color=0081FB" />
   </a>
 
- <!-- Third Row -->
+  <a href="https://github.com/ful1e5/TheActionDev/community">
+    <img src="https://img.shields.io/badge/community%20standards-satisfied-brightgreen" alt="OpenSource Community Standards" />
+  </a>
+
+  <!-- Third Row -->
+
   <br />
   <a href="https://github.com/ful1e5">
     <img alt="Made By Kaiz"  src="https://kaiz.vercel.app/api/badge" width="133" />
