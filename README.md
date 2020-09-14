@@ -104,7 +104,7 @@ File you wan't to ignore by this action. Below listed files ignored **globally**
 - README.md
 - CONTRIBUTING.md
 - CODE_OF_CONDUCT.md
-- CHANGELOGS.md
+- CHANGELOG.md
 - [Pull Request Templates](https://docs.github.com/en/github/building-a-strong-community/about-issue-and-pull-request-templates#pull-request-templates)
 - [Issue Templates](https://docs.github.com/en/github/building-a-strong-community/about-issue-and-pull-request-templates#issue-templates)
 
