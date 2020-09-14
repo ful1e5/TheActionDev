@@ -50,15 +50,15 @@
 ---
 
 <!-- <p align="center">
-    Start using this action with
+    Start using this action by forking
     <a href="">
       TheActionDev-template
     </a>
 </p> -->
 
-# What is TheActionDev
+# What is TheActionDev?
 
-TheActionDev is Github Action allow you to write & Maintining [dev.to](https://dev.to/) **articles** without touching `dev.to` UI. This entire action developed in **[#ActionsHackathon](https://dev.to/devteam/announcing-the-github-actions-hackathon-on-dev-3ljn)** with **[dev.to OpenApi]** & **Typescript**. This action is scan your **Github Repository** directories and find articles based on `yaml` **MetaData** inside `.md`(markdown file).
+TheActionDev is Github Action allow you to write & Maintining [dev.to](https://dev.to/) **articles** without touching `dev.to` UI. This entire action developed in **[#ActionsHackathon](https://dev.to/devteam/announcing-the-github-actions-hackathon-on-dev-3ljn)** with **[dev.to OpenApi]** & **Typescript**. This action is scan your **Github Repository** directories and find articles based on **YAML Front Matter** in `markdown` files.
 
 <!-- Usage -->
 
@@ -186,6 +186,11 @@ First Post with **TheActionDev** 🤩
 ## Development
 
 Check [docs/DEVELOPMENT.md](./docs/DEVELOPMENT.md)
+
+## Code Inspiration/Adopation
+
+- [vscode-devto](https://github.com/Sneezry/vscode-devto) extension for `vscode`
+- [typescript-action](https://github.com/actions/typescript-action)
 
 <!-- Help -->
 
