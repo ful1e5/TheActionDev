@@ -80,7 +80,16 @@ export class RepoArticlesProvider {
 
     // Creating MetaParser objects
     for (const file of await this.files()) {
-      data.push(new MetaParser(file));
+      const obj = new MetaParser(file);
+
+      // Printing Repo Article Info
+      core.info(`\n\n ℹ️ ${obj.title()} Repo Article Available`);
+      core.info(`Tags: ${obj.tags().toString()}`);
+      core.info(`Description: ${obj.description()}`);
+      core.info(`Canonical Url: ${obj.canonicalUrl()}`);
+      core.info(`Series: ${obj.series()}`);
+      core.info(`Published: ${obj.publishState()}`);
+      data.push(obj);
     }
 
     // Loop through all repo articles
