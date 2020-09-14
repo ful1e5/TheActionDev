@@ -37,8 +37,8 @@ export class RepoArticlesProvider {
 
       const userIgnoreFiles = userIgnore
         .split(",")
-        .map(f => `!**/${f.trim()}`)
-        .filter(f => f !== "");
+        .filter(f => f !== "")
+        .map(f => `!**/${f.trim()}`);
       core.debug(`User Ignore Files: ${userIgnoreFiles}`);
 
       this._excludePattern.push(...userIgnoreFiles);
