@@ -15,7 +15,9 @@ export class RepoArticlesProvider {
     "!**/README.md",
     "!**/CONTRIBUTING.md",
     "!**/CODE_OF_CONDUCT.md",
-    "!**/CHANGELOGS.md"
+    "!**/CHANGELOGS.md",
+    "!**/ISSUE_TEMPLATE/**.md",
+    "!**/PULL_REQUEST_TEMPLATE.md"
   ];
 
   /**
