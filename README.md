@@ -99,7 +99,7 @@ Relative path to your articles files (\*.md) directory
 
 #### `ignore`
 
-File you wan't to ignore by this action. Below listed files ignored **globally** by this action.
+File you wan't to ignore by this action. listed files ignored **globally** by this action.
 
 - README.md
 - CONTRIBUTING.md
