@@ -295,12 +295,12 @@ class MetaParser {
     description() {
         const msg = `Set 'description:' as {null} default in ${this._maskedURI}`;
         if (!this._yaml) {
-            core.warning(msg);
+            core.info(msg);
             return undefined;
         }
         const description = this._yaml[1].match(/^[ \t]*description:[ \t]*(.*?)[ \t]*$/m);
         if (!description) {
-            core.warning(msg);
+            core.info(msg);
             return undefined;
         }
         return decodeURIComponent(description[1]);
@@ -311,12 +311,12 @@ class MetaParser {
     coverImage() {
         const msg = `Set 'cover_image:' as {null} default in ${this._maskedURI}`;
         if (!this._yaml) {
-            core.warning(msg);
+            core.info(msg);
             return null;
         }
         const coverImage = this._yaml[1].match(/^[ \t]*cover_image:[ \t]*(.*?)[ \t]*$/m);
         if (!coverImage) {
-            core.warning(msg);
+            core.info(msg);
             return null;
         }
         return decodeURIComponent(coverImage[1]);
@@ -327,12 +327,12 @@ class MetaParser {
     series() {
         const msg = `Set 'series:' as ""(empty) default in ${this._maskedURI}`;
         if (!this._yaml) {
-            core.debug(msg);
+            core.info(msg);
             return "";
         }
         const series = this._yaml[1].match(/^[ \t]*series:[ \t]*(.*?)[ \t]*$/m);
         if (!series) {
-            core.debug(msg);
+            core.info(msg);
             return "";
         }
         return decodeURIComponent(series[1]);
@@ -343,12 +343,12 @@ class MetaParser {
     canonicalUrl() {
         const msg = `Set 'canonical_url:' as ""(empty) default in ${this._maskedURI}`;
         if (!this._yaml) {
-            core.debug(msg);
+            core.info(msg);
             return "";
         }
         const canonicalUrl = this._yaml[1].match(/^[ \t]*canonical_url:[ \t]*(.*?)[ \t]*$/m);
         if (!canonicalUrl) {
-            core.debug(msg);
+            core.info(msg);
             return "";
         }
         return decodeURIComponent(canonicalUrl[1]);
@@ -359,17 +359,17 @@ class MetaParser {
     tags() {
         const msg = `Set 'tags:' as [] Default in ${this._maskedURI}`;
         if (!this._yaml) {
-            core.debug(msg);
+            core.info(msg);
             return [];
         }
         const tags = this._yaml[1].match(/^[ \t]*tags:[ \t]*(.*?)[ \t]*$/m);
         if (!tags) {
-            core.debug(msg);
+            core.info(msg);
             return [];
         }
         return tags[1]
             .split(",")
-            .map(t => t.trim())
+            .map(t => decodeURIComponent(t.trim()))
             .filter(t => t !== "");
     }
     /**
@@ -485,7 +485,9 @@ class RepoArticlesProvider {
             "!**/README.md",
             "!**/CONTRIBUTING.md",
             "!**/CODE_OF_CONDUCT.md",
-            "!**/CHANGELOGS.md"
+            "!**/CHANGELOG.md",
+            "!**/ISSUE_TEMPLATE/**.md",
+            "!**/PULL_REQUEST_TEMPLATE.md"
         ];
         // Set Repo Name
         this.name = github.context.repo.repo;
@@ -498,8 +500,8 @@ class RepoArticlesProvider {
             core.info(`Ignoring ${userIgnore} to Sync`);
             const userIgnoreFiles = userIgnore
                 .split(",")
-                .map(f => `!**/${f.trim()}`)
-                .filter(f => f !== "");
+                .filter(f => f !== "")
+                .map(f => `!**/${f.trim()}`);
             core.debug(`User Ignore Files: ${userIgnoreFiles}`);
             this._excludePattern.push(...userIgnoreFiles);
         }
@@ -516,7 +518,7 @@ class RepoArticlesProvider {
             const globber = yield glob.create(pattern.join("\n"), {
                 followSymbolicLinks: false
             });
-            return yield globber.glob();
+            return globber.glob();
         });
     }
     /**
@@ -536,7 +538,15 @@ class RepoArticlesProvider {
             }
             // Creating MetaParser objects
             for (const file of yield this.files()) {
-                data.push(new MetaParser_1.MetaParser(file));
+                const obj = new MetaParser_1.MetaParser(file);
+                // Printing Repo Article Info
+                core.info(`\n\n 📝 "${obj.title()}" Article Fetched`);
+                core.info(`  Tags: ${obj.tags().toString()}`);
+                core.info(`  Description: ${obj.description()}`);
+                core.info(`  Canonical Url: ${obj.canonicalUrl()}`);
+                core.info(`  Series: ${obj.series()}`);
+                core.info(`  Published: ${obj.publishState()}`);
+                data.push(obj);
             }
             // Loop through all repo articles
             for (const repoArticle of data) {
