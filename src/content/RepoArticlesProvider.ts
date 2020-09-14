@@ -57,7 +57,7 @@ export class RepoArticlesProvider {
       followSymbolicLinks: false
     });
 
-    return await globber.glob();
+    return globber.glob();
   }
 
   /**
