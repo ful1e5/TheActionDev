@@ -234,7 +234,7 @@ Give a **★**, So other **DEV** don't miss this.
 </h1>
 <p align="center">
   <sub>Ninja is listing 
-  <a href="">
+  <a href="https://en.wikipedia.org/wiki/Hardstyle">
     <b>HardStyle</b>
   </a>
   </sub>
