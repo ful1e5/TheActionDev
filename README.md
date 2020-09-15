@@ -49,12 +49,14 @@
 
 ---
 
-<!-- <p align="center">
-    Start using this action by forking
-    <a href="">
-      TheActionDev-template
+<p align="center">
+    ⚡ Start writing <b>dev.to</b> articles with
+    <a href="https://github.com/ful1e5/TheActionDev-template/generate">
+      <b>TheActionDev-template</b>
     </a>
-</p> -->
+</p>
+
+---
 
 # What is TheActionDev?
 
