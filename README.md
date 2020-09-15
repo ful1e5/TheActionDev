@@ -58,15 +58,15 @@
 
 # What is TheActionDev?
 
-TheActionDev is Github Action allow you to write & Maintining [dev.to](https://dev.to/) **articles** without touching `dev.to` UI. This entire action developed in **[#ActionsHackathon](https://dev.to/devteam/announcing-the-github-actions-hackathon-on-dev-3ljn)** with **[dev.to OpenApi]** & **Typescript**. This action is scan your **Github Repository** directories and find articles based on **[Jekyll front matter](https://jekyllrb.com/docs/front-matter/)** in `markdown` files.
+TheActionDev is Github Action allow you to write & Maintining [dev.to](https://dev.to/) **articles** without touching `dev.to` UI. This action is initiate in **[#ActionsHackathon](https://dev.to/devteam/announcing-the-github-actions-hackathon-on-dev-3ljn)** and using **[DEV API]** under the hood. This action is scan your **Github Repository** based on `directory` [input](#inputs) and find articles based on **[Jekyll front matter](https://jekyllrb.com/docs/front-matter/)** in `markdown` files.
 
 <!-- Usage -->
 
 ## Basic Usage
 
-- You'll first need to create a YAML file to describe the workflow in your project (e.g. .github/workflows/TheActionDev.yml).
-- Generate dev.to `apiKey` by following [this docs](https://docs.dev.to/api/#section/Authentication/api_key)
-- Add your `apiKey` to **GitHub Secret** by follow [Github Docs](https://docs.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets)
+- You'll first need to create a YAML file to describe the workflow in your project (e.g. .github/workflows/TheActionDev.yaml).
+- Generate dev.to `apiKey` by following [dev.to docs](https://docs.dev.to/api/#section/Authentication/api_key)
+- Add your `apiKey` to **GitHub Secret** by following [Github Docs](https://docs.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets)
 
 <!-- Usage Example -->
 
@@ -100,7 +100,7 @@ jobs:
 
 #### `api-key`
 
-[dev.to OpenApi] Key. Set inside **[Github Secret](https://docs.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets)**.
+[DEV API] Key. Set inside **[Github Secret](https://docs.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets)**.
 
 #### `directory`
 
@@ -197,7 +197,12 @@ First Post with **TheActionDev** 🤩
 
 Check [docs/DEVELOPMENT.md](./docs/DEVELOPMENT.md)
 
-## Inspiration
+# Branding
+
+- Assets: [Figma](https://www.figma.com/file/mO5kSS79lY0NIMMzAJDBJZ/TheActionDev?node-id=0%3A1)
+- Font: [JoyStick](www.pixelsagas.com/?download=joystick)
+
+# Inspiration
 
 - [DEV Docs 😍](https://docs.dev.to/)
 - [vscode-devto 🔥](https://github.com/Sneezry/vscode-devto) extension for `vscode`
@@ -219,7 +224,7 @@ Check [CONTRIBUTING.md](CONTRIBUTING.md), any suggestions for features and contr
 
 ## Support
 
-Give a **★**, So other **DEV** don't miss this.
+Give a **★**, So other **OpenSource Ninja** don't miss this.
 
 > For more support
 
@@ -242,4 +247,4 @@ Give a **★**, So other **DEV** don't miss this.
 
 <!-- Reuse Links -->
 
-[dev.to openapi]: https://docs.dev.to/api/
+[dev api]: https://docs.dev.to/api/
