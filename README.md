@@ -89,7 +89,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Sycing Article to dev.to
-        uses: ful1e5/TheActionDev@v1
+        uses: ful1e5/TheActionDev@v2
         with:
           api-key: ${{ secrets.DEVTO_API_KEY }} # Store your 'api-key' in Github Secret
           directory: ./articles # Your article directory
@@ -120,7 +120,7 @@ for example, I want ignore all articles inside `foo` sub-directory, The action i
 .....
 
  - name: Sycing Article to dev.to
-   uses: ful1e5/TheActionDev@v1
+   uses: ful1e5/TheActionDev@v2
    with:
      api-key: ${{ secrets.DEVTO_API_KEY }}
      directory: ./articles
