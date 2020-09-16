@@ -1,6 +1,6 @@
 {
   "name": "the-action-dev",
-  "version": "2.0",
+  "version": "2.0.0",
   "description": "dev.to Posts with GitHub Actions 🧑‍💻",
   "author": "Kaiz Khatri",
   "main": "lib/main.js",
