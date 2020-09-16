@@ -51,14 +51,14 @@ export class MetaParser {
   description(): string | undefined {
     const msg = `Set 'description:' as {null} default in ${this._maskedURI}`;
     if (!this._yaml) {
-      core.info(msg);
+      core.debug(msg);
       return undefined;
     }
     const description = this._yaml[1].match(
       /^[ \t]*description:[ \t]*(.*?)[ \t]*$/m
     );
     if (!description) {
-      core.info(msg);
+      core.debug(msg);
       return undefined;
     }
 
@@ -71,14 +71,14 @@ export class MetaParser {
   coverImage(): string | null {
     const msg = `Set 'cover_image:' as {null} default in ${this._maskedURI}`;
     if (!this._yaml) {
-      core.info(msg);
+      core.debug(msg);
       return null;
     }
     const coverImage = this._yaml[1].match(
       /^[ \t]*cover_image:[ \t]*(.*?)[ \t]*$/m
     );
     if (!coverImage) {
-      core.info(msg);
+      core.debug(msg);
       return null;
     }
 
@@ -91,12 +91,12 @@ export class MetaParser {
   series(): string {
     const msg = `Set 'series:' as ""(empty) default in ${this._maskedURI}`;
     if (!this._yaml) {
-      core.info(msg);
+      core.debug(msg);
       return "";
     }
     const series = this._yaml[1].match(/^[ \t]*series:[ \t]*(.*?)[ \t]*$/m);
     if (!series) {
-      core.info(msg);
+      core.debug(msg);
       return "";
     }
 
@@ -109,14 +109,14 @@ export class MetaParser {
   canonicalUrl(): string {
     const msg = `Set 'canonical_url:' as ""(empty) default in ${this._maskedURI}`;
     if (!this._yaml) {
-      core.info(msg);
+      core.debug(msg);
       return "";
     }
     const canonicalUrl = this._yaml[1].match(
       /^[ \t]*canonical_url:[ \t]*(.*?)[ \t]*$/m
     );
     if (!canonicalUrl) {
-      core.info(msg);
+      core.debug(msg);
       return "";
     }
 
@@ -129,13 +129,13 @@ export class MetaParser {
   tags(): string[] | [] {
     const msg = `Set 'tags:' as [] Default in ${this._maskedURI}`;
     if (!this._yaml) {
-      core.info(msg);
+      core.debug(msg);
       return [];
     }
 
     const tags = this._yaml[1].match(/^[ \t]*tags:[ \t]*(.*?)[ \t]*$/m);
     if (!tags) {
-      core.info(msg);
+      core.debug(msg);
       return [];
     }
 
@@ -151,14 +151,14 @@ export class MetaParser {
   publishState(): boolean {
     const msg = `Set "published: false" in ${this._maskedURI}`;
     if (!this._yaml) {
-      core.info(msg);
+      core.debug(msg);
       return false;
     }
     const published = this._yaml[1].match(
       /^[ \t]*published:[ \t]*(.*?)[ \t]*$/m
     );
     if (!published) {
-      core.info(msg);
+      core.debug(msg);
       return false;
     }
 
@@ -166,44 +166,13 @@ export class MetaParser {
   }
 
   /**
-   * Get article "body" from markdown file
-   */
-  body(): string | undefined {
-    const msg = `Can't Parse "Markdown Body" in ${this._maskedURI}`;
-    if (!this._yaml) {
-      core.warning(msg);
-      return undefined;
-    }
-    const body = this._markdown
-      .replace(this._yaml[1], "")
-      .replace(/-{3}\n{2}/g, "");
-    if (!body) {
-      core.warning(msg);
-      return undefined;
-    }
-
-    return body;
-  }
-
-  /**
    * Get Repo Article Data
    */
   data(): ArticleData {
-    // Must require
-    const title = this.title();
-    const body_markdown = this.body();
-    const description = this.description();
-
-    if (title && body_markdown && description) {
+    if (this._markdown) {
       return {
-        title,
-        description,
-        body_markdown,
-        published: this.publishState(),
-        series: this.series(),
-        tags: this.tags(),
-        canonical_url: this.canonicalUrl(),
-        cover_image: this.coverImage()
+        body_markdown: this._markdown,
+        published: this.publishState()
       };
     }
 

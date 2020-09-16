@@ -18,14 +18,8 @@ export interface Article {
 }
 
 export interface ArticleData {
-  title: string;
-  published: boolean;
-  description: string;
-  tags: string[];
-  cover_image: string | null;
   body_markdown: string;
-  series: string;
-  canonical_url: string;
+  published: boolean;
 }
 
 export interface WebhookInput {
