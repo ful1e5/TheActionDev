@@ -3,8 +3,6 @@ import * as core from "@actions/core";
 import { DevAPI } from "./api/DevApi";
 import { RepoArticlesProvider } from "./content/RepoArticlesProvider";
 
-// TODO: Run action on webhooks and send update articles with pull request
-
 /**
  * Run TheActionDev
  */
