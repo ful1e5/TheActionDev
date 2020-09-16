@@ -1,9 +1,5 @@
 name: "build-test"
 on: # rebuild any PRs and main branch changes
-  # TODO:Webhooks
-  # repository_dispatch:
-  # types: test-run
-
   pull_request:
   push:
     paths-ignore:
@@ -29,4 +25,4 @@ jobs:
         with:
           api-key: ${{ secrets.DEVTO_API_KEY }}
           directory: ./docs
-          ignore: Development.md
+          ignore: DEVELOPMENT.md
