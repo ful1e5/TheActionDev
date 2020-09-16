@@ -295,12 +295,12 @@ class MetaParser {
     description() {
         const msg = `Set 'description:' as {null} default in ${this._maskedURI}`;
         if (!this._yaml) {
-            core.info(msg);
+            core.debug(msg);
             return undefined;
         }
         const description = this._yaml[1].match(/^[ \t]*description:[ \t]*(.*?)[ \t]*$/m);
         if (!description) {
-            core.info(msg);
+            core.debug(msg);
             return undefined;
         }
         return decodeURIComponent(description[1]);
@@ -311,12 +311,12 @@ class MetaParser {
     coverImage() {
         const msg = `Set 'cover_image:' as {null} default in ${this._maskedURI}`;
         if (!this._yaml) {
-            core.info(msg);
+            core.debug(msg);
             return null;
         }
         const coverImage = this._yaml[1].match(/^[ \t]*cover_image:[ \t]*(.*?)[ \t]*$/m);
         if (!coverImage) {
-            core.info(msg);
+            core.debug(msg);
             return null;
         }
         return decodeURIComponent(coverImage[1]);
@@ -327,12 +327,12 @@ class MetaParser {
     series() {
         const msg = `Set 'series:' as ""(empty) default in ${this._maskedURI}`;
         if (!this._yaml) {
-            core.info(msg);
+            core.debug(msg);
             return "";
         }
         const series = this._yaml[1].match(/^[ \t]*series:[ \t]*(.*?)[ \t]*$/m);
         if (!series) {
-            core.info(msg);
+            core.debug(msg);
             return "";
         }
         return decodeURIComponent(series[1]);
@@ -343,12 +343,12 @@ class MetaParser {
     canonicalUrl() {
         const msg = `Set 'canonical_url:' as ""(empty) default in ${this._maskedURI}`;
         if (!this._yaml) {
-            core.info(msg);
+            core.debug(msg);
             return "";
         }
         const canonicalUrl = this._yaml[1].match(/^[ \t]*canonical_url:[ \t]*(.*?)[ \t]*$/m);
         if (!canonicalUrl) {
-            core.info(msg);
+            core.debug(msg);
             return "";
         }
         return decodeURIComponent(canonicalUrl[1]);
@@ -359,12 +359,12 @@ class MetaParser {
     tags() {
         const msg = `Set 'tags:' as [] Default in ${this._maskedURI}`;
         if (!this._yaml) {
-            core.info(msg);
+            core.debug(msg);
             return [];
         }
         const tags = this._yaml[1].match(/^[ \t]*tags:[ \t]*(.*?)[ \t]*$/m);
         if (!tags) {
-            core.info(msg);
+            core.debug(msg);
             return [];
         }
         return tags[1]
@@ -378,52 +378,24 @@ class MetaParser {
     publishState() {
         const msg = `Set "published: false" in ${this._maskedURI}`;
         if (!this._yaml) {
-            core.info(msg);
+            core.debug(msg);
             return false;
         }
         const published = this._yaml[1].match(/^[ \t]*published:[ \t]*(.*?)[ \t]*$/m);
         if (!published) {
-            core.info(msg);
+            core.debug(msg);
             return false;
         }
         return published[1] === "true";
     }
     /**
-     * Get article "body" from markdown file
-     */
-    body() {
-        const msg = `Can't Parse "Markdown Body" in ${this._maskedURI}`;
-        if (!this._yaml) {
-            core.warning(msg);
-            return undefined;
-        }
-        const body = this._markdown
-            .replace(this._yaml[1], "")
-            .replace(/-{3}\n{2}/g, "");
-        if (!body) {
-            core.warning(msg);
-            return undefined;
-        }
-        return body;
-    }
-    /**
      * Get Repo Article Data
      */
     data() {
-        // Must require
-        const title = this.title();
-        const body_markdown = this.body();
-        const description = this.description();
-        if (title && body_markdown && description) {
+        if (this._markdown) {
             return {
-                title,
-                description,
-                body_markdown,
-                published: this.publishState(),
-                series: this.series(),
-                tags: this.tags(),
-                canonical_url: this.canonicalUrl(),
-                cover_image: this.coverImage()
+                body_markdown: this._markdown,
+                published: this.publishState()
             };
         }
         throw new Error(`Can't Parse meta-data in ${this._maskedURI}`);
