@@ -60,7 +60,7 @@
 
 # What is TheActionDev?
 
-TheActionDev is Github Action allow you to write & Maintining [dev.to](https://dev.to/) **articles** without touching `dev.to` UI. This action is initiate in **[#ActionsHackathon](https://dev.to/devteam/announcing-the-github-actions-hackathon-on-dev-3ljn)** and using **[DEV API]** under the hood. This action is scan your **Github Repository** based on `directory` [input](#inputs) and find articles based on **[Jekyll front matter](https://jekyllrb.com/docs/front-matter/)** in `markdown` files.
+TheActionDev is Github Action allow you to write & Maintining [dev.to](https://dev.to/) **articles** without touching `dev.to` UI. This action is initiate in **[#actionshackathon](https://dev.to/devteam/announcing-the-github-actions-hackathon-on-dev-3ljn)** and using **[DEV API]** under the hood. This action is scan your **Github Repository** based on `directory` [input](#inputs) and find articles based on **[Jekyll front matter](https://jekyllrb.com/docs/front-matter/)** in `markdown` files.
 
 <!-- Usage -->
 
