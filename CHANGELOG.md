@@ -24,6 +24,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Logo and badges
 - CI/CD Pipelines
 
-[unreleased]: https://github.com/ful1e5/TheActionDev/compare/main...v2
+[unreleased]: https://github.com/ful1e5/TheActionDev/compare/release/v2...main
 [v2]: https://github.com/ful1e5/TheActionDev/compare/v1...v2
 [v1]: https://github.com/ful1e5/TheActionDev/tree/release/v1
