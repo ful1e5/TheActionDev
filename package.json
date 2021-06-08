@@ -32,7 +32,7 @@
     "action": "npm run build && npm run format && npm run lint && npm run package && npm test"
   },
   "dependencies": {
-    "@actions/core": "^1.2.5",
+    "@actions/core": "^1.4.0",
     "@actions/github": "^4.0.0",
     "@actions/glob": "^0.1.0",
     "request-promise": "^4.2.6"
