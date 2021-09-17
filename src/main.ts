@@ -15,7 +15,7 @@ export const run = async (): Promise<void> => {
     const repo = new RepoArticlesProvider(articlesPath);
 
     repo.sync(api);
-  } catch (error) {
+  } catch (error: any) {
     core.setFailed(error.message);
   }
 };

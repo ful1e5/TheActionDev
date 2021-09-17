@@ -112,7 +112,7 @@ export class RepoArticlesProvider {
           core.info(
             `🔗 "${response.title}" available as "${status}" at ${response.url}`
           );
-        } catch (error) {
+        } catch (error: any) {
           core.warning(error);
         }
       } else {
@@ -122,7 +122,7 @@ export class RepoArticlesProvider {
           core.info(
             `🔗 "${response.title}" available as "${status}" at ${response.url}`
           );
-        } catch (error) {
+        } catch (error: any) {
           core.warning(error);
         }
       }

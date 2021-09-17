@@ -23,13 +23,12 @@
     "rebuild": "yarn clean && yarn build",
     "format": "prettier --write **/*.ts",
     "format-check": "prettier --check **/*.ts",
-    "lint": "eslint src/**/*.ts",
     "package": "ncc build --source-map --license licenses.txt",
     "test": "jest",
     "pack:dev": "yarn rebuild && yarn package",
     "dev": "yarn pack:dev && act -s DEVTO_API_KEY=$TOKEN -j test-run",
-    "action:yarn": "yarn build && yarn format && yarn lint && yarn package && yarn test",
-    "action": "npm run build && npm run format && npm run lint && npm run package && npm test"
+    "action:yarn": "yarn build && yarn format && yarn package && yarn test",
+    "action": "npm run build && npm run format && npm run package && npm test"
   },
   "dependencies": {
     "@actions/core": "^1.2.5",
@@ -43,9 +42,6 @@
     "@types/request-promise": "^4.1.46",
     "@typescript-eslint/parser": "^4.1.0",
     "@vercel/ncc": "^0.24.0",
-    "eslint": "^7.8.1",
-    "eslint-plugin-github": "^4.1.1",
-    "eslint-plugin-jest": "^24.0.0",
     "jest": "^26.4.2",
     "jest-circus": "^26.4.2",
     "prettier": "^2.1.1",
