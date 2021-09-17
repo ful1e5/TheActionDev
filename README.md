@@ -12,18 +12,18 @@
 
   <!-- First Row -->
   <a href="https://github.com/ful1e5/TheActionDev/actions/workflows/build.yml">
-    <img alt="Build" src="https://github.com/ful1e5/TheActionDev/actions/workflows/build.yml/badge.svg" width="129" />
+    <img alt="Build" src="https://github.com/ful1e5/TheActionDev/actions/workflows/build.yml/badge.svg" />
   </a>
 
   <a href="https://github.com/ful1e5/TheActionDev/actions/workflows/test-run.yml">
-    <img alt="Test Run" src="https://github.com/ful1e5/TheActionDev/actions/workflows/test-run.yml/badge.svg" width="129" />
+    <img alt="Test Run" src="https://github.com/ful1e5/TheActionDev/actions/workflows/test-run.yml/badge.svg" />
   </a>
 
   <a href="https://www.codefactor.io/repository/github/ful1e5/theactiondev">
     <img src="https://www.codefactor.io/repository/github/ful1e5/theactiondev/badge" alt="CodeFactor" />
   </a>
 
-  <a href="https://github.com/ful1e5/TheActionDev/releases">  
+  <a href="https://github.com/ful1e5/TheActionDev/releases">
     <img alt="TheActionDev Releases" src="https://img.shields.io/github/v/release/ful1e5/TheActionDev">
   </a>
 
@@ -229,10 +229,6 @@ Check [CONTRIBUTING.md](CONTRIBUTING.md), any suggestions for features and contr
 <!-- Support -->
 
 ## Support
-
-Give a **★**, So other **OpenSource Ninja** don't miss this.
-
-> For more support
 
 <a href="https://www.buymeacoffee.com/Nt7Wg4V" target="_blank">
   <img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" >
