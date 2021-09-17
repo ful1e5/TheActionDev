@@ -11,10 +11,14 @@
 <p align="center">
 
   <!-- First Row -->
-  <a href="https://github.com/ful1e5/TheActionDev/actions?query=workflow%3Abuild-test">
-    <img alt="GitHub Action Build" src="https://github.com/ful1e5/TheActionDev/workflows/build-test/badge.svg" width="129" />
+  <a href="https://github.com/ful1e5/TheActionDev/actions/workflows/build.yml">
+    <img alt="Build" src="https://github.com/ful1e5/TheActionDev/actions/workflows/build.yml/badge.svg" width="129" />
   </a>
-  
+
+  <a href="https://github.com/ful1e5/TheActionDev/actions/workflows/test-run.yml">
+    <img alt="Test Run" src="https://github.com/ful1e5/TheActionDev/actions/workflows/test-run.yml/badge.svg" width="129" />
+  </a>
+
   <a href="https://www.codefactor.io/repository/github/ful1e5/theactiondev">
     <img src="https://www.codefactor.io/repository/github/ful1e5/theactiondev/badge" alt="CodeFactor" />
   </a>
