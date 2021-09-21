@@ -1,4 +1,4 @@
-name: "build"
+name: build
 on: # rebuild any PRs and main branch changes
   pull_request:
   push:
@@ -9,11 +9,33 @@ on: # rebuild any PRs and main branch changes
       - "releases/*"
 
 jobs:
-  build:
+  build: # make sure the action works on a clean machine without building
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: |
-          npm install
-      - run: |
-          npm run action
+
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: npm-${{ hashFiles('package-lock.json') }}
+          restore-keys: npm-
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build
+        run: npm run build
+
+      - name: Package
+        run: npm run package
+
+      - name: Test
+        run: npm run test
+
+      - name: Test Run
+        uses: ./
+        with:
+          api-key: ${{ secrets.DEVTO_API_KEY }}
+          directory: ./docs
+          ignore: DEVELOPMENT.md
