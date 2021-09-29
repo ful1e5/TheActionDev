@@ -1,3 +1,4 @@
+-r
 -w
 --secret-file .env
 -j build

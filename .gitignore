@@ -1,6 +1,7 @@
 # Custom
 .db
 *.db
+keys.ts
 
 # Dependency directory
 node_modules

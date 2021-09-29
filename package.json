@@ -23,7 +23,8 @@
     "build": "tsc",
     "package": "ncc build --source-map --license licenses.txt",
     "format": "prettier --write **/*.ts",
-    "test": "jest"
+    "test": "jest",
+    "dev": "yarn clean && yarn build && yarn package && yarn test && node dist/index.js"
   },
   "dependencies": {
     "@actions/core": "^1.2.5",
@@ -34,7 +35,6 @@
   "devDependencies": {
     "@types/got": "^9.6.12",
     "@types/jest": "^27.0.2",
-    "@types/node": "^16.9.2",
     "@vercel/ncc": "^0.24.0",
     "jest": "^26.4.2",
     "jest-circus": "^26.4.2",

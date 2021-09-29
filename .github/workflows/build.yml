@@ -18,14 +18,16 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ~/.npm
-          key: npm-${{ hashFiles('package-lock.json') }}
-          restore-keys: npm-
+          key: npm_cache
+          restore-keys: npm_cache
 
       - name: Install Dependencies
         run: npm install
 
       - name: Build
-        run: npm run build
+        run: |
+          rm -rf dist lib
+          npm run build
 
       - name: Package
         run: npm run package
@@ -33,7 +35,7 @@ jobs:
       - name: Test
         run: npm run test
 
-      - name: Test Run
+      - name: TheActionDev
         uses: ./
         with:
           api-key: ${{ secrets.DEVTO_API_KEY }}
