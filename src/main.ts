@@ -68,9 +68,12 @@ const main = async (): Promise<void> => {
         const update = onlineArticles.filter(a => a.title === article.title);
         const articleStatus = article.published ? "published" : "draft";
 
-        if (update) {
+        if (update[0]) {
           core.info(`Updating '${article.title}' as ${articleStatus}...`);
-          await devtoApi.updateArticle(update[0].id!, article);
+          if (!update[0].id) {
+            throw new Error(`Unable to find 'id' of '${article.title}'`);
+          }
+          await devtoApi.updateArticle(update[0].id, article);
           core.info("Updated.");
         } else {
           core.info(`Creating '${article.title}' as ${articleStatus}...`);
