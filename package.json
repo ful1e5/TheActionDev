@@ -27,7 +27,7 @@
     "dev": "yarn clean && yarn build && yarn package && yarn test && node dist/index.js"
   },
   "dependencies": {
-    "@actions/core": "^1.2.5",
+    "@actions/core": "^1.6.0",
     "@actions/github": "^4.0.0",
     "@actions/glob": "^0.1.0",
     "got": "^11.8.2"
