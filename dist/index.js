@@ -116,14 +116,14 @@ class DevtoApi {
             return res;
         });
     }
-    updateArticle(article) {
+    updateArticle(id, article) {
         return __awaiter(this, void 0, void 0, function* () {
             const options = this._buildRequestOptions({
                 method: "PUT",
                 article,
                 authRequest: true
             });
-            const res = (yield (0, got_1.default)("articles/" + article.id, options));
+            const res = (yield (0, got_1.default)("articles/" + id, options));
             return res;
         });
     }
@@ -295,30 +295,35 @@ const main = () => __awaiter(void 0, void 0, void 0, function* () {
     // Synchronise Article with dev.to
     //
     //
-    for (const file of files) {
-        core.startGroup(`Synchronising ${file}`);
-        core.debug(`Parsing ${file}`);
-        const article = localApi.parse(file);
-        if (article) {
-            dumpArticleInfo(article);
-            const update = onlineArticles.filter(a => a.title === article.title);
-            const articleStatus = article.published ? "published" : "draft";
-            if (update) {
-                core.info(`Updating '${article.title}' as ${articleStatus}...`);
-                article.id = update[0].id;
-                yield devtoApi.updateArticle(article);
-                core.info("Updated.");
+    try {
+        for (const file of files) {
+            core.startGroup(`Synchronising ${file}`);
+            core.debug(`Parsing ${file}`);
+            const article = localApi.parse(file);
+            if (article) {
+                dumpArticleInfo(article);
+                const update = onlineArticles.filter(a => a.title === article.title);
+                const articleStatus = article.published ? "published" : "draft";
+                if (update) {
+                    core.info(`Updating '${article.title}' as ${articleStatus}...`);
+                    yield devtoApi.updateArticle(update[0].id, article);
+                    core.info("Updated.");
+                }
+                else {
+                    core.info(`Creating '${article.title}' as ${articleStatus}...`);
+                    yield devtoApi.createArticle(article);
+                    core.info("Created.");
+                }
             }
             else {
-                core.info(`Creating '${article.title}' as ${articleStatus}...`);
-                yield devtoApi.createArticle(article);
-                core.info("Created.");
+                core.info("Unable to parse this file.\nSkipping.");
             }
+            core.endGroup();
         }
-        else {
-            core.info("Unable to parse this file.\nSkipping.");
-        }
-        core.endGroup();
+    }
+    catch (err) {
+        console.error(err);
+        core.setFailed("");
     }
 });
 main();
