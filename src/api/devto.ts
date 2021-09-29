@@ -90,7 +90,7 @@ export class DevtoApi {
     return res;
   }
 
-  public async updateArticle(id:number,article: Article): Promise<Response> {
+  public async updateArticle(id: number, article: Article): Promise<Response> {
     const options = this._buildRequestOptions({
       method: "PUT",
       article,
