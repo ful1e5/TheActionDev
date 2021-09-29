@@ -24,7 +24,7 @@ export class LocalArticleApi {
   }
 
   public async files(directoryPath: string): Promise<string[]> {
-    const mdPattern = `${directoryPath}/**/*.md`;
+    const mdPattern = `${directoryPath}/**.md`;
     const pattern = [mdPattern, ...this._ignorePattern];
 
     const globber = await glob.create(pattern.join("\n"), {
