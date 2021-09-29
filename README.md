@@ -60,7 +60,7 @@
 
 # What is TheActionDev?
 
-**TheActionDev** is Github Action that allows you to write & maintain [dev.to](https://dev.to/) **articles** without touching the `dev.to` UI. This action is initiated in **[#ActionsHackathon](https://dev.to/devteam/announcing-the-github-actions-hackathon-on-dev-3ljn)** and is using **[DEV API](https://docs.dev.to/api/)** under the hood. This action is scanning your **Github Repository** based on `directory` [input](#inputs) and finds articles based on the **[Jekyll front matter](https://jekyllrb.com/docs/front-matter/)** in `markdown` files.
+**TheActionDev** is Github Action that allows you to write & maintain [dev.to](https://dev.to/) **articles** without touching the `dev.to` UI. This action is initiated in **[#ActionsHackathon](https://dev.to/devteam/announcing-the-github-actions-hackathon-on-dev-3ljn)** and is using **[DEV API](https://docs.dev.to/api/)**. This action is scan your **Github Repository** based on `directory` [input](#inputs) and finds articles based on the **[Jekyll front matter](https://jekyllrb.com/docs/front-matter/)** in `markdown` files.
 
 <!-- Usage -->
 
@@ -158,19 +158,15 @@ Custom variables set for each post, located between the triple-dashed lines in y
 
 #### Front Matter `default` value
 
-```
----
-title: string                     # `Required`
-published: true/false             # `Required` but 'false' by default
-description: string               # `Optional`
-tags: string                      # `Optional` multiple tags separated by ,(comma)
-series: string                    # `Optional`
-cover_image: string               # `Optional` url to image
-canonical_url: string             # `Optional` url
----
-
-# The Markdown Body here
-```
+| tag           | value   | required |
+| :------------ | :------ | :------- |
+| title         | `null`  | **yes**  |
+| published     | `false` | **no**   |
+| description   | `null`  | **no**   |
+| tags          | `[]`    | **no**   |
+| canonical_url | `null`  | **no**   |
+| cover_image   | `null`  | **no**   |
+| series        | `null`  | **no**   |
 
 ### Article Body Basics
 
