@@ -1,0 +1,43 @@
+name: build
+on: # rebuild any PRs and main branch changes
+  pull_request:
+  push:
+    paths-ignore:
+      - "**.md"
+    branches:
+      - main
+      - "releases/*"
+
+jobs:
+  build: # make sure the action works on a clean machine without building
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: npm_cache
+          restore-keys: npm_cache
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build
+        run: |
+          rm -rf dist lib
+          npm run build
+
+      - name: Package
+        run: npm run package
+
+      - name: Test
+        run: npm run test
+
+      - name: TheActionDev
+        uses: ./
+        with:
+          api-key: ${{ secrets.DEVTO_API_KEY }}
+          directory: ./docs
+          ignore: DEVELOPMENT.md

@@ -11,15 +11,15 @@
 <p align="center">
 
   <!-- First Row -->
-  <a href="https://github.com/ful1e5/TheActionDev/actions?query=workflow%3Abuild-test">
-    <img alt="GitHub Action Build" src="https://github.com/ful1e5/TheActionDev/workflows/build-test/badge.svg" width="129" />
+  <a href="https://github.com/ful1e5/TheActionDev/actions/workflows/build.yml">
+    <img alt="Build" src="https://github.com/ful1e5/TheActionDev/actions/workflows/build.yml/badge.svg" />
   </a>
-  
+
   <a href="https://www.codefactor.io/repository/github/ful1e5/theactiondev">
     <img src="https://www.codefactor.io/repository/github/ful1e5/theactiondev/badge" alt="CodeFactor" />
   </a>
 
-  <a href="https://github.com/ful1e5/TheActionDev/releases">  
+  <a href="https://github.com/ful1e5/TheActionDev/releases">
     <img alt="TheActionDev Releases" src="https://img.shields.io/github/v/release/ful1e5/TheActionDev">
   </a>
 
@@ -60,7 +60,7 @@
 
 # What is TheActionDev?
 
-TheActionDev is Github Action allow you to write & Maintining [dev.to](https://dev.to/) **articles** without touching `dev.to` UI. This action is initiate in **[#actionshackathon](https://dev.to/devteam/announcing-the-github-actions-hackathon-on-dev-3ljn)** and using **[DEV API]** under the hood. This action is scan your **Github Repository** based on `directory` [input](#inputs) and find articles based on **[Jekyll front matter](https://jekyllrb.com/docs/front-matter/)** in `markdown` files.
+**TheActionDev** is Github Action that allows you to write & maintain [dev.to](https://dev.to/) **articles** without touching the `dev.to` UI. This action is initiated in **[#ActionsHackathon](https://dev.to/devteam/announcing-the-github-actions-hackathon-on-dev-3ljn)** and is using **[DEV API](https://docs.dev.to/api/)**. This action is scan your **Github Repository** based on `directory` [input](#inputs) and finds articles based on the **[Jekyll front matter](https://jekyllrb.com/docs/front-matter/)** in `markdown` files.
 
 <!-- Usage -->
 
@@ -158,19 +158,15 @@ Custom variables set for each post, located between the triple-dashed lines in y
 
 #### Front Matter `default` value
 
-```
----
-title: string                     # `Required`
-published: true/false             # `Required` but 'false' by default
-description: string               # `Optional`
-tags: string                      # `Optional` multiple tags separated by ,(comma)
-series: string                    # `Optional`
-cover_image: string               # `Optional` url to image
-canonical_url: string             # `Optional` url
----
-
-# The Markdown Body here
-```
+| tag           | value   | required |
+| :------------ | :------ | :------- |
+| title         | `null`  | **yes**  |
+| published     | `false` | **no**   |
+| description   | `null`  | **no**   |
+| tags          | `[]`    | **no**   |
+| canonical_url | `null`  | **no**   |
+| cover_image   | `null`  | **no**   |
+| series        | `null`  | **no**   |
 
 ### Article Body Basics
 
@@ -225,10 +221,6 @@ Check [CONTRIBUTING.md](CONTRIBUTING.md), any suggestions for features and contr
 <!-- Support -->
 
 ## Support
-
-Give a **★**, So other **OpenSource Ninja** don't miss this.
-
-> For more support
 
 <a href="https://www.buymeacoffee.com/Nt7Wg4V" target="_blank">
   <img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" >

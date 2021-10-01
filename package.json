@@ -19,37 +19,28 @@
   ],
   "scripts": {
     "clean": "rm -rf lib dist",
+    "watch": "ts-node-dev --respawn -- src/main.ts",
     "build": "tsc",
-    "rebuild": "yarn clean && yarn build",
-    "format": "prettier --write **/*.ts",
-    "format-check": "prettier --check **/*.ts",
-    "lint": "eslint src/**/*.ts",
     "package": "ncc build --source-map --license licenses.txt",
+    "format": "prettier --write **/*.ts",
     "test": "jest",
-    "pack:dev": "yarn rebuild && yarn package",
-    "dev": "yarn pack:dev && act -s DEVTO_API_KEY=$TOKEN -j test-run",
-    "action:yarn": "yarn build && yarn format && yarn lint && yarn package && yarn test",
-    "action": "npm run build && npm run format && npm run lint && npm run package && npm test"
+    "dev": "yarn clean && yarn build && yarn package && yarn test && node dist/index.js"
   },
   "dependencies": {
     "@actions/core": "^1.2.5",
     "@actions/github": "^4.0.0",
     "@actions/glob": "^0.1.0",
-    "request-promise": "^4.2.6"
+    "got": "^11.8.2"
   },
   "devDependencies": {
-    "@types/jest": "^26.0.13",
-    "@types/node": "^14.6.4",
-    "@types/request-promise": "^4.1.46",
-    "@typescript-eslint/parser": "^4.1.0",
+    "@types/got": "^9.6.12",
+    "@types/jest": "^27.0.2",
     "@vercel/ncc": "^0.24.0",
-    "eslint": "^7.8.1",
-    "eslint-plugin-github": "^4.1.1",
-    "eslint-plugin-jest": "^24.0.0",
     "jest": "^26.4.2",
     "jest-circus": "^26.4.2",
     "prettier": "^2.1.1",
     "ts-jest": "^26.3.0",
+    "ts-node-dev": "^1.1.8",
     "typescript": "^4.0.2"
   }
 }
