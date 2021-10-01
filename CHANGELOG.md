@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed tags,series,cover_image problem
 - Tags updated in [README.md](./README.md)
 - `core.info` cleanup
+- fixed #101 #102
 
 ## [v1] (15 Sept 2020)
 
