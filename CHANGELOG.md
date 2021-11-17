@@ -9,14 +9,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [v2] (16 Sept 2020)
 
-# Changed
+### Added
 
+- support creator with liberapay
 - send `YAML Front Matter` in `body_markdown`
+
+### Changed
+
 - Fixed tags,series,cover_image problem
 - Tags updated in [README.md](./README.md)
 - `core.info` cleanup
 - fixed #101 #102
-- support creator with liberapay
+- removed support section from `README.md`
 
 ## [v1] (15 Sept 2020)
 

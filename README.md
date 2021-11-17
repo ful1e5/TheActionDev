@@ -1,4 +1,3 @@
-<!-- Branding -->
 <p align="center">
     <img src="https://imgur.com/VFbYYSa.png" width="270" alt="TheActionDev" />
 </p>
@@ -7,53 +6,41 @@
     <a href="https://dev.to/">dev.to</a> articles with <b>GitHub Action</b> 🧑‍💻
 </p>
 
-<!-- Badges -->
 <p align="center">
-
-  <!-- First Row -->
   <a href="https://github.com/ful1e5/TheActionDev/actions/workflows/build.yml">
     <img alt="Build" src="https://github.com/ful1e5/TheActionDev/actions/workflows/build.yml/badge.svg" />
   </a>
-
   <a href="https://www.codefactor.io/repository/github/ful1e5/theactiondev">
     <img src="https://www.codefactor.io/repository/github/ful1e5/theactiondev/badge" alt="CodeFactor" />
   </a>
-
   <a href="https://github.com/ful1e5/TheActionDev/releases">
     <img alt="TheActionDev Releases" src="https://img.shields.io/github/v/release/ful1e5/TheActionDev">
   </a>
-
-  <!-- Second Row -->
   </br >
+
   <a href="https://www.typescriptlang.org/docs/handbook/typescript-from-scratch.html">
     <img alt="npm type definitions" src="https://img.shields.io/npm/types/typescript">
   </a>
-
   <a href="https://github.com/ful1e5/TheActionDev/blob/main/LICENSE">
     <img alt="License" src="https://img.shields.io/github/license/ful1e5/TheActionDev?color=0081FB" />
   </a>
-
   <a href="https://github.com/ful1e5/TheActionDev/community">
     <img src="https://img.shields.io/badge/community%20standards-satisfied-brightgreen" alt="OpenSource Community Standards" />
   </a>
-
-  <!-- Third Row -->
-
   <br />
+
   <a href="https://github.com/ful1e5">
     <img alt="Made By Kaiz"  src="https://kaiz.vercel.app/api/badge" width="133" />
   </a>
 </p>
 
-<!-- Intro -->
-
 ---
 
 <p align="center">
-    ⚡ Start writing <b>dev.to</b> articles with
-    <a href="https://github.com/ful1e5/TheActionDev-template/generate">
-      <b>TheActionDev-template</b>
-    </a>
+  ⚡ Start writing <b>dev.to</b> articles with
+   <a href="https://github.com/ful1e5/TheActionDev-template/generate">
+     <b>TheActionDev-template</b>
+   </a>
 </p>
 
 ---
@@ -62,15 +49,11 @@
 
 **TheActionDev** is Github Action that allows you to write & maintain [dev.to](https://dev.to/) **articles** without touching the `dev.to` UI. This action is initiated in **[#ActionsHackathon](https://dev.to/devteam/announcing-the-github-actions-hackathon-on-dev-3ljn)** and is using **[DEV API](https://docs.dev.to/api/)**. This action is scan your **Github Repository** based on `directory` [input](#inputs) and finds articles based on the **[Jekyll front matter](https://jekyllrb.com/docs/front-matter/)** in `markdown` files.
 
-<!-- Usage -->
-
 ## Basic Usage
 
 - You'll first need to create a YAML file to describe the workflow in your project (e.g. .github/workflows/TheActionDev.yaml).
 - Generate dev.to `apiKey` by following [dev.to docs](https://docs.dev.to/api/#section/Authentication/api_key)
 - Add your `apiKey` to **GitHub Secret** by following [Github Docs](https://docs.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets)
-
-<!-- Usage Example -->
 
 ### TheActionDev.yaml
 
@@ -96,8 +79,6 @@ jobs:
           ignore: Development.md, Production.md # Markdown file you wan't to ignore. Multple files separated by ,(comma)
 ```
 
-<!-- Inputs of this Action -->
-
 ### Inputs
 
 #### `api-key`
@@ -111,8 +92,6 @@ Relative path to your articles files (\*.md) directory
 #### `ignore`
 
 The file you want to ignore by this action. This **feature** is implemented by [@actions/glob](https://github.com/actions/toolkit/tree/master/packages/glob),So you also provide **[glob pattern](https://github.com/actions/toolkit/tree/master/packages/glob#patterns)** with it.
-
-<!-- Glob pattern example -->
 
 for example, I want ignore all articles inside `foo` sub-directory, The action input look like this 👇.
 
@@ -173,8 +152,6 @@ Custom variables set for each post, located between the triple-dashed lines in y
 - Use [Markdown](https://guides.github.com/features/mastering-markdown/) to write and format posts.
 - You can use [Liquid tags](https://docs.dev.to/frontend/liquid-tags/) to add rich content such as Tweets, YouTube videos, etc.
 
-<!-- Article Example -->
-
 ### Example
 
 ```
@@ -206,39 +183,23 @@ Check [docs/DEVELOPMENT.md](./docs/DEVELOPMENT.md)
 - [vscode-devto 🔥](https://github.com/Sneezry/vscode-devto) extension for `vscode`
 - [typescript-action 📦](https://github.com/actions/typescript-action)
 
-<!-- Help -->
-
 # Getting Help
 
 You can create a **issue**, I will help you. 🙂
-
-<!-- Contributions and Suggestion -->
 
 # Contributing
 
 Check [CONTRIBUTING.md](CONTRIBUTING.md), any suggestions for features and contributions to the continuing code masterelopment can be made via the issue tracker or code contributions via a `Fork` & `Pull requests`.
 
-<!-- Support -->
-
-## Support
-
-<a href="https://www.buymeacoffee.com/Nt7Wg4V" target="_blank">
-  <img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" >
-</a>
-
-<!-- Ninja  -->
-
 <h1 align="center">
   ♫♪.ılılıll|̲̅̅●̲̅̅|̲̅̅=̲̅̅|̲̅̅●̲̅̅|llılılı.♫♪
 </h1>
 <p align="center">
-  <sub>Ninja is listing 
+  <sub>Ninja is listing
   <a href="https://en.wikipedia.org/wiki/Hardstyle">
     <b>HardStyle</b>
   </a>
   </sub>
 </p>
-
-<!-- Reuse Links -->
 
 [dev api]: https://docs.dev.to/api/
