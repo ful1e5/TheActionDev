@@ -47,7 +47,7 @@
 
 # What is TheActionDev?
 
-**TheActionDev** is Github Action that allows you to write & maintain [dev.to](https://dev.to/) **articles** without touching the `dev.to` UI. This action is initiated in **[#ActionsHackathon](https://dev.to/devteam/announcing-the-github-actions-hackathon-on-dev-3ljn)** and is using **[DEV API](https://docs.dev.to/api/)**. This action is scan your **Github Repository** based on `directory` [input](#inputs) and finds articles based on the **[Jekyll front matter](https://jekyllrb.com/docs/front-matter/)** in `markdown` files.
+**TheActionDev** is Github Action that allows you to write & maintain [dev.to](https://dev.to/) **articles** without touching the `dev.to` UI. This action is initiated in **[#ActionsHackathon](https://dev.to/devteam/announcing-the-github-actions-hackathon-on-dev-3ljn)** using **[DEV API](https://docs.dev.to/api/)**. This action is scan your **Github Repository** based on `directory` [input](#inputs) and finds articles based on the **[Jekyll front matter](https://jekyllrb.com/docs/front-matter/)** in `markdown` files.
 
 ## Basic Usage
 
@@ -123,7 +123,7 @@ Listed files ignored **globally** by **TheActionDev**.
 
 ### Front Matter
 
-> **Original Docs @** [DEV Editor Guide 🤓](https://dev.to/p/editor_guide)
+> **Original Docs @** [DEV Editor Guide](https://dev.to/p/editor_guide)
 
 Custom variables set for each post, located between the triple-dashed lines in your editor. Here is a list of possibilities:
 
@@ -156,14 +156,14 @@ Custom variables set for each post, located between the triple-dashed lines in y
 
 ```
 ---
-title:  TheActionDev 👋
+title:  TheActionDev
 description: Hello World
 published: false
 tags: typescript, javascript, github
 series: TheActionDev
 ---
 
-First Post with **TheActionDev** 🤩
+First Post with **TheActionDev**
 
 {% github ful1e5/TheActionDev %}
 ```
@@ -179,27 +179,16 @@ Check [docs/DEVELOPMENT.md](./docs/DEVELOPMENT.md)
 
 # Inspiration
 
-- [DEV Docs 😍](https://docs.dev.to/)
-- [vscode-devto 🔥](https://github.com/Sneezry/vscode-devto) extension for `vscode`
-- [typescript-action 📦](https://github.com/actions/typescript-action)
+- [DEV Docs](https://docs.dev.to/)
+- [vscode-devto](https://github.com/Sneezry/vscode-devto) extension for `vscode`
+- [typescript-action](https://github.com/actions/typescript-action)
 
 # Getting Help
 
-You can create a **issue**, I will help you. 🙂
+You can create a **issue**, I will help you.
 
 # Contributing
 
 Check [CONTRIBUTING.md](CONTRIBUTING.md), any suggestions for features and contributions to the continuing code masterelopment can be made via the issue tracker or code contributions via a `Fork` & `Pull requests`.
-
-<h1 align="center">
-  ♫♪.ılılıll|̲̅̅●̲̅̅|̲̅̅=̲̅̅|̲̅̅●̲̅̅|llılılı.♫♪
-</h1>
-<p align="center">
-  <sub>Ninja is listing
-  <a href="https://en.wikipedia.org/wiki/Hardstyle">
-    <b>HardStyle</b>
-  </a>
-  </sub>
-</p>
 
 [dev api]: https://docs.dev.to/api/
