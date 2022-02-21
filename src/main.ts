@@ -18,11 +18,7 @@ const dumpArticleInfo = (article: Article): void => {
 };
 
 const main = async (): Promise<void> => {
-  //
-  //
   // Prepare TheActionDev
-  //
-  //
   core.startGroup("Preparing TheActionDev");
 
   const key = core.getInput("api-key", { required: true });
@@ -36,11 +32,7 @@ const main = async (): Promise<void> => {
 
   core.endGroup();
 
-  //
-  //
   // Fetching local articles
-  //
-  //
   core.startGroup("Fetching local articles");
   const files = await localApi.files(directory);
   if (!files) {
@@ -51,11 +43,7 @@ const main = async (): Promise<void> => {
     core.endGroup();
   }
 
-  //
-  //
   // Synchronise Article with dev.to
-  //
-  //
   try {
     for (const file of files) {
       core.startGroup(`Synchronising ${file}`);
