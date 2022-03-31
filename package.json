@@ -22,23 +22,20 @@
     "watch": "ts-node-dev --respawn -- src/main.ts",
     "build": "tsc",
     "package": "ncc build --source-map --license licenses.txt",
-    "format": "prettier --write **/*.ts",
     "test": "jest",
     "dev": "yarn clean && yarn build && yarn package && yarn test && node dist/index.js"
   },
   "dependencies": {
-    "@actions/core": "^1.2.5",
-    "@actions/github": "^4.0.0",
+    "@actions/core": "^1.6.0",
+    "@actions/github": "^5.0.0",
     "@actions/glob": "^0.2.1",
     "got": "^11.8.2"
   },
   "devDependencies": {
-    "@types/got": "^9.6.12",
     "@types/jest": "^27.4.1",
     "@vercel/ncc": "^0.33.0",
     "jest": "^26.4.2",
     "jest-circus": "^27.5.1",
-    "prettier": "^2.6.1",
     "ts-jest": "^26.3.0",
     "ts-node-dev": "^1.1.8",
     "typescript": "^4.6.3"
