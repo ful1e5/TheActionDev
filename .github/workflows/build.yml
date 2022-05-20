@@ -22,9 +22,7 @@ jobs:
           restore-keys: npm_cache
 
       - name: Install Dependencies
-        run: |
-          npm install
-          npm install codecov
+        run: npm install
 
       - name: Build
         run: |
@@ -35,7 +33,7 @@ jobs:
         run: npm run package
 
       - name: Test
-        run: npm run test --coverage
+        run: npm run test
 
       - name: TheActionDev
         uses: ./
