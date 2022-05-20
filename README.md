@@ -16,28 +16,15 @@
   <a href="https://github.com/ful1e5/TheActionDev/releases">
     <img alt="TheActionDev Releases" src="https://img.shields.io/github/v/release/ful1e5/TheActionDev">
   </a>
-  </br >
-
-  <a href="https://www.typescriptlang.org/docs/handbook/typescript-from-scratch.html">
-    <img alt="npm type definitions" src="https://img.shields.io/npm/types/typescript">
-  </a>
-  <a href="https://github.com/ful1e5/TheActionDev/blob/main/LICENSE">
-    <img alt="License" src="https://img.shields.io/github/license/ful1e5/TheActionDev?color=0081FB" />
-  </a>
-  <a href="https://github.com/ful1e5/TheActionDev/community">
-    <img src="https://img.shields.io/badge/community%20standards-satisfied-brightgreen" alt="OpenSource Community Standards" />
-  </a>
-  <br />
-
-  <a href="https://github.com/ful1e5">
-    <img alt="Made By Kaiz"  src="https://kaiz.vercel.app/api/badge" width="133" />
+  <a href="https://codecov.io/gh/ful1e5/TheActionDev">
+    <img src="https://codecov.io/gh/ful1e5/TheActionDev/branch/main/graph/badge.svg?token=3M1OY1SMO3"/>
   </a>
 </p>
 
 ---
 
 <p align="center">
-  ⚡ Start writing <b>dev.to</b> articles with
+  Start writing <b>dev.to</b> articles with
    <a href="https://github.com/ful1e5/TheActionDev-template/generate">
      <b>TheActionDev-template</b>
    </a>
