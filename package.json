@@ -1,7 +1,7 @@
 {
   "name": "the-action-dev",
   "version": "2.0.0",
-  "description": "dev.to Posts with GitHub Actions 🧑‍💻",
+  "description": "dev.to Posts with GitHub Actions",
   "author": "Kaiz Khatri",
   "main": "lib/main.js",
   "license": "MIT",
@@ -22,7 +22,7 @@
     "watch": "ts-node-dev --respawn -- src/main.ts",
     "build": "tsc",
     "package": "ncc build --source-map --license licenses.txt",
-    "test": "jest",
+    "test": "jest --maxWorker=10 --runInBand",
     "dev": "yarn clean && yarn build && yarn package && yarn test && node dist/index.js"
   },
   "dependencies": {

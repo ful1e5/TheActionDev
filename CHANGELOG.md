@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 [unreleased]
 
+### Added
+
+- Utility name changed `inputs` to `getInputAsArray`
+- Added basic test cases
+
+### Changed
+
+-
+
 ## [v2] (16 Sept 2020)
 
 ### Added

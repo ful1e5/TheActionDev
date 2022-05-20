@@ -22,7 +22,9 @@ jobs:
           restore-keys: npm_cache
 
       - name: Install Dependencies
-        run: npm install
+        run: |
+          npm install
+          npm install codecov
 
       - name: Build
         run: |
@@ -33,7 +35,7 @@ jobs:
         run: npm run package
 
       - name: Test
-        run: npm run test
+        run: npm run test --coverage
 
       - name: TheActionDev
         uses: ./
@@ -41,3 +43,8 @@ jobs:
           api-key: ${{ secrets.DEVTO_API_KEY }}
           directory: ./docs
           ignore: DEVELOPMENT.md
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v2
+        with:
+          verbose: true

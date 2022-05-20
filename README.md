@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-    <a href="https://dev.to/">dev.to</a> articles with <b>GitHub Action</b> 🧑‍💻
+    <a href="https://dev.to/">dev.to</a> articles with <b>GitHub Action</b>
 </p>
 
 <p align="center">

@@ -2,7 +2,7 @@ import * as core from "@actions/core";
 
 import { DevtoApi } from "./api/devto";
 import { LocalArticleApi } from "./api/local";
-import { arrayInput } from "./utils/inputs";
+import { getInputAsArray } from "./utils/getInputAsArray";
 
 import { Article } from "./types";
 
@@ -23,7 +23,7 @@ const main = async (): Promise<void> => {
 
   const key = core.getInput("api-key", { required: true });
   const directory = core.getInput("directory");
-  const ignore = arrayInput("ignore");
+  const ignore = getInputAsArray("ignore");
 
   const devtoApi = new DevtoApi(key);
   const onlineArticles = await devtoApi.getAllArticles();

@@ -59,6 +59,7 @@ const parseFrontMatter = (data: string): Article | undefined => {
     }
 
     core.debug("Parsing article body_markdown...");
+    // Removing front-matter and returning body of markdown without blanklines('\n') in front.
     const body_markdown = data
       .replace(frontMatter, "<!-- remove me -->")
       .replace("---\n<!-- remove me -->\n---\n", "");
