@@ -22,7 +22,7 @@
     "watch": "ts-node-dev --respawn -- src/main.ts",
     "build": "tsc",
     "package": "ncc build --source-map --license licenses.txt",
-    "test": "jest --maxWorker=10 --runInBand --coverage",
+    "test": "jest --maxWorker=10 --runInBand",
     "dev": "yarn clean && yarn build && yarn package && yarn test && node dist/index.js"
   },
   "dependencies": {
@@ -34,7 +34,6 @@
   "devDependencies": {
     "@types/jest": "^27.5.0",
     "@vercel/ncc": "^0.33.4",
-    "codecov": "^3.8.3",
     "jest": "^26.4.2",
     "jest-circus": "^27.5.1",
     "ts-jest": "^26.3.0",

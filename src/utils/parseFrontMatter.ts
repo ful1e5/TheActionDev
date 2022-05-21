@@ -23,7 +23,7 @@ const parseFrontMatter = (data: string): Article | undefined => {
     const title_str = frontMatter.match(createPattern("title"));
     let title: string;
     if (!title_str || title_str[1] == "") {
-      core.error("Unable to find article title...");
+      core.error("Unable to find article title.");
       return;
     } else {
       title = title_str[1];
@@ -62,7 +62,8 @@ const parseFrontMatter = (data: string): Article | undefined => {
     // Removing front-matter and returning body of markdown without blanklines('\n') in front.
     const body_markdown = data
       .replace(frontMatter, "<!-- remove me -->")
-      .replace("---\n<!-- remove me -->\n---\n", "");
+      .replace("---\n<!-- remove me -->\n---\n", "")
+      .trim();
 
     return {
       title: title,
@@ -82,4 +83,5 @@ const parseFrontMatter = (data: string): Article | undefined => {
     return;
   }
 };
+
 export { parseFrontMatter };

@@ -33,7 +33,7 @@ jobs:
         run: npm run package
 
       - name: Test
-        run: npm run test
+        run: npm run test -- --coverage
 
       - name: TheActionDev
         uses: ./
@@ -43,6 +43,6 @@ jobs:
           ignore: DEVELOPMENT.md
 
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v2
+        uses: codecov/codecov-action@v3
         with:
           verbose: true
