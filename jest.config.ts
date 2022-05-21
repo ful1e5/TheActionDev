@@ -1,4 +1,7 @@
-module.exports = {
+import type { Config } from "@jest/types";
+
+// Sync object
+const config: Config.InitialOptions = {
   clearMocks: true,
   moduleFileExtensions: ["js", "ts"],
   testEnvironment: "node",
@@ -10,3 +13,5 @@ module.exports = {
   },
   verbose: true
 };
+
+export default config;
