@@ -32,6 +32,23 @@
 
 ---
 
+## :warning: Deprecation of v1 and v2
+
+**As of May 28, 2022, v1 and v2 has been fully sunset and no longer functions**
+
+Due to the deprecation of the underlying utility functions,
+the TheActionDev GitHub Action has released `v3` which will use the [yaml](https://www.npmjs.com/package/yaml)
+library for parsing front-matter in articles.
+
+I will be restricting any updates to the `v1` and `v2` Actions to security updates and hotfixes.
+
+### Migration from `v1` and `v2` to `v3`
+
+The `v3` uploader has a few breaking changes for users
+
+- Multiple tags have not been assigned as string with colon(,) or have been deprecated. Notably
+  many of the `functionalities`. Please check the documentation below for the full list.
+
 # What is TheActionDev?
 
 **TheActionDev** is Github Action that allows you to write & maintain [dev.to](https://dev.to/) **articles** without touching the `dev.to` UI. This action is initiated in **[#ActionsHackathon](https://dev.to/devteam/announcing-the-github-actions-hackathon-on-dev-3ljn)** using **[DEV API](https://docs.dev.to/api/)**. This action is scan your **Github Repository** based on `directory` [input](#inputs) and finds articles based on the **[Jekyll front matter](https://jekyllrb.com/docs/front-matter/)** in `markdown` files.
@@ -59,7 +76,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Sycing Article to dev.to
-        uses: ful1e5/TheActionDev@v2
+        uses: ful1e5/TheActionDev@v3
         with:
           api-key: ${{ secrets.DEVTO_API_KEY }} # Store your 'api-key' in Github Secret
           directory: ./articles # Your article directory
@@ -80,13 +97,13 @@ Relative path to your articles files (\*.md) directory
 
 The file you want to ignore by this action. This **feature** is implemented by [@actions/glob](https://github.com/actions/toolkit/tree/master/packages/glob),So you also provide **[glob pattern](https://github.com/actions/toolkit/tree/master/packages/glob#patterns)** with it.
 
-for example, I want ignore all articles inside `foo` sub-directory, The action input look like this 👇.
+for example, I want ignore all articles inside `foo` sub-directory, The action input look like this :point_down:.
 
 ```diff
 .....
 
  - name: Sycing Article to dev.to
-   uses: ful1e5/TheActionDev@v2
+   uses: ful1e5/TheActionDev@v3
    with:
      api-key: ${{ secrets.DEVTO_API_KEY }}
      directory: ./articles
@@ -136,7 +153,8 @@ Custom variables set for each post, located between the triple-dashed lines in y
 
 ### Article Body Basics
 
-- Use [Markdown](https://guides.github.com/features/mastering-markdown/) to write and format posts.
+- Use [YAML](https://yaml.org/) to write and format posts front-matter.
+- Use [Markdown](https://guides.github.com/features/mastering-markdown/) to write and format posts body.
 - You can use [Liquid tags](https://docs.dev.to/frontend/liquid-tags/) to add rich content such as Tweets, YouTube videos, etc.
 
 ### Example

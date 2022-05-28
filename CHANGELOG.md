@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Utility name changed `inputs` to `getInputAsArray`
 - Added basic test cases
+- :warning: breaking-change: parse front-matter with yaml library
 
 ### Changed
 

@@ -68,7 +68,6 @@ Testing!
 `);
     assertWriteCalls([
       `Parsing Front-Matter...${os.EOL}`,
-      `::debug::Parsing article title...${os.EOL}`,
       `::error::Unable to find article title.${os.EOL}`
     ]);
   });
@@ -80,17 +79,7 @@ title: Test
 ---
 Test Body
 `);
-    assertWriteCalls([
-      `Parsing Front-Matter...${os.EOL}`,
-      `::debug::Parsing article title...${os.EOL}`,
-      `::debug::Parsing article published state...${os.EOL}`,
-      `::debug::Parsing article description...${os.EOL}`,
-      `::debug::Parsing article cover image...${os.EOL}`,
-      `::debug::Parsing article series...${os.EOL}`,
-      `::debug::Parsing article canonical url...${os.EOL}`,
-      `::debug::Parsing article tags...${os.EOL}`,
-      `::debug::Parsing article body_markdown...${os.EOL}`
-    ]);
+    assertWriteCalls([`Parsing Front-Matter...${os.EOL}`]);
     expect(result).toMatchObject({
       title: "Test",
       description: undefined,
@@ -110,18 +99,26 @@ title: Test
 published: true
 description: Test Post
 series: Test
-tags: ,test1,test2,,test3,
+tags:
+  - test1
+  - null
+  - test2
+  - test3
+  - 0
+  - 
 canonical_url: https://www.test.org
 cover_image: https://www.test.com
 ---
 
+# Heading1
 Testing!
+
 `);
     expect(result).toMatchObject({
       title: "Test",
       description: "Test Post",
       published: true,
-      body_markdown: "Testing!",
+      body_markdown: "# Heading1\nTesting!",
       cover_image: "https://www.test.com",
       tags: ["test1", "test2", "test3"],
       canonical_url: "https://www.test.org",
