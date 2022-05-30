@@ -33,31 +33,12 @@
     "yaml": "^2.1.0"
   },
   "devDependencies": {
-    "@types/jest": "^27.5.0",
+    "@types/jest": "^27.5.1",
     "@vercel/ncc": "^0.33.4",
     "jest": "^26.4.2",
     "jest-circus": "^27.5.1",
     "ts-jest": "^26.3.0",
     "ts-node-dev": "^1.1.8",
     "typescript": "^4.6.4"
-  },
-  "jest": {
-    "clearMocks": true,
-    "moduleFileExtensions": [
-      "js",
-      "ts"
-    ],
-    "testEnvironment": "node",
-    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(ts)$",
-    "collectCoverageFrom": [
-      "<rootDir>/**/*.ts"
-    ],
-    "roots": [
-      "<rootDir>"
-    ],
-    "transform": {
-      "^.+\\.ts$": "ts-jest"
-    },
-    "verbose": true
   }
 }

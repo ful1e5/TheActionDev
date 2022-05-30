@@ -2,6 +2,7 @@
 .db
 *.db
 keys.ts
+.secrets
 
 # Dependency directory
 node_modules
