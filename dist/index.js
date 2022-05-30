@@ -5551,11 +5551,11 @@ function asPromise(normalizedOptions) {
                     request._beforeError(new types_1.RequestError(error.message, error, request));
                     return;
                 }
+                globalResponse = response;
                 if (!is_response_ok_1.isResponseOk(response)) {
                     request._beforeError(new types_1.HTTPError(response));
                     return;
                 }
-                globalResponse = response;
                 resolve(request.options.resolveBodyOnly ? response.body : response);
             });
             const onError = (error) => {
@@ -6693,6 +6693,14 @@ class Request extends stream_1.Duplex {
                 const redirectUrl = new url_1.URL(redirectBuffer, url);
                 const redirectString = redirectUrl.toString();
                 decodeURI(redirectString);
+                // eslint-disable-next-line no-inner-declarations
+                function isUnixSocketURL(url) {
+                    return url.protocol === 'unix:' || url.hostname === 'unix';
+                }
+                if (!isUnixSocketURL(url) && isUnixSocketURL(redirectUrl)) {
+                    this._beforeError(new RequestError('Cannot redirect to UNIX socket', {}, this));
+                    return;
+                }
                 // Redirecting to a different site, clear sensitive data.
                 if (redirectUrl.hostname !== url.hostname || redirectUrl.port !== url.port) {
                     if ('host' in options.headers) {
@@ -10502,6 +10510,7 @@ const compressBrotli = __nccwpck_require__(5728);
 const loadStore = options => {
 	const adapters = {
 		redis: '@keyv/redis',
+		rediss: '@keyv/redis',
 		mongodb: '@keyv/mongo',
 		mongo: '@keyv/mongo',
 		sqlite: '@keyv/sqlite',
@@ -10530,7 +10539,7 @@ const iterableAdapters = [
 ];
 
 class Keyv extends EventEmitter {
-	constructor(uri, options) {
+	constructor(uri, {emitErrors = true, ...options} = {}) {
 		super();
 		this.opts = {
 			namespace: 'keyv',
@@ -10554,7 +10563,7 @@ class Keyv extends EventEmitter {
 			};
 		}
 
-		if (typeof this.opts.store.on === 'function') {
+		if (typeof this.opts.store.on === 'function' && emitErrors) {
 			this.opts.store.on('error', error => this.emit('error', error));
 		}
 
