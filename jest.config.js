@@ -1,12 +1,5 @@
-module.export = {
-  clearMocks: true,
-  moduleFileExtensions: ["js", "ts"],
+module.exports = {
+  preset: "ts-jest",
   testEnvironment: "node",
-  testRegex: "(/__tests__/.*|(\\.|/)(test|spec))\\.(ts)$",
-  collectCoverageFrom: ["<rootDir>/**/*.ts"],
-  roots: ["<rootDir>"],
-  transform: {
-    "^.+\\.ts$": "ts-jest"
-  },
-  verbose: true
+  collectCoverageFrom: ["<rootDir>/**/*.ts"]
 };
