@@ -11,11 +11,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Utility name changed `inputs` to `getInputAsArray`
 - Added basic test cases
-- :warning: breaking-change: parse front-matter with yaml library
+- :warning: breaking-change: parse front-matter with [js-yaml](https://www.npmjs.com/package/js-yaml) library
 
 ### Changed
 
--
+- README.md: remove nonsense links and styling
 
 ## [v2] (16 Sept 2020)
 

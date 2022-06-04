@@ -26,7 +26,7 @@ const main = async (): Promise<void> => {
   const ignore = getInputAsArray("ignore");
 
   const devtoApi = new DevtoApi(key);
-  const onlineArticles = await devtoApi.getAllArticles();
+  const liveArticles = await devtoApi.getAllArticles();
 
   const localApi = new LocalArticleApi(ignore);
 
@@ -53,7 +53,7 @@ const main = async (): Promise<void> => {
 
       if (article) {
         dumpArticleInfo(article);
-        const update = onlineArticles.filter(a => a.title === article.title);
+        const update = liveArticles.filter(a => a.title === article.title);
         const articleStatus = article.published ? "published" : "draft";
 
         if (update[0]) {
@@ -69,7 +69,7 @@ const main = async (): Promise<void> => {
           core.info("Created.");
         }
       } else {
-        core.info("Unable to parse this file.\nSkipping.");
+        core.info("Unable to parse: ${file}\nSkipping.");
       }
 
       core.endGroup();

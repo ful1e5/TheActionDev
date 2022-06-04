@@ -22,7 +22,7 @@
     "build": "tsc",
     "package": "ncc build --source-map --license licenses.txt",
     "test": "jest",
-    "dev": "yarn clean && yarn build && yarn package && yarn test && node dist/index.js"
+    "dev": "yarn clean && yarn build && yarn package && yarn test"
   },
   "dependencies": {
     "@actions/core": "^1.8.0",

@@ -1,44 +1,21 @@
-<p align="center">
-    <img src="https://imgur.com/VFbYYSa.png" width="270" alt="TheActionDev" />
-</p>
+![TheActionDev](https://imgur.com/VFbYYSa.png)
+[dev.to] articles with **GitHub Action**
 
-<p align="center">
-    <a href="https://dev.to/">dev.to</a> articles with <b>GitHub Action</b>
-</p>
+<!-- Badges -->
 
-<p align="center">
-  <a href="https://github.com/ful1e5/TheActionDev/actions/workflows/build.yml">
-    <img alt="Build" src="https://github.com/ful1e5/TheActionDev/actions/workflows/build.yml/badge.svg" />
-  </a>
-  <a href="https://www.codefactor.io/repository/github/ful1e5/theactiondev">
-    <img src="https://www.codefactor.io/repository/github/ful1e5/theactiondev/badge" alt="CodeFactor" />
-  </a>
-  <a href="https://github.com/ful1e5/TheActionDev/releases">
-    <img alt="TheActionDev Releases" src="https://img.shields.io/github/v/release/ful1e5/TheActionDev">
-  </a>
-  <a href="https://codecov.io/gh/ful1e5/TheActionDev">
-    <img src="https://codecov.io/gh/ful1e5/TheActionDev/branch/main/graph/badge.svg?token=3M1OY1SMO3"/>
-  </a>
-</p>
+[![ci](https://github.com/ful1e5/TheActionDev/actions/workflows/ci.yml/badge.svg)](https://github.com/ful1e5/TheActionDev/actions/workflows/ci.yml)
+[![CodeFactor](https://www.codefactor.io/repository/github/ful1e5/theactiondev/badge)](https://www.codefactor.io/repository/github/ful1e5/theactiondev)
+[![Releases](https://img.shields.io/github/v/release/ful1e5/TheActionDev)](https://github.com/ful1e5/TheActionDev/releases)
+[![Coverage](https://codecov.io/gh/ful1e5/TheActionDev/branch/main/graph/badge.svg?token=3M1OY1SMO3)](https://codecov.io/gh/ful1e5/TheActionDev)
 
----
-
-<p align="center">
-  Start writing <b>dev.to</b> articles with
-   <a href="https://github.com/ful1e5/TheActionDev-template/generate">
-     <b>TheActionDev-template</b>
-   </a>
-</p>
-
----
+Start writing **dev.to** articles with [TheActionDev-template]
 
 ## :warning: Deprecation of v1 and v2
 
 **As of May 28, 2022, v1 and v2 has been fully sunset and no longer functions**
 
-Due to the deprecation of the underlying utility functions,
-the TheActionDev GitHub Action has released `v3` which will use the [js-yaml](https://www.npmjs.com/package/js-yaml)
-library for parsing front-matter in articles.
+Due to the deprecation of the underlying utility functions, the TheActionDev GitHub Action
+has released `v3` which will use the [js-yaml] library for parsing front-matter in articles.
 
 I will be restricting any updates to the `v1` and `v2` Actions to security updates and hotfixes.
 
@@ -46,18 +23,22 @@ I will be restricting any updates to the `v1` and `v2` Actions to security updat
 
 The `v3` uploader has a few breaking changes for users
 
-- Multiple tags have not been assigned as string with colon(,) or have been deprecated. Notably
-  many of the `functionalities`. Please check the documentation below for the full list.
+- Multiple tags have not been assigned as string with colon(,) or have been deprecated. Instead of use
+  [YAML Array List] to assign it.
 
 # What is TheActionDev?
 
-**TheActionDev** is Github Action that allows you to write & maintain [dev.to](https://dev.to/) **articles** without touching the `dev.to` UI. This action is initiated in **[#ActionsHackathon](https://dev.to/devteam/announcing-the-github-actions-hackathon-on-dev-3ljn)** using **[DEV API](https://docs.dev.to/api/)**. This action is scan your **Github Repository** based on `directory` [input](#inputs) and finds articles based on the **[Jekyll front matter](https://jekyllrb.com/docs/front-matter/)** in `markdown` files.
+**TheActionDev** is Github Action that allows you to write & maintain [dev.to] **articles**
+without touching the `dev.to` UI. This action is initiated in **[#ActionsHackathon]** using **[DEV API]**.
+This action is scan your **Github Repository** based on `directory` [input](#inputs) and finds articles based
+on the **[Jekyll front matter]** in `markdown` files.
 
 ## Basic Usage
 
-- You'll first need to create a YAML file to describe the workflow in your project (e.g. .github/workflows/TheActionDev.yaml).
-- Generate dev.to `apiKey` by following [dev.to docs](https://docs.dev.to/api/#section/Authentication/api_key)
-- Add your `apiKey` to **GitHub Secret** by following [Github Docs](https://docs.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets)
+- You'll first need to create a YAML file to describe the workflow in your project
+  (e.g. .github/workflows/TheActionDev.yaml).
+- Generate dev.to `apiKey` by following [dev.to authentication docs]
+- Add your `apiKey` to **GitHub Secret** by following [Github's creating and storing encrypted secrets doc]
 
 ### TheActionDev.yaml
 
@@ -87,7 +68,7 @@ jobs:
 
 #### `api-key`
 
-[DEV API] Key. Set inside **[Github Secret](https://docs.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets)**.
+[DEV API] Key. Set inside **[Github Secret]**.
 
 #### `directory`
 
@@ -95,7 +76,8 @@ Relative path to your articles files (\*.md) directory
 
 #### `ignore`
 
-The file you want to ignore by this action. This **feature** is implemented by [@actions/glob](https://github.com/actions/toolkit/tree/master/packages/glob),So you also provide **[glob pattern](https://github.com/actions/toolkit/tree/master/packages/glob#patterns)** with it.
+The file you want to ignore by this action. This **feature** is implemented by [@actions/glob],
+So you also provide **[glob pattern]** with it.
 
 for example, I want ignore all articles inside `foo` sub-directory, The action input look like this :point_down:.
 
@@ -134,7 +116,7 @@ Custom variables set for each post, located between the triple-dashed lines in y
 - **title:** the title of your article
 - **published:** boolean that determines whether or not your article is published
 - **description:** description area in Twitter cards and open graph cards
-- **tags:** max of four tags, needs to be comma-separated
+- **tags:** max of four tags, needs to be [YAML Array List]
 - **canonical_url:** link for the canonical version of the content
 - **cover_image:** cover image for post, accepts a URL.(The best size is 1000 x 420.)
 - **series:** post series name.
@@ -155,7 +137,8 @@ Custom variables set for each post, located between the triple-dashed lines in y
 
 - Use [YAML](https://yaml.org/) to write and format posts front-matter.
 - Use [Markdown](https://guides.github.com/features/mastering-markdown/) to write and format posts body.
-- You can use [Liquid tags](https://docs.dev.to/frontend/liquid-tags/) to add rich content such as Tweets, YouTube videos, etc.
+- You can use [Liquid tags](https://docs.dev.to/frontend/liquid-tags/) to add rich content such as Tweets,
+  YouTube videos, etc.
 
 ### Example
 
@@ -164,7 +147,10 @@ Custom variables set for each post, located between the triple-dashed lines in y
 title:  TheActionDev
 description: Hello World
 published: false
-tags: typescript, javascript, github
+tags:
+  - typescript
+  - javascript
+  - github
 series: TheActionDev
 ---
 
@@ -194,6 +180,20 @@ You can create a **issue**, I will help you.
 
 # Contributing
 
-Check [CONTRIBUTING.md](CONTRIBUTING.md), any suggestions for features and contributions to the continuing code masterelopment can be made via the issue tracker or code contributions via a `Fork` & `Pull requests`.
+Check [CONTRIBUTING.md](CONTRIBUTING.md), any suggestions for features and contributions to the continuing code
+masterelopment can be made via the issue tracker or code contributions via a `Fork` & `Pull requests`.
 
+<!-- Links  -->
+
+[dev.to]: (https://dev.to/)
 [dev api]: https://docs.dev.to/api/
+[theactiondev-template]: https://github.com/ful1e5/TheActionDev-template/generate
+[dev.to authentication docs]: (https://docs.dev.to/api/#section/Authentication/api_key)
+[#actionshackathon]: (https://dev.to/devteam/announcing-the-github-actions-hackathon-on-dev-3ljn)
+[js-yaml]: (https://www.npmjs.com/package/js-yaml)
+[@actions/glob]: (https://github.com/actions/toolkit/tree/master/packages/glob)
+[glob pattern]: (https://github.com/actions/toolkit/tree/master/packages/glob#patterns)
+[github's creating and storing encrypted secrets doc]: (https://docs.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets)
+[yaml array list]: https://www.w3schools.io/file/yaml-arrays/
+[jekyll front matter]: (https://jekyllrb.com/docs/front-matter/)
+[github secret]: (https://docs.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets)

@@ -1,6 +1,8 @@
 import fs from "fs";
+
 import * as glob from "@actions/glob";
 import * as core from "@actions/core";
+
 import { parseFrontMatter } from "../utils/parseFrontMatter";
 
 import { Article } from "../types";
