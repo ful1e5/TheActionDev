@@ -37,7 +37,7 @@
 **As of May 28, 2022, v1 and v2 has been fully sunset and no longer functions**
 
 Due to the deprecation of the underlying utility functions,
-the TheActionDev GitHub Action has released `v3` which will use the [yaml](https://www.npmjs.com/package/yaml)
+the TheActionDev GitHub Action has released `v3` which will use the [js-yaml](https://www.npmjs.com/package/js-yaml)
 library for parsing front-matter in articles.
 
 I will be restricting any updates to the `v1` and `v2` Actions to security updates and hotfixes.

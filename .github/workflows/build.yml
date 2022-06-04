@@ -33,7 +33,7 @@ jobs:
         run: npm run package
 
       - name: Test
-        run: npm run test -- --coverage
+        run: npm run test
 
       - name: TheActionDev
         uses: ./

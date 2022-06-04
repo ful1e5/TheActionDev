@@ -1,7 +1,18 @@
 import * as core from "@actions/core";
-import YAML from "yaml";
+import YAML from "js-yaml";
 
 import { Article } from "../types";
+
+interface YamlTableType {
+  title?: string;
+  description?: string;
+  published?: Boolean;
+  body_markdown?: string;
+  cover_image?: string;
+  tags?: string[];
+  canonical_url?: string;
+  series?: string;
+}
 
 const parseFrontMatter = (data: string): Article | undefined => {
   core.info("Parsing Front-Matter...");
@@ -9,11 +20,11 @@ const parseFrontMatter = (data: string): Article | undefined => {
   const frontMatter = data.match(reg);
 
   if (frontMatter != null) {
-    const yml = YAML.parse(frontMatter[1]);
+    const yt = YAML.load(frontMatter[1]) as YamlTableType;
 
     // We are checking title's null value here.
     // Other values are checked by Request handler (got).
-    const title = yml["title"];
+    const title = yt.title;
     if (title == null) {
       core.error("Unable to find article title.");
       return;
@@ -21,8 +32,8 @@ const parseFrontMatter = (data: string): Article | undefined => {
 
     // Filtering null, undefined and 0 values from array
     let tags: string[] = [];
-    if (yml["tags"]) {
-      tags = yml["tags"].filter((e: string) => e);
+    if (yt.tags) {
+      tags = yt.tags.filter((e: string) => e);
     }
 
     // Removing front-matter and returning body of markdown without blanklines('\n') in front.
@@ -30,13 +41,13 @@ const parseFrontMatter = (data: string): Article | undefined => {
 
     return {
       title: title,
-      description: yml["description"],
-      published: yml["published"] || false,
+      description: yt.description,
+      published: yt.published || false,
       body_markdown: body_markdown,
-      cover_image: yml["cover_image"],
+      cover_image: yt.cover_image,
       tags: tags,
-      canonical_url: yml["canonical_url"],
-      series: yml["series"]
+      canonical_url: yt.canonical_url,
+      series: yt.series
     };
   } else {
     core.warning("dev.to Front-Matter not found. Ignoring this file.");

@@ -1,8 +1,8 @@
 import * as os from "os";
 
-import { parseAsArray } from "../utils/parseAsArray";
-import { getInputAsArray } from "../utils/getInputAsArray";
-import { parseFrontMatter } from "../utils/parseFrontMatter";
+import { parseAsArray } from "../src/utils/parseAsArray";
+import { getInputAsArray } from "../src/utils/getInputAsArray";
+import { parseFrontMatter } from "../src/utils/parseFrontMatter";
 
 describe.each([{ s: "a,b" }, { s: "a, b" }, { s: " a,,b " }, { s: "a,b,," }])(
   "converting string '$s' to array",
