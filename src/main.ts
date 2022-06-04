@@ -1,7 +1,7 @@
 import * as core from "@actions/core";
 
-import { DevtoApi } from "./api/devto";
-import { LocalArticleApi } from "./api/local";
+import { DevtoApi } from "./apis/devto";
+import { LocalArticleApi } from "./apis/local";
 import { getInputAsArray } from "./utils/getInputAsArray";
 
 import { Article } from "./types";

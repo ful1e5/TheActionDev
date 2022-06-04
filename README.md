@@ -1,4 +1,5 @@
-![TheActionDev](https://imgur.com/VFbYYSa.png)
+![TheActionDev](https://imgur.com/09TIb7R.png)
+
 [dev.to] articles with **GitHub Action**
 
 <!-- Badges -->
