@@ -1,5 +1,5 @@
 name: "TheActionDev"
-description: "dev.to articles with GitHub Action 🧑‍💻"
+description: "Write dev.to articles with GitHub Action"
 author: "Kaiz Khatri"
 
 inputs:
