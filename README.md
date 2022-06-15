@@ -1,15 +1,14 @@
-![TheActionDev](https://imgur.com/09TIb7R.png)
+# TheActionDev
 
-[dev.to] articles with **GitHub Action**
+Write [dev.to] articles with **GitHub Action**.
 
 <!-- Badges -->
 
 [![ci](https://github.com/ful1e5/TheActionDev/actions/workflows/ci.yml/badge.svg)](https://github.com/ful1e5/TheActionDev/actions/workflows/ci.yml)
-[![CodeFactor](https://www.codefactor.io/repository/github/ful1e5/theactiondev/badge)](https://www.codefactor.io/repository/github/ful1e5/theactiondev)
 [![Releases](https://img.shields.io/github/v/release/ful1e5/TheActionDev)](https://github.com/ful1e5/TheActionDev/releases)
 [![Coverage](https://codecov.io/gh/ful1e5/TheActionDev/branch/main/graph/badge.svg?token=3M1OY1SMO3)](https://codecov.io/gh/ful1e5/TheActionDev)
 
-Start writing **dev.to** articles with [TheActionDev-template]
+Start writing **dev.to** articles with [TheActionDev-template](https://github.com/ful1e5/TheActionDev-template)
 
 ## :warning: Deprecation of v1 and v2
 
