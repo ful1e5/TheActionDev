@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 [unreleased]
 
+### Added
+
+-
+
+### Changed
+
+- Fixed **unable to parse warning message** string concatenation
+
 ## [v3.0.0] - 15 Jun 2022
 
 ### Added

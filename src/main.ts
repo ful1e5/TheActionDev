@@ -69,7 +69,7 @@ const main = async (): Promise<void> => {
           core.info("Created.");
         }
       } else {
-        core.info("Unable to parse: ${file}\nSkipping.");
+        core.info(`Unable to parse: ${file}\nSkipping.`);
       }
 
       core.endGroup();
