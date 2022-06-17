@@ -29,7 +29,7 @@ The `v3` uploader has a few breaking changes for users
 # What is TheActionDev?
 
 **TheActionDev** is Github Action that allows you to write & maintain [dev.to] **articles**
-without touching the `dev.to` UI. This action is initiated in **[#ActionsHackathon]** using **[DEV API]**.
+without touching the `dev.to` UI. This action is initiated in **[ActionsHackathon]** using **[DEV API]**.
 This action is scan your **Github Repository** based on `directory` [input](#inputs) and finds articles based
 on the **[Jekyll front matter]** in `markdown` files.
 
@@ -68,18 +68,25 @@ jobs:
 
 #### `api-key`
 
-[DEV API] Key. Set inside **[Github Secret]**.
+dev.to api key. (Set inside **[Github Secret]**)
 
 #### `directory`
 
-Relative path to your articles files (\*.md) directory
+Relative path to your articles(`*.md`) directory.
 
 #### `ignore`
 
 The file you want to ignore by this action. This **feature** is implemented by [@actions/glob],
-So you also provide **[glob pattern]** with it.
+So you also provide **[glob pattern]** with it. **Following files are ignored by default :**
 
-for example, I want ignore all articles inside `foo` sub-directory, The action input look like this :point_down:.
+- README.md
+- CONTRIBUTING.md
+- CODE_OF_CONDUCT.md
+- CHANGELOG.md
+- [Pull Request Templates](https://docs.github.com/en/github/building-a-strong-community/about-issue-and-pull-request-templates#pull-request-templates)
+- [Issue Templates](https://docs.github.com/en/github/building-a-strong-community/about-issue-and-pull-request-templates#issue-templates)
+
+For example, you want ignore all articles inside `foo` sub-directory, The `ignore` input look like this:
 
 ```diff
 .....
@@ -96,20 +103,11 @@ for example, I want ignore all articles inside `foo` sub-directory, The action i
 
 ```
 
-Listed files ignored **globally** by **TheActionDev**.
-
-- README.md
-- CONTRIBUTING.md
-- CODE_OF_CONDUCT.md
-- CHANGELOG.md
-- [Pull Request Templates](https://docs.github.com/en/github/building-a-strong-community/about-issue-and-pull-request-templates#pull-request-templates)
-- [Issue Templates](https://docs.github.com/en/github/building-a-strong-community/about-issue-and-pull-request-templates#issue-templates)
-
 ## Writing Article with `TheActionDev`
 
 ### Front Matter
 
-> **Original Docs @** [DEV Editor Guide](https://dev.to/p/editor_guide)
+> Original Docs at [DEV editor guide](https://dev.to/p/editor_guide)
 
 Custom variables set for each post, located between the triple-dashed lines in your editor. Here is a list of possibilities:
 
@@ -133,11 +131,11 @@ Custom variables set for each post, located between the triple-dashed lines in y
 | cover_image   | `null`  | **no**   |
 | series        | `null`  | **no**   |
 
-### Article Body Basics
+### Article Basics
 
-- Use [YAML](https://yaml.org/) to write and format posts front-matter.
-- Use [Markdown](https://guides.github.com/features/mastering-markdown/) to write and format posts body.
-- You can use [Liquid tags](https://docs.dev.to/frontend/liquid-tags/) to add rich content such as Tweets,
+- Use [YAML](https://yaml.org/) to write and format article's [front-matter](#front-matter).
+- Use [Markdown](https://guides.github.com/features/mastering-markdown/) to write and format article body.
+- You can also use [Liquid tags](https://docs.dev.to/frontend/liquid-tags/) to add rich content such as Tweets,
   YouTube videos, etc.
 
 ### Example
@@ -185,15 +183,15 @@ masterelopment can be made via the issue tracker or code contributions via a `Fo
 
 <!-- Links  -->
 
-[dev.to]: (https://dev.to/)
-[dev api]: https://docs.dev.to/api/
+[dev.to]: https://dev.to/
+[dev-api]: https://docs.dev.to/api/
 [theactiondev-template]: https://github.com/ful1e5/TheActionDev-template/generate
-[dev.to authentication docs]: (https://docs.dev.to/api/#section/Authentication/api_key)
-[#actionshackathon]: (https://dev.to/devteam/announcing-the-github-actions-hackathon-on-dev-3ljn)
-[js-yaml]: (https://www.npmjs.com/package/js-yaml)
-[@actions/glob]: (https://github.com/actions/toolkit/tree/master/packages/glob)
-[glob pattern]: (https://github.com/actions/toolkit/tree/master/packages/glob#patterns)
-[github's creating and storing encrypted secrets doc]: (https://docs.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets)
+[dev.to authentication docs]: https://docs.dev.to/api/#section/Authentication/api_key
+[actionshackathon]: https://dev.to/devteam/announcing-the-github-actions-hackathon-on-dev-3ljn
+[js-yaml]: https://www.npmjs.com/package/js-yaml
+[@actions/glob]: https://github.com/actions/toolkit/tree/master/packages/glob
+[glob pattern]: https://github.com/actions/toolkit/tree/master/packages/glob#patterns
+[github's creating and storing encrypted secrets doc]: https://docs.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets
 [yaml array list]: https://www.w3schools.io/file/yaml-arrays/
-[jekyll front matter]: (https://jekyllrb.com/docs/front-matter/)
-[github secret]: (https://docs.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets)
+[jekyll front matter]: https://jekyllrb.com/docs/front-matter/
+[github secret]: https://docs.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets
