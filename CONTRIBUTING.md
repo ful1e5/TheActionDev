@@ -53,4 +53,8 @@ This document was adapted from the open-source contribution guidelines for [Face
 
 ## Contributors
 
-Become first contributor. 🤗
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/kanekotic"><img src="https://avatars.githubusercontent.com/u/3071208?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Alvaro (Kanekotic)</b></sub></a><br /><a href="https://github.com/ful1e5/TheActionDev/commits?author=kanekotic" title="Code">💻</a></td>
+  </tr>
+</table>

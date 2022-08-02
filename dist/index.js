@@ -62,6 +62,13 @@ class DevtoApi {
                         return error;
                     }
                 ]
+            },
+            retry: {
+                limit: 10,
+                maxRetryAfter: 20000,
+                calculateDelay: () => {
+                    return 10000;
+                }
             }
         };
         // Passing dev.to Authorization header manually
@@ -318,7 +325,7 @@ const main = () => __awaiter(void 0, void 0, void 0, function* () {
                 }
             }
             else {
-                core.info("Unable to parse: ${file}\nSkipping.");
+                core.info(`Unable to parse: ${file}\nSkipping.`);
             }
             core.endGroup();
         }
