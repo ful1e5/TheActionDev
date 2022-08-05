@@ -5,7 +5,6 @@
   "author": "Kaiz Khatri",
   "main": "lib/main.js",
   "license": "MIT",
-  "private": true,
   "repository": {
     "type": "git",
     "url": "git+https://github.com:ful1e5/TheActionDev.git"

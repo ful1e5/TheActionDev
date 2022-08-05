@@ -1,6 +1,6 @@
 # TheActionDev
 
-Write [dev.to] articles with **GitHub Action**.
+Write dev.to articles with **GitHub Action**.
 
 <!-- Badges -->
 
@@ -10,7 +10,9 @@ Write [dev.to] articles with **GitHub Action**.
 
 Start writing **dev.to** articles with [TheActionDev-template](https://github.com/ful1e5/TheActionDev-template)
 
-## :warning: Deprecation of v1 and v2
+## Notice
+
+### :warning: Deprecation of v1 and v2
 
 **As of May 28, 2022, v1 and v2 has been fully sunset and no longer functions**
 
@@ -19,28 +21,30 @@ has released `v3` which will use the [js-yaml] library for parsing front-matter 
 
 I will be restricting any updates to the `v1` and `v2` Actions to security updates and hotfixes.
 
-### Migration from `v1` and `v2` to `v3`
+#### Migration from `v1` and `v2` to `v3`
 
 The `v3` uploader has a few breaking changes for users
 
 - Multiple tags have not been assigned as string with colon(,) or have been deprecated. Instead of use
   [YAML Array List] to assign it.
 
-# What is TheActionDev?
+## What is TheActionDev?
 
-**TheActionDev** is Github Action that allows you to write & maintain [dev.to] **articles**
-without touching the `dev.to` UI. This action is initiated in **[ActionsHackathon]** using **[DEV API]**.
+**TheActionDev** is Github Action that allows you to write & upsert dev.to **articles**
+without touching the `dev.to` UI. This action is initiated in **[ActionsHackathon]** and using **[forem API]**.
 This action is scan your **Github Repository** based on `directory` [input](#inputs) and finds articles based
 on the **[Jekyll front matter]** in `markdown` files.
 
 ## Basic Usage
 
 - You'll first need to create a YAML file to describe the workflow in your project
-  (e.g. .github/workflows/TheActionDev.yaml).
-- Generate dev.to `apiKey` by following [dev.to authentication docs]
-- Add your `apiKey` to **GitHub Secret** by following [Github's creating and storing encrypted secrets doc]
+  (e.g. .github/workflows/TheActionDev.yml).
+- Generate dev.to `apiKey` by following
+  [Forem API Docs](https://developers.forem.com/api/#section/Authentication/api_key)
+- Add your `apiKey` to **GitHub Secret** by following
+  [GitHub Docs](https://docs.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets)
 
-### TheActionDev.yaml
+### TheActionDev.yml
 
 ```yaml
 name: TheActionDev Sync
@@ -68,7 +72,7 @@ jobs:
 
 #### `api-key`
 
-dev.to api key. (Set inside **[Github Secret]**)
+dev.to api key.
 
 #### `directory`
 
@@ -134,7 +138,7 @@ Custom variables set for each post, located between the triple-dashed lines in y
 ### Article Basics
 
 - Use [YAML](https://yaml.org/) to write and format article's [front-matter](#front-matter).
-- Use [Markdown](https://guides.github.com/features/mastering-markdown/) to write and format article body.
+- Follow [dev.to editor guide](https://dev.to/p/editor_guide) for write and format article body.
 - You can also use [Liquid tags](https://docs.dev.to/frontend/liquid-tags/) to add rich content such as Tweets,
   YouTube videos, etc.
 
@@ -161,37 +165,29 @@ First Post with **TheActionDev**
 
 Check [docs/DEVELOPMENT.md](./docs/DEVELOPMENT.md)
 
-# Branding
+## Branding
 
 - Assets: [Figma](https://www.figma.com/file/mO5kSS79lY0NIMMzAJDBJZ/TheActionDev?node-id=0%3A1)
 - Font: [JoyStick](www.pixelsagas.com/?download=joystick)
 
-# Inspiration
+## Inspiration
 
 - [DEV Docs](https://docs.dev.to/)
 - [vscode-devto](https://github.com/Sneezry/vscode-devto) extension for `vscode`
 - [typescript-action](https://github.com/actions/typescript-action)
 
-# Getting Help
-
-You can create a **issue**, I will help you.
-
-# Contributing
+## Contributing
 
 Check [CONTRIBUTING.md](CONTRIBUTING.md), any suggestions for features and contributions to the continuing code
 masterelopment can be made via the issue tracker or code contributions via a `Fork` & `Pull requests`.
 
 <!-- Links  -->
 
-[dev.to]: https://dev.to/
-[dev-api]: https://docs.dev.to/api/
+[forem api]: https://developers.forem.com/api/
 [theactiondev-template]: https://github.com/ful1e5/TheActionDev-template/generate
-[dev.to authentication docs]: https://docs.dev.to/api/#section/Authentication/api_key
 [actionshackathon]: https://dev.to/devteam/announcing-the-github-actions-hackathon-on-dev-3ljn
 [js-yaml]: https://www.npmjs.com/package/js-yaml
 [@actions/glob]: https://github.com/actions/toolkit/tree/master/packages/glob
 [glob pattern]: https://github.com/actions/toolkit/tree/master/packages/glob#patterns
-[github's creating and storing encrypted secrets doc]: https://docs.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets
 [yaml array list]: https://www.w3schools.io/file/yaml-arrays/
 [jekyll front matter]: https://jekyllrb.com/docs/front-matter/
-[github secret]: https://docs.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets
