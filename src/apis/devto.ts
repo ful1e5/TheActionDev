@@ -29,6 +29,13 @@ export class DevtoApi {
             return error;
           }
         ]
+      },
+      retry:{
+        limit: 10,
+        maxRetryAfter: 20000,
+        calculateDelay: () => {
+          return 10000;
+        }
       }
     };
 
