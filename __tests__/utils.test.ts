@@ -125,4 +125,72 @@ Testing!
       series: "Test"
     });
   });
+
+  it('should parse data with published date in past', () => {
+    const result = parseFrontMatter(`
+---
+title: Test
+published: 2022-08-28T09:21:25+02:00
+description: Test Post
+series: Test
+tags:
+  - test1
+  - null
+  - test2
+  - test3
+  - 0
+  - 
+canonical_url: https://www.test.org
+cover_image: https://www.test.com
+---
+
+# Heading1
+Testing!
+
+`);
+    expect(result).toMatchObject({
+      title: "Test",
+      description: "Test Post",
+      published: true,
+      body_markdown: "# Heading1\nTesting!",
+      cover_image: "https://www.test.com",
+      tags: ["test1", "test2", "test3"],
+      canonical_url: "https://www.test.org",
+      series: "Test"
+    });
+  });
+
+it('should parse data with published date in future', () => {
+    const result = parseFrontMatter(`
+---
+title: Test
+published: 4020-09-13T10:07:58+02:00
+description: Test Post
+series: Test
+tags:
+  - test1
+  - null
+  - test2
+  - test3
+  - 0
+  - 
+canonical_url: https://www.test.org
+cover_image: https://www.test.com
+---
+
+# Heading1
+Testing!
+
+`);
+    expect(result).toMatchObject({
+      title: "Test",
+      description: "Test Post",
+      published: false,
+      body_markdown: "# Heading1\nTesting!",
+      cover_image: "https://www.test.com",
+      tags: ["test1", "test2", "test3"],
+      canonical_url: "https://www.test.org",
+      series: "Test"
+    });
+  });
 });

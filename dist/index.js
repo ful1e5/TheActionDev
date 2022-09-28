@@ -452,15 +452,22 @@ const parseFrontMatter = (data) => {
         if (yt.tags) {
             tags = yt.tags.filter((e) => e);
         }
+        let published;
+        if (yt.published instanceof Date) {
+            published = yt.published <= new Date();
+        }
+        else {
+            published = yt.published || false;
+        }
         // Removing front-matter and returning body of markdown without blanklines('\n') in front.
         const body_markdown = data.replace(reg, "").trim();
         return {
-            title: title,
+            title,
             description: yt.description,
-            published: yt.published || false,
+            published,
             body_markdown: body_markdown,
             cover_image: yt.cover_image,
-            tags: tags,
+            tags,
             canonical_url: yt.canonical_url,
             series: yt.series
         };
