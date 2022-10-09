@@ -52,7 +52,7 @@ const parseFrontMatter = (data: string): Article | undefined => {
       description: yt.description,
       published,
       body_markdown: body_markdown,
-      cover_image: yt.cover_image,
+      main_image: yt.cover_image,
       tags,
       canonical_url: yt.canonical_url,
       series: yt.series

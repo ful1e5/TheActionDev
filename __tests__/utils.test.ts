@@ -85,7 +85,7 @@ Test Body
       description: undefined,
       published: false,
       body_markdown: "Test Body",
-      cover_image: undefined,
+      main_image: undefined,
       tags: [],
       canonical_url: undefined,
       series: undefined
@@ -119,7 +119,7 @@ Testing!
       description: "Test Post",
       published: true,
       body_markdown: "# Heading1\nTesting!",
-      cover_image: "https://www.test.com",
+      main_image: "https://www.test.com",
       tags: ["test1", "test2", "test3"],
       canonical_url: "https://www.test.org",
       series: "Test"
@@ -153,7 +153,7 @@ Testing!
       description: "Test Post",
       published: true,
       body_markdown: "# Heading1\nTesting!",
-      cover_image: "https://www.test.com",
+      main_image: "https://www.test.com",
       tags: ["test1", "test2", "test3"],
       canonical_url: "https://www.test.org",
       series: "Test"
@@ -187,7 +187,7 @@ Testing!
       description: "Test Post",
       published: false,
       body_markdown: "# Heading1\nTesting!",
-      cover_image: "https://www.test.com",
+      main_image: "https://www.test.com",
       tags: ["test1", "test2", "test3"],
       canonical_url: "https://www.test.org",
       series: "Test"
