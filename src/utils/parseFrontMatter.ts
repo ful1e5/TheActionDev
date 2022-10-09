@@ -48,12 +48,12 @@ const parseFrontMatter = (data: string): Article | undefined => {
     const body_markdown = data.replace(reg, "").trim();
 
     return {
-      title,
+      title: title,
       description: yt.description,
-      published,
+      published: published,
       body_markdown: body_markdown,
       main_image: yt.cover_image,
-      tags,
+      tags: tags,
       canonical_url: yt.canonical_url,
       series: yt.series
     };

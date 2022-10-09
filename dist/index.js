@@ -463,12 +463,12 @@ const parseFrontMatter = (data) => {
         // Removing front-matter and returning body of markdown without blanklines('\n') in front.
         const body_markdown = data.replace(reg, "").trim();
         return {
-            title,
+            title: title,
             description: yt.description,
-            published,
+            published: published,
             body_markdown: body_markdown,
             main_image: yt.cover_image,
-            tags,
+            tags: tags,
             canonical_url: yt.canonical_url,
             series: yt.series
         };
