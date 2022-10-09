@@ -146,13 +146,34 @@ Custom variables set for each post, located between the triple-dashed lines in y
 - You can also use [Liquid tags](https://docs.dev.to/frontend/liquid-tags/) to add rich content such as Tweets,
   YouTube videos, etc.
 
-### Example
+### Examples
+
+#### Basic Article
 
 ```
 ---
 title:  TheActionDev
 description: Hello World
 published: false
+tags:
+  - typescript
+  - javascript
+  - github
+series: TheActionDev
+---
+
+First Post with **TheActionDev**
+
+{% github ful1e5/TheActionDev %}
+```
+
+#### Scheduled Article
+
+```
+---
+title:  TheActionDev
+description: Hello World
+published: 2023-01-01T22:00:00+02:00
 tags:
   - typescript
   - javascript
