@@ -5,7 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-[unreleased]
+### [unreleased]
+
+### Added
+
+-
+
+### Changed
+
+-
+
+## [v3.0.1] - 10 October 2022
 
 ### Added
 
@@ -16,7 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed **unable to parse warning message** string concatenation
 - Fixed #240
 
-## [v3.0.0] - 15 Jun 2022
+## [v3.0.0] - 15 June 2022
 
 ### Added
 
@@ -28,7 +38,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - README.md: remove nonsense links and styling
 
-## [v2] - 16 Sept 2020
+## [v2] - 16 September 2020
 
 ### Added
 
@@ -43,7 +53,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - fixed #101 #102
 - removed support section from `README.md`
 
-## [v1] - 15 Sept 2020
+## [v1] - 15 September 2020
 
 ### Added
 
