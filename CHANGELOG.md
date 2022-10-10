@@ -9,11 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
--
+- feat: Schedule Post #238
 
 ### Changed
 
 - Fixed **unable to parse warning message** string concatenation
+- Fixed #240
 
 ## [v3.0.0] - 15 Jun 2022
 
@@ -50,7 +51,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Logo and badges
 - CI/CD Pipelines
 
-[unreleased]: https://github.com/ful1e5/TheActionDev/compare/release/v3.0.0...main
+[unreleased]: https://github.com/ful1e5/TheActionDev/compare/release/v3.0.1...main
+[v3.0.1]: https://github.com/ful1e5/TheActionDev/compare/v3.0.0...v3.0.1
 [v3.0.0]: https://github.com/ful1e5/TheActionDev/compare/v2...v3.0.0
 [v2]: https://github.com/ful1e5/TheActionDev/compare/v1...v2
 [v1]: https://github.com/ful1e5/TheActionDev/tree/release/v1
