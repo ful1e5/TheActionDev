@@ -1,6 +1,6 @@
 name: "TheActionDev"
 description: "Write dev.to articles with GitHub Action"
-author: "Kaiz Khatri"
+author: "Abdulkaiz Khatri"
 
 inputs:
   api-key:

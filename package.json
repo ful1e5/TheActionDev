@@ -1,8 +1,8 @@
 {
   "name": "the-action-dev",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "dev.to Posts with GitHub Actions",
-  "author": "Kaiz Khatri",
+  "author": "Abdulkaiz Khatri",
   "main": "lib/main.js",
   "license": "MIT",
   "repository": {
