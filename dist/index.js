@@ -275,6 +275,7 @@ const dumpArticleInfo = (article) => {
     core.info(`published: ${article.published}`);
     core.info(`tags: ${article.tags}`);
     core.info(`description: ${article.description}`);
+    core.info(`cover image: ${article.main_image}`);
     core.info(`canonical Url: ${article.canonical_url}`);
     core.info(`series: ${article.series}`);
     core.info("");
@@ -452,14 +453,21 @@ const parseFrontMatter = (data) => {
         if (yt.tags) {
             tags = yt.tags.filter((e) => e);
         }
+        let published;
+        if (yt.published instanceof Date) {
+            published = yt.published <= new Date();
+        }
+        else {
+            published = yt.published || false;
+        }
         // Removing front-matter and returning body of markdown without blanklines('\n') in front.
         const body_markdown = data.replace(reg, "").trim();
         return {
             title: title,
             description: yt.description,
-            published: yt.published || false,
+            published: published,
             body_markdown: body_markdown,
-            cover_image: yt.cover_image,
+            main_image: yt.cover_image,
             tags: tags,
             canonical_url: yt.canonical_url,
             series: yt.series

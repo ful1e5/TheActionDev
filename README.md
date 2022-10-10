@@ -116,7 +116,11 @@ For example, you want ignore all articles inside `foo` sub-directory, The `ignor
 Custom variables set for each post, located between the triple-dashed lines in your editor. Here is a list of possibilities:
 
 - **title:** the title of your article
-- **published:** boolean that determines whether or not your article is published
+- **published:** boolean or date that determines whether your article is published. The next case exist:
+  - Boolean is `true` the article will be `published`.
+  - Boolean is `false` the article will be `not published`.
+  - Date is in the `past` the article will be `published`.
+  - Date is in the `future` the article will be `not published`.
 - **description:** description area in Twitter cards and open graph cards
 - **tags:** max of four tags, needs to be [YAML Array List]
 - **canonical_url:** link for the canonical version of the content
@@ -142,7 +146,9 @@ Custom variables set for each post, located between the triple-dashed lines in y
 - You can also use [Liquid tags](https://docs.dev.to/frontend/liquid-tags/) to add rich content such as Tweets,
   YouTube videos, etc.
 
-### Example
+### Examples
+
+#### Basic Article
 
 ```
 ---
@@ -157,6 +163,25 @@ series: TheActionDev
 ---
 
 First Post with **TheActionDev**
+
+{% github ful1e5/TheActionDev %}
+```
+
+#### Scheduled Article
+
+```
+---
+title:  TheActionDev
+description: Hello World
+published: 2023-01-01T22:00:00+02:00
+tags:
+  - typescript
+  - javascript
+  - github
+series: TheActionDev
+---
+
+Second Post with **TheActionDev**
 
 {% github ful1e5/TheActionDev %}
 ```
