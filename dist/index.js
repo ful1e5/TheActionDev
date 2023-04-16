@@ -278,6 +278,7 @@ const dumpArticleInfo = (article) => {
     core.info(`cover image: ${article.main_image}`);
     core.info(`canonical Url: ${article.canonical_url}`);
     core.info(`series: ${article.series}`);
+    core.info(`organization id: ${article.organization_id}`);
     core.info("");
 };
 const main = () => __awaiter(void 0, void 0, void 0, function* () {
@@ -470,7 +471,8 @@ const parseFrontMatter = (data) => {
             main_image: yt.cover_image,
             tags: tags,
             canonical_url: yt.canonical_url,
-            series: yt.series
+            series: yt.series,
+            organization_id: yt.organization_id
         };
     }
     else {
