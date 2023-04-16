@@ -12,6 +12,7 @@ interface YamlTableType {
   tags?: string[];
   canonical_url?: string;
   series?: string;
+  organization_id?: number;
 }
 
 const parseFrontMatter = (data: string): Article | undefined => {
@@ -55,7 +56,8 @@ const parseFrontMatter = (data: string): Article | undefined => {
       main_image: yt.cover_image,
       tags: tags,
       canonical_url: yt.canonical_url,
-      series: yt.series
+      series: yt.series,
+      organization_id: yt.organization_id
     };
   } else {
     core.warning("dev.to Front-Matter not found. Ignoring this file.");

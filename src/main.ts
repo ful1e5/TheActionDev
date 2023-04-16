@@ -15,6 +15,7 @@ const dumpArticleInfo = (article: Article): void => {
   core.info(`cover image: ${article.main_image}`);
   core.info(`canonical Url: ${article.canonical_url}`);
   core.info(`series: ${article.series}`);
+  core.info(`organization id: ${article.organization_id}`);
   core.info("");
 };
 

@@ -8,6 +8,7 @@ export interface Article {
   tags?: string[];
   canonical_url?: string;
   series?: string;
+  organization_id?: number;
 }
 
 export interface DevtoError {
