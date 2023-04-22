@@ -126,18 +126,20 @@ Custom variables set for each post, located between the triple-dashed lines in y
 - **canonical_url:** link for the canonical version of the content
 - **cover_image:** cover image for post, accepts a URL.(The best size is 1000 x 420.)
 - **series:** post series name.
+- **organization_id:** numerical identifier of the organization that this post will be publish under.
 
 #### Front Matter `default` value
 
-| tag           | value   | required |
-| :------------ | :------ | :------- |
-| title         | `null`  | **yes**  |
-| published     | `false` | **no**   |
-| description   | `null`  | **no**   |
-| tags          | `[]`    | **no**   |
-| canonical_url | `null`  | **no**   |
-| cover_image   | `null`  | **no**   |
-| series        | `null`  | **no**   |
+| tag             | value   | required |
+| :-------------- | :------ | :------- |
+| title           | `null`  | **yes**  |
+| published       | `false` | **no**   |
+| description     | `null`  | **no**   |
+| tags            | `[]`    | **no**   |
+| canonical_url   | `null`  | **no**   |
+| cover_image     | `null`  | **no**   |
+| series          | `null`  | **no**   |
+| organization_id | `null`  | **no**   |
 
 ### Article Basics
 
